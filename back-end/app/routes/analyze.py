@@ -1,0 +1,208 @@
+"""POST /api/v1/analyze-patient — full diagnostic analysis pipeline."""
+
+from __future__ import annotations
+
+from fastapi import APIRouter, Request, HTTPException
+from app.models.patient import (
+    PatientPayload,
+    AnalysisResponse,
+    ClinicalBrief,
+    BiometricDelta,
+    ConditionMatch,
+    MetricDataPoint,
+    LongitudinalDataPoint,
+)
+from app.services.llm_extractor import extract_clinical_brief
+from app.services.embeddings import encode_text
+from app.services.vector_search import search_conditions
+
+router = APIRouter(prefix="/api/v1", tags=["analysis"])
+
+# ---------------------------------------------------------------------------
+# Clinical significance thresholds
+# ---------------------------------------------------------------------------
+THRESHOLDS = {
+    "restingHeartRate": {"value": 5, "unit": "bpm"},
+    "heartRateVariabilitySDNN": {"value": 10, "unit": "ms"},
+    "respiratoryRate": {"value": 2, "unit": "breaths/min"},
+    "stepCount": {"value": 3000, "unit": "count"},
+    "sleepAnalysis_awakeSegments": {"value": 2, "unit": "count"},
+    "appleSleepingWristTemperature": {"value": 0.5, "unit": "degC_deviation"},
+    "walkingAsymmetryPercentage": {"value": 3, "unit": "%"},
+}
+
+# Metrics present in both acute and longitudinal data
+SHARED_METRICS = {"restingHeartRate", "walkingAsymmetryPercentage"}
+
+# Acute-only metrics: use first 3 days as baseline, last 4 as acute
+ACUTE_ONLY_METRICS = {
+    "heartRateVariabilitySDNN",
+    "respiratoryRate",
+    "stepCount",
+    "sleepAnalysis_awakeSegments",
+    "appleSleepingWristTemperature",
+}
+
+
+def _avg(values: list[float]) -> float:
+    """Return the mean of a list of floats."""
+    if not values:
+        return 0.0
+    return sum(values) / len(values)
+
+
+def _compute_biometric_deltas(payload: PatientPayload) -> list[BiometricDelta]:
+    """Compute biometric deltas between acute and baseline measurements.
+
+    For metrics in BOTH acute and longitudinal (restingHeartRate,
+    walkingAsymmetryPercentage): compare acute 7-day average against
+    longitudinal 6-month average.
+
+    For acute-only metrics: split the 7-day window into baseline (first 3
+    days) and acute (last 4 days), then compare.
+    """
+    deltas: list[BiometricDelta] = []
+    acute_metrics = payload.data.acute_7_day.metrics
+    longitudinal_metrics = payload.data.longitudinal_6_month.metrics
+
+    # --- Shared metrics: acute avg vs longitudinal avg ---
+    for metric_name in SHARED_METRICS:
+        acute_points: list[MetricDataPoint] = getattr(acute_metrics, metric_name)
+        longitudinal_points: list[LongitudinalDataPoint] = getattr(
+            longitudinal_metrics, metric_name
+        )
+
+        acute_avg = _avg([p.value for p in acute_points])
+        longitudinal_avg = _avg([p.value for p in longitudinal_points])
+        delta = abs(acute_avg - longitudinal_avg)
+        unit = acute_points[0].unit if acute_points else ""
+
+        threshold_info = THRESHOLDS.get(metric_name, {"value": 0})
+        clinically_significant = delta > threshold_info["value"]
+
+        deltas.append(
+            BiometricDelta(
+                metric=metric_name,
+                acute_avg=round(acute_avg, 2),
+                longitudinal_avg=round(longitudinal_avg, 2),
+                delta=round(delta, 2),
+                unit=unit,
+                clinically_significant=clinically_significant,
+            )
+        )
+
+    # --- Acute-only metrics: first 3 days (baseline) vs last 4 days (acute) ---
+    for metric_name in ACUTE_ONLY_METRICS:
+        acute_points: list[MetricDataPoint] = getattr(acute_metrics, metric_name)
+
+        baseline_values = [p.value for p in acute_points[:3]]
+        acute_values = [p.value for p in acute_points[3:]]
+
+        baseline_avg = _avg(baseline_values)
+        acute_avg = _avg(acute_values)
+        delta = abs(acute_avg - baseline_avg)
+        unit = acute_points[0].unit if acute_points else ""
+
+        threshold_info = THRESHOLDS.get(metric_name, {"value": 0})
+        clinically_significant = delta > threshold_info["value"]
+
+        deltas.append(
+            BiometricDelta(
+                metric=metric_name,
+                acute_avg=round(acute_avg, 2),
+                longitudinal_avg=round(baseline_avg, 2),
+                delta=round(delta, 2),
+                unit=unit,
+                clinically_significant=clinically_significant,
+            )
+        )
+
+    return deltas
+
+
+def _format_biometric_summary(deltas: list[BiometricDelta]) -> str:
+    """Format biometric deltas into a human-readable summary for the LLM."""
+    lines = ["### Biometric Delta Summary\n"]
+    for d in deltas:
+        significance = "CLINICALLY SIGNIFICANT" if d.clinically_significant else "within normal range"
+        lines.append(
+            f"- **{d.metric}**: acute avg {d.acute_avg} {d.unit} vs "
+            f"baseline avg {d.longitudinal_avg} {d.unit} "
+            f"(delta: {d.delta} {d.unit}) — {significance}"
+        )
+    return "\n".join(lines)
+
+
+@router.post("/analyze-patient", response_model=AnalysisResponse)
+async def analyze_patient(payload: PatientPayload, request: Request):
+    """Run the full diagnostic analysis pipeline.
+
+    1. Compute biometric deltas
+    2. Format biometric summary for LLM
+    3. Extract clinical brief via GPT-4o
+    4. Generate PubMedBERT embedding from brief + symptoms
+    5. Run MongoDB $vectorSearch for matching conditions
+    6. Return structured AnalysisResponse
+    """
+    # Step 1: Compute biometric deltas
+    biometric_deltas = _compute_biometric_deltas(payload)
+
+    # Step 2: Format biometric summary
+    biometric_summary = _format_biometric_summary(biometric_deltas)
+
+    # Step 3: Call LLM for clinical brief
+    try:
+        clinical_output = await extract_clinical_brief(
+            narrative=payload.patient_narrative,
+            biometric_summary=biometric_summary,
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=502,
+            detail=f"LLM extraction failed: {str(e)}",
+        )
+
+    clinical_brief = ClinicalBrief(
+        summary=clinical_output.summary,
+        key_symptoms=clinical_output.key_symptoms,
+        severity_assessment=clinical_output.severity_assessment,
+        recommended_actions=clinical_output.recommended_actions,
+    )
+
+    # Step 4: Generate embedding from brief summary + key symptoms
+    embedding_text = (
+        clinical_output.summary
+        + " "
+        + " ".join(clinical_output.key_symptoms)
+    )
+    embedding_model = request.app.state.embedding_model
+    query_vector = encode_text(embedding_model, embedding_text)
+
+    # Step 5: Run MongoDB vector search
+    try:
+        mongo_client = request.app.state.mongo_client
+        raw_matches = await search_conditions(mongo_client, query_vector, top_k=5)
+    except Exception as e:
+        raise HTTPException(
+            status_code=502,
+            detail=f"Vector search failed: {str(e)}",
+        )
+
+    condition_matches = [
+        ConditionMatch(
+            condition=m.get("condition", ""),
+            similarity_score=round(m.get("score", 0.0), 4),
+            pmcid=m.get("pmcid", ""),
+            title=m.get("title", ""),
+            snippet=m.get("snippet", ""),
+        )
+        for m in raw_matches
+    ]
+
+    # Step 6: Return structured response
+    return AnalysisResponse(
+        patient_id=payload.patient_id,
+        clinical_brief=clinical_brief,
+        biometric_deltas=biometric_deltas,
+        condition_matches=condition_matches,
+    )
