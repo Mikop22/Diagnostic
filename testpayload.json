@@ -2,6 +2,7 @@
   "patient_id": "pt_883920_x",
   "sync_timestamp": "2026-02-21T12:35:39Z",
   "hardware_source": "Apple Watch Series 9",
+  "patient_narrative": "I've been experiencing severe lower abdominal pain for the past four days. It started suddenly on Tuesday — a sharp, stabbing pain on my right side that has since become a constant dull ache radiating to my lower back. The pain wakes me up multiple times at night. I've noticed I'm walking differently, almost limping, because any jarring movement makes it worse. My energy is completely gone; I can barely get out of bed some days. I feel warm but haven't taken my temperature. I've had similar but milder episodes over the past six months that were dismissed as 'just period pain,' but this is significantly worse. I'm worried something is being missed.",
   "data": {
     "acute_7_day": {
       "granularity": "daily_summary",
@@ -27,11 +28,11 @@
         "appleSleepingWristTemperature": [
           {"date": "2026-02-15", "value": -0.12, "unit": "degC_deviation"},
           {"date": "2026-02-16", "value": -0.10, "unit": "degC_deviation"},
-          {"date": "2026-02-17", "value": +0.05, "unit": "degC_deviation"},
-          {"date": "2026-02-18", "value": +0.85, "unit": "degC_deviation", "flag": "sustained_high"},
-          {"date": "2026-02-19", "value": +0.92, "unit": "degC_deviation"},
-          {"date": "2026-02-20", "value": +0.80, "unit": "degC_deviation"},
-          {"date": "2026-02-21", "value": +0.75, "unit": "degC_deviation"}
+          {"date": "2026-02-17", "value": 0.05, "unit": "degC_deviation"},
+          {"date": "2026-02-18", "value": 0.85, "unit": "degC_deviation", "flag": "sustained_high"},
+          {"date": "2026-02-19", "value": 0.92, "unit": "degC_deviation"},
+          {"date": "2026-02-20", "value": 0.80, "unit": "degC_deviation"},
+          {"date": "2026-02-21", "value": 0.75, "unit": "degC_deviation"}
         ],
         "respiratoryRate": [
           {"date": "2026-02-15", "value": 14.5, "unit": "breaths/min"},
