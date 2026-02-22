@@ -14,7 +14,7 @@ How we make money:
 
 
 What a populated dashboard looks like:
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/MUIznBSKof4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![YouTube video player](https://img.youtube.com/vi/MUIznBSKof4/maxresdefault.jpg)](https://www.youtube.com/watch?v=MUIznBSKof4)
 
 ## Table of Contents
 
