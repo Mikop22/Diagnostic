@@ -5,30 +5,63 @@ import { motion, AnimatePresence } from "framer-motion";
 import { getPaperUrl } from "@/lib/api";
 import type { ConditionMatch } from "@/lib/types";
 
+// Global blob cache — persists across accordion open/close cycles
+const blobCache = new Map<string, string>();
+const fetchPromises = new Map<string, Promise<string | null>>();
+
+function fetchAndCache(pmcid: string): Promise<string | null> {
+  if (blobCache.has(pmcid)) return Promise.resolve(blobCache.get(pmcid)!);
+  if (fetchPromises.has(pmcid)) return fetchPromises.get(pmcid)!;
+
+  const promise = fetch(getPaperUrl(pmcid), {
+    headers: { "ngrok-skip-browser-warning": "true" },
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error(`${res.status}`);
+      return res.blob();
+    })
+    .then((blob) => {
+      const blobUrl = URL.createObjectURL(blob);
+      blobCache.set(pmcid, blobUrl);
+      fetchPromises.delete(pmcid);
+      return blobUrl;
+    })
+    .catch(() => {
+      fetchPromises.delete(pmcid);
+      return null;
+    });
+
+  fetchPromises.set(pmcid, promise);
+  return promise;
+}
+
 function usePdfBlob(pmcid: string | null) {
-  const [url, setUrl] = useState<string | null>(null);
+  const [url, setUrl] = useState<string | null>(
+    pmcid ? blobCache.get(pmcid) ?? null : null
+  );
   const [error, setError] = useState(false);
 
   useEffect(() => {
     if (!pmcid) return;
-    let revoke: string | null = null;
-    fetch(getPaperUrl(pmcid), {
-      headers: { "ngrok-skip-browser-warning": "true" },
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error(`${res.status}`);
-        return res.blob();
-      })
-      .then((blob) => {
-        const blobUrl = URL.createObjectURL(blob);
-        revoke = blobUrl;
-        setUrl(blobUrl);
-      })
-      .catch(() => setError(true));
-    return () => { if (revoke) URL.revokeObjectURL(revoke); };
+    // Already cached — instant
+    if (blobCache.has(pmcid)) {
+      setUrl(blobCache.get(pmcid)!);
+      return;
+    }
+    fetchAndCache(pmcid).then((blobUrl) => {
+      if (blobUrl) setUrl(blobUrl);
+      else setError(true);
+    });
   }, [pmcid]);
 
   return { url, error };
+}
+
+/** Prefetch all PDFs in background so they're cached when user clicks */
+function usePrefetchPdfs(pmcids: string[]) {
+  useEffect(() => {
+    pmcids.forEach((id) => fetchAndCache(id));
+  }, [pmcids]);
 }
 
 function PdfViewer({ pmcid, title }: { pmcid: string | null; title: string }) {
@@ -76,6 +109,9 @@ interface AccordionProps {
 
 export function DiagnosticNudgeAccordion({ matches }: AccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  // Prefetch all PDFs as soon as the accordion mounts
+  usePrefetchPdfs(matches.map((m) => m.pmcid));
 
   return (
     <div className="space-y-3">
