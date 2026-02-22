@@ -485,7 +485,6 @@ export default function IntakePage() {
               <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#E9E0F5] border-t-[#5D2EA8]" />
               <p className="text-[22px] font-medium text-[#1F1B2D] font-poppins">Syncing wearable data…</p>
               <p className="text-[16px] text-[#6D6885] font-poppins">Connecting to Apple Health</p>
->>>>>>> 8579dd1 (Fix ngrok browser interstitial blocking Vercel API calls)
             </motion.div>
           )}
 
