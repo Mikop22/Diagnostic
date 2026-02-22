@@ -17,13 +17,14 @@ import type { PatientRecord } from "@/lib/types";
 import { AddPatientModal } from "./_components/AddPatientModal";
 import { ScheduleModal } from "./_components/ScheduleModal";
 
-type Status = "In Progress" | "Stable" | "Review" | "Pending";
+type Status = "In Progress" | "Stable" | "Review" | "Pending" | "Completed";
 
 const statusStyles: Record<Status, string> = {
   "In Progress": "bg-[var(--lavender-bg)] text-[var(--purple-primary)] bg-opacity-80 font-semibold",
   Stable: "bg-[var(--green-bg)] text-[var(--green-text)] bg-opacity-80 font-semibold",
   Review: "bg-[var(--orange-bg)] text-[var(--orange-text)] bg-opacity-80 font-semibold",
   Pending: "bg-[var(--orange-bg)] text-[var(--orange-text)] bg-opacity-80 font-semibold",
+  Completed: "bg-[var(--green-bg)] text-[var(--green-text)] bg-opacity-80 font-semibold",
 };
 
 const statColor: Record<string, string> = {

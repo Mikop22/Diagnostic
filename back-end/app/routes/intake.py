@@ -269,6 +269,15 @@ async def submit_intake(
         },
     )
 
+    # Also update the patient record status so the doctor's patient list
+    # reflects that this patient's intake + analysis is done.
+    patient_id = appointment.get("patient_id")
+    if patient_id:
+        db.patients.update_one(
+            {"id": patient_id},
+            {"$set": {"status": "Completed"}},
+        )
+
     # ── Step 4: DeSci Blockchain Payout (Background Task) ────────────
     # Compensate the patient with XRP for their data. Runs in the
     # background so ledger consensus does not block the HTTP response.
