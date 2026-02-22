@@ -1,0 +1,3 @@
+module.exports=[46677,a=>{a.v({className:"poppins_37c4598a-module__JRG3Wq__className",variable:"poppins_37c4598a-module__JRG3Wq__variable"})},27572,a=>{"use strict";var b=a.i(7997),c=a.i(46677);let d={className:c.default.className,style:{fontFamily:"'Poppins', 'Poppins Fallback'",fontStyle:"normal"}};function e({children:a}){return(0,b.jsx)("html",{lang:"en",className:"h-full w-full",children:(0,b.jsx)("body",{className:`${d.variable} h-full w-full antialiased`,children:a})})}null!=c.default.variable&&(d.variable=c.default.variable),a.s(["default",()=>e,"metadata",0,{title:"Diagnostic Front",description:"Ready for your appointment"}],27572)}];
+
+//# sourceMappingURL=%5Broot-of-the-server%5D__80362990._.js.map
