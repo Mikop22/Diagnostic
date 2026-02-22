@@ -50,11 +50,10 @@ export default function DashboardPage() {
             <button
               onClick={handleToggle}
               disabled={loading}
-              className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
-                useLive
+              className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${useLive
                   ? "bg-emerald-50 border-emerald-200 text-emerald-700 hover:bg-emerald-100"
                   : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100"
-              } disabled:opacity-50 disabled:cursor-not-allowed`}
+                } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               {loading ? "Connecting..." : useLive ? "Live API" : "Mock Data"}
             </button>
@@ -94,6 +93,18 @@ export default function DashboardPage() {
                 </ul>
               </div>
             </div>
+            {response.clinical_brief.cited_sources?.length > 0 && (
+              <div className="mt-4 pt-4 border-t border-slate-200">
+                <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wide mb-2">Cited Sources</h3>
+                <ul className="space-y-1">
+                  {response.clinical_brief.cited_sources.map((s, i) => (
+                    <li key={i} className="text-sm text-slate-600 flex items-start gap-2">
+                      <span className="text-blue-500 mt-0.5 font-mono text-xs">[{i + 1}]</span> {s}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </section>
 

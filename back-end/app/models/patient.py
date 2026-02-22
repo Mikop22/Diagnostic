@@ -61,6 +61,7 @@ class ClinicalBrief(BaseModel):
     key_symptoms: list[str]
     severity_assessment: str
     recommended_actions: list[str]
+    cited_sources: list[str]
 
 
 class BiometricDelta(BaseModel):

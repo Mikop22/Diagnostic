@@ -51,6 +51,7 @@ export interface ClinicalBrief {
   key_symptoms: string[];
   severity_assessment: string;
   recommended_actions: string[];
+  cited_sources: string[];
 }
 
 export interface BiometricDelta {

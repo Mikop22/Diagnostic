@@ -1,4 +1,4 @@
-"""POST /api/v1/analyze-patient — full diagnostic analysis pipeline."""
+"""POST /api/v1/analyze-patient — full diagnostic analysis pipeline with RAG."""
 
 from __future__ import annotations
 
@@ -133,16 +133,33 @@ def _format_biometric_summary(deltas: list[BiometricDelta]) -> str:
     return "\n".join(lines)
 
 
+def _format_retrieval_context(matches: list[dict]) -> str:
+    """Format vector search matches as retrieval context for the RAG prompt."""
+    if not matches:
+        return ""
+
+    lines = []
+    for i, m in enumerate(matches, 1):
+        lines.append(
+            f"### [{i}] {m.get('condition', 'Unknown Condition')}\n"
+            f"**Paper:** {m.get('title', 'Untitled')}\n"
+            f"**PMCID:** {m.get('pmcid', 'N/A')}\n"
+            f"**Key findings:** {m.get('snippet', '')}\n"
+        )
+    return "\n".join(lines)
+
+
 @router.post("/analyze-patient", response_model=AnalysisResponse)
 async def analyze_patient(payload: PatientPayload, request: Request):
-    """Run the full diagnostic analysis pipeline.
+    """Run the full RAG diagnostic analysis pipeline.
 
     1. Compute biometric deltas
-    2. Format biometric summary for LLM
-    3. Extract clinical brief via GPT-4o
-    4. Generate PubMedBERT embedding from brief + symptoms
-    5. Run MongoDB $vectorSearch for matching conditions
-    6. Return structured AnalysisResponse
+    2. Format biometric summary
+    3. Generate PubMedBERT embedding from narrative + biometrics
+    4. Run hybrid search (vector + BM25) for matching conditions
+    5. Format retrieval context from matched conditions
+    6. Call GPT-4o with RAG context → clinical brief with citations
+    7. Return structured AnalysisResponse
     """
     # Step 1: Compute biometric deltas
     biometric_deltas = _compute_biometric_deltas(payload)
@@ -150,11 +167,35 @@ async def analyze_patient(payload: PatientPayload, request: Request):
     # Step 2: Format biometric summary
     biometric_summary = _format_biometric_summary(biometric_deltas)
 
-    # Step 3: Call LLM for clinical brief
+    # Step 3: Generate embedding from narrative + biometric summary (moved before LLM)
+    embedding_text = payload.patient_narrative + " " + biometric_summary
+    embedding_model = request.app.state.embedding_model
+    query_vector = encode_text(embedding_model, embedding_text)
+
+    # Step 4: Run hybrid search (vector + BM25)
+    try:
+        mongo_client = request.app.state.mongo_client
+        raw_matches = await search_conditions(
+            mongo_client,
+            query_vector,
+            query_text=payload.patient_narrative,
+            top_k=5,
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=502,
+            detail=f"Vector search failed: {str(e)}",
+        )
+
+    # Step 5: Format retrieval context from top 3 matches for RAG
+    retrieval_context = _format_retrieval_context(raw_matches[:3])
+
+    # Step 6: Call LLM with RAG context
     try:
         clinical_output = await extract_clinical_brief(
             narrative=payload.patient_narrative,
             biometric_summary=biometric_summary,
+            retrieval_context=retrieval_context,
         )
     except Exception as e:
         raise HTTPException(
@@ -167,27 +208,10 @@ async def analyze_patient(payload: PatientPayload, request: Request):
         key_symptoms=clinical_output.key_symptoms,
         severity_assessment=clinical_output.severity_assessment,
         recommended_actions=clinical_output.recommended_actions,
+        cited_sources=clinical_output.cited_sources,
     )
 
-    # Step 4: Generate embedding from brief summary + key symptoms
-    embedding_text = (
-        clinical_output.summary
-        + " "
-        + " ".join(clinical_output.key_symptoms)
-    )
-    embedding_model = request.app.state.embedding_model
-    query_vector = encode_text(embedding_model, embedding_text)
-
-    # Step 5: Run MongoDB vector search
-    try:
-        mongo_client = request.app.state.mongo_client
-        raw_matches = await search_conditions(mongo_client, query_vector, top_k=5)
-    except Exception as e:
-        raise HTTPException(
-            status_code=502,
-            detail=f"Vector search failed: {str(e)}",
-        )
-
+    # Step 7: Format condition matches
     condition_matches = [
         ConditionMatch(
             condition=m.get("condition", ""),
@@ -199,7 +223,6 @@ async def analyze_patient(payload: PatientPayload, request: Request):
         for m in raw_matches
     ]
 
-    # Step 6: Return structured response
     return AnalysisResponse(
         patient_id=payload.patient_id,
         clinical_brief=clinical_brief,

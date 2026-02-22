@@ -260,6 +260,11 @@ export const MOCK_CLINICAL_BRIEF: ClinicalBrief = {
     "Consider diagnostic laparoscopy given family history and symptom severity",
     "Sleep study if fragmentation persists after pain management",
   ],
+  cited_sources: [
+    "Endometriosis: The effects of coagulation factors on the risk of endometriosis (PMC10210381)",
+    "Uterine Fibroids: The efficacy and safety of Xuefu Zhuyu Decoction in the treatment of Uterine leiomyoma (PMC7837943)",
+    "Adenomyosis: Adenomyosis as a Risk Factor for Myometrial or Endometrial Neoplasms (PMC8872164)",
+  ],
 };
 
 // ---------- Assembled Mock Response ----------
