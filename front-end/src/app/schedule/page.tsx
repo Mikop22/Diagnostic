@@ -8,6 +8,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
+import { fetchPatients } from "@/lib/api";
+import type { PatientRecord } from "@/lib/types";
 
 /* ── Appointment data ── */
 
@@ -28,10 +30,9 @@ const dotColor: Record<DotVariant, string> = {
   lavender: "bg-[var(--lavender-border)]",
 };
 
-interface Appointment {
+interface ScheduleEntry {
   time: string;
   name: string;
-  patientId: string;
   type: string;
   status: ApptStatus;
   dot: DotVariant;
@@ -39,14 +40,22 @@ interface Appointment {
   muted?: boolean;
 }
 
-const appointments: Appointment[] = [
-  { time: "8:30 AM", name: "Jordan Lee", patientId: "hc-1", type: "Follow-up", status: "In Progress", dot: "purple", highlighted: true },
-  { time: "9:15 AM", name: "Amara Osei", patientId: "hc-2", type: "New Patient", status: "Confirmed", dot: "pink" },
-  { time: "10:30 AM", name: "David Chen", patientId: "hc-3", type: "Lab Review", status: "Confirmed", dot: "lilac" },
-  { time: "11:45 AM", name: "Maria Santos", patientId: "hc-4", type: "Consultation", status: "Confirmed", dot: "purple" },
-  { time: "2:00 PM", name: "Elijah Brooks", patientId: "hc-5", type: "Follow-up", status: "Confirmed", dot: "pink" },
-  { time: "3:30 PM", name: "Priya Sharma", patientId: "hc-6", type: "Referral", status: "Pending", dot: "lavender", muted: true },
+const scheduleEntries: ScheduleEntry[] = [
+  { time: "8:30 AM", name: "Jordan Lee", type: "Follow-up", status: "In Progress", dot: "purple", highlighted: true },
+  { time: "9:15 AM", name: "Amara Osei", type: "New Patient", status: "Confirmed", dot: "pink" },
+  { time: "10:30 AM", name: "David Chen", type: "Lab Review", status: "Confirmed", dot: "lilac" },
+  { time: "11:45 AM", name: "Maria Santos", type: "Consultation", status: "Confirmed", dot: "purple" },
+  { time: "2:00 PM", name: "Elijah Brooks", type: "Follow-up", status: "Confirmed", dot: "pink" },
+  { time: "3:30 PM", name: "Priya Sharma", type: "Referral", status: "Pending", dot: "lavender", muted: true },
 ];
+
+function resolveAppointments(patients: PatientRecord[]) {
+  const nameToId = new Map(patients.map((p) => [p.name.toLowerCase(), p.id]));
+  return scheduleEntries.map((entry) => ({
+    ...entry,
+    patientId: nameToId.get(entry.name.toLowerCase()) ?? null,
+  }));
+}
 
 const summaryStats = [
   { num: "6", label: "Total", color: "text-[var(--purple-primary)]" },
@@ -86,7 +95,13 @@ function Divider({ strong }: { strong?: boolean }) {
 
 /* ── Page ── */
 
-export default function SchedulePage() {
+export default async function SchedulePage() {
+  const patients = await fetchPatients().catch(() => [] as PatientRecord[]);
+  const appointments = resolveAppointments(patients);
+
+  // Find the first patient with a real ID for "Next Up"
+  const nextUp = appointments.find((a) => a.patientId);
+
   return (
     <div className="flex h-full w-full flex-col bg-transparent font-poppins">
       {/* ── Navigation Bar ── */}
@@ -181,37 +196,44 @@ export default function SchedulePage() {
                 ? "text-[var(--text-muted)]"
                 : "text-[var(--text-secondary)]";
 
+              const rowClass = `flex items-center px-6 py-5 transition-colors hover:bg-[rgba(243,237,250,0.5)] ${appt.highlighted ? "rounded-[12px] bg-[rgba(93,46,168,0.04)]" : ""}`;
+
+              const rowContent = (
+                <>
+                  <span className={`w-[120px] text-[14px] font-semibold ${textColor}`}>
+                    {appt.time}
+                  </span>
+
+                  <div className="flex flex-1 items-center gap-3">
+                    <div
+                      className={`h-2.5 w-2.5 shrink-0 rounded-full ${dotColor[appt.dot]}`}
+                    />
+                    <span className={`text-[14px] font-medium ${textColor}`}>
+                      {appt.name}
+                    </span>
+                  </div>
+
+                  <span className={`w-[180px] text-[13px] font-medium ${typeColor}`}>
+                    {appt.type}
+                  </span>
+
+                  <div className="flex w-[120px] justify-end">
+                    <Badge status={appt.status} />
+                  </div>
+                </>
+              );
+
               return (
                 <div key={appt.name}>
-                  <Link
-                    href={`/dashboard/${appt.patientId}`}
-                    className={`flex cursor-pointer items-center px-6 py-5 transition-colors hover:bg-[rgba(243,237,250,0.5)] ${appt.highlighted
-                        ? "rounded-[12px] bg-[rgba(93,46,168,0.04)]"
-                        : ""
-                      }`}
-                  >
-                    <span className={`w-[120px] text-[14px] font-semibold ${textColor}`}>
-                      {appt.time}
-                    </span>
-
-                    <div className="flex flex-1 items-center gap-3">
-                      <div
-                        className={`h-2.5 w-2.5 shrink-0 rounded-full ${dotColor[appt.dot]}`}
-                      />
-                      <span className={`text-[14px] font-medium ${textColor}`}>
-                        {appt.name}
-                      </span>
+                  {appt.patientId ? (
+                    <Link href={`/dashboard/${appt.patientId}`} className={`${rowClass} cursor-pointer`}>
+                      {rowContent}
+                    </Link>
+                  ) : (
+                    <div className={rowClass}>
+                      {rowContent}
                     </div>
-
-                    <span className={`w-[180px] text-[13px] font-medium ${typeColor}`}>
-                      {appt.type}
-                    </span>
-
-                    <div className="flex w-[120px] justify-end">
-                      <Badge status={appt.status} />
-                    </div>
-                  </Link>
-
+                  )}
                   {i < appointments.length - 1 && <Divider />}
                 </div>
               );
@@ -251,7 +273,7 @@ export default function SchedulePage() {
               </div>
             </div>
 
-            <Link href="/dashboard/pt_mock_9a385a00" className="glass-purple mt-2 flex h-14 w-full items-center justify-center gap-2 rounded-[28px] transition-all hover:brightness-110 hover:shadow-lg active:scale-[0.98]">
+            <Link href={`/dashboard/${nextUp?.patientId ?? ""}`} className="glass-purple mt-2 flex h-14 w-full items-center justify-center gap-2 rounded-[28px] transition-all hover:brightness-110 hover:shadow-lg active:scale-[0.98]">
               <span className="text-[14px] font-medium tracking-[-0.1px] text-white">
                 View Dashboard
               </span>
