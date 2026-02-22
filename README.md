@@ -155,7 +155,7 @@ The FastAPI application uses an **async lifespan context manager** to manage exp
 
 ### Route: `POST /api/v1/analyze-patient` (`routes/analyze.py`)
 
-This is the core RAG pipeline. The 242-line route handler executes 7 sequential steps:
+This is the core RAG pipeline. The route handler executes 7 sequential steps:
 
 1. **Compute biometric deltas** — Iterates over shared metrics (acute avg vs. longitudinal avg) and acute-only metrics (first 3 days as baseline vs. last 4 days as acute). Each delta is checked against clinical significance thresholds defined in `THRESHOLDS`:
    - Resting heart rate: > 5 bpm
@@ -377,7 +377,7 @@ For UI/UX development and testing, the system uses a fully-populated mock payloa
   - Respiratory rate rises from 14.5 to 18.2 breaths/min
   - Walking asymmetry surges from 1.3% to 8.5% (guarding gait)
   - Step count plummets from 8,600 to 1,200 (mobility collapse)
-  - Sleep wake segments jump from 2 to 6 (painsomnia)
+  - Sleep wake segments jump from 2 to 6 (pain-induced insomnia, flagged as `painsomnia` in the data)
   - Days 5–7 show gradual recovery but still far from baseline
 - **Longitudinal 6-Month Pattern**: Shows a subtle 26-week creeping elevation in resting heart rate (61.2 → 68.8 bpm) and walking asymmetry (1.1% → 4.3%), suggesting a chronic underlying condition slowly worsening.
 - **Risk Profile**: West African Ancestry (high), Dense Breast Tissue (elevated), Endometriosis Family Hx (elevated), Metabolic Inflammatory Markers (moderate).
