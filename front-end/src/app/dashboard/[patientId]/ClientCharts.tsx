@@ -1,11 +1,7 @@
 "use client";
 
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer } from "recharts";
-import MOCK_PAYLOAD from "@/lib/testpayload.json";
-import type { BiometricDelta } from "@/lib/types";
-
-// Extract data dynamically from our mock JSON payload
-const acuteData = MOCK_PAYLOAD.data.acute_7_day.metrics;
+import type { BiometricDelta, AcuteMetrics } from "@/lib/types";
 
 const mapMetric = (metricArray: { date: string, value: number }[]) =>
     metricArray.map(d => {
@@ -13,13 +9,6 @@ const mapMetric = (metricArray: { date: string, value: number }[]) =>
         const shortDate = d.date.split("-").slice(1).join("/");
         return { time: shortDate, value: d.value };
     });
-
-const chartData = {
-    "Walking Asymmetry": mapMetric(acuteData.walkingAsymmetryPercentage),
-    "Respiratory Rate": mapMetric(acuteData.respiratoryRate),
-    "Resting Heart Rate": mapMetric(acuteData.restingHeartRate),
-    "Wrist Temp (Δ°C)": mapMetric(acuteData.appleSleepingWristTemperature),
-};
 
 const chartsConfig = [
     { title: "Walking Asymmetry", color: "var(--red-alert)", dataKey: "Walking Asymmetry", unit: "%", metricKey: "walkingAsymmetryPercentage" },
@@ -33,7 +22,19 @@ function toChartDate(isoDate: string): string {
     return isoDate.split("-").slice(1).join("/");
 }
 
-export function ClientCharts({ biometricDeltas }: { biometricDeltas?: BiometricDelta[] }) {
+interface ClientChartsProps {
+    biometricDeltas?: BiometricDelta[];
+    acuteData: AcuteMetrics;
+}
+
+export function ClientCharts({ biometricDeltas, acuteData }: ClientChartsProps) {
+    const chartData = {
+        "Walking Asymmetry": mapMetric(acuteData.walkingAsymmetryPercentage),
+        "Respiratory Rate": mapMetric(acuteData.respiratoryRate),
+        "Resting Heart Rate": mapMetric(acuteData.restingHeartRate),
+        "Wrist Temp (Δ°C)": mapMetric(acuteData.appleSleepingWristTemperature),
+    };
+
     return (
         <>
             {chartsConfig.map((c) => {

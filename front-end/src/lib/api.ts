@@ -1,13 +1,8 @@
 import type { PatientPayload, AnalysisResponse, PatientRecord, AppointmentRecord } from "./types";
-import MOCK_PAYLOAD_JSON from "./testpayload.json";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
-export async function analyzePatient(patientId: string): Promise<AnalysisResponse> {
-  const payloadToAnalyze: PatientPayload = {
-    ...(MOCK_PAYLOAD_JSON as PatientPayload),
-    patient_id: patientId,
-  };
+export async function analyzePatient(payloadToAnalyze: PatientPayload): Promise<AnalysisResponse> {
 
   const res = await fetch(`${API_BASE}/api/v1/analyze-patient`, {
     method: "POST",

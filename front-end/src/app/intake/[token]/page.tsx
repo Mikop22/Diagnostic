@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import { motion, AnimatePresence, useSpring, useMotionValue, useTransform } from "framer-motion";
-import DEMO_PAYLOAD from "@/lib/testpayload.json";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -236,12 +235,45 @@ export default function IntakePage() {
     setSubmitError(null);
 
     const payload = useDemoData
-      ? { ...DEMO_PAYLOAD, patient_id: token }
+      ? {
+        patient_id: token,
+        sync_timestamp: new Date().toISOString(),
+        hardware_source: "Apple Watch Series 9",
+        patient_narrative: narrative || "Reporting general fatigue and mild discomfort.",
+        data: {
+          acute_7_day: {
+            granularity: "daily_summary",
+            metrics: {
+              heartRateVariabilitySDNN: Array(7).fill({ date: "2026-03-10", value: 35, unit: "ms" }),
+              restingHeartRate: Array(7).fill({ date: "2026-03-10", value: 65, unit: "bpm" }),
+              appleSleepingWristTemperature: Array(7).fill({ date: "2026-03-10", value: 0.1, unit: "degC_deviation" }),
+              respiratoryRate: Array(7).fill({ date: "2026-03-10", value: 14, unit: "breaths/min" }),
+              walkingAsymmetryPercentage: Array(7).fill({ date: "2026-03-10", value: 1.2, unit: "%" }),
+              stepCount: Array(7).fill({ date: "2026-03-10", value: 8000, unit: "count" }),
+              sleepAnalysis_awakeSegments: Array(7).fill({ date: "2026-03-10", value: 1, unit: "count" }),
+            },
+          },
+          longitudinal_6_month: {
+            granularity: "weekly_average",
+            metrics: {
+              restingHeartRate: Array(26).fill({ week_start: "2025-08-24", value: 62, unit: "bpm" }),
+              walkingAsymmetryPercentage: Array(26).fill({ week_start: "2025-08-24", value: 1.1, unit: "%" }),
+            },
+          },
+        },
+        risk_profile: { factors: [] }
+      }
       : {
-          ...DEMO_PAYLOAD,
-          patient_id: token,
-          patient_narrative: narrative || DEMO_PAYLOAD.patient_narrative,
-        };
+        patient_id: token,
+        sync_timestamp: new Date().toISOString(),
+        hardware_source: "Apple Watch Series 9",
+        patient_narrative: narrative || "Reporting general fatigue and mild discomfort.",
+        data: {
+          acute_7_day: { granularity: "daily_summary", metrics: { heartRateVariabilitySDNN: [], restingHeartRate: [], appleSleepingWristTemperature: [], respiratoryRate: [], walkingAsymmetryPercentage: [], stepCount: [], sleepAnalysis_awakeSegments: [] } },
+          longitudinal_6_month: { granularity: "weekly_average", metrics: { restingHeartRate: [], walkingAsymmetryPercentage: [] } }
+        },
+        risk_profile: { factors: [] }
+      };
 
     try {
       const res = await fetch(`${API_BASE}/api/v1/intake/${token}/submit`, {
