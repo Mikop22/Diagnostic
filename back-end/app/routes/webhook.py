@@ -99,4 +99,5 @@ async def intake_status(token: str, request: Request):
 
     return {
         "biometrics_received": bool(appointment.get("biometrics_received", False)),
+        "already_submitted": appointment.get("status") == "completed",
     }

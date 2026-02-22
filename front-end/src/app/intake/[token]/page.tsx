@@ -177,13 +177,25 @@ export default function IntakePage() {
 
   const [showButton, setShowButton] = useState(false);
   const [view, setView] = useState<
-    "welcome" | "intro" | "symptoms-intro" | "symptoms-explainer" | "symptoms-input" | "syncing-wearables" | "questions" | "finish"
+    "welcome" | "intro" | "symptoms-intro" | "symptoms-explainer" | "symptoms-input" | "syncing-wearables" | "questions" | "finish" | "already-submitted"
   >("welcome");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [narrative, setNarrative] = useState("");
   const [useDemoData, setUseDemoData] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // Check if this intake link has already been used
+  useEffect(() => {
+    fetch(`${API_BASE}/api/v1/intake/${encodeURIComponent(token)}/status`, {
+      headers: { "ngrok-skip-browser-warning": "true" },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.already_submitted) setView("already-submitted");
+      })
+      .catch(() => {});
+  }, [token]);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowButton(true), 2000);
@@ -605,6 +617,23 @@ export default function IntakePage() {
                 />
               </AnimatePresence>
             </div>
+          )}
+
+          {view === "already-submitted" && (
+            <motion.div
+              key="already-submitted"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="w-full flex flex-col items-center justify-center gap-4"
+            >
+              <h2 className="text-[52px] font-medium leading-none bg-linear-to-r from-[#5D2EA8] to-[#F294B9] bg-clip-text text-transparent text-center font-poppins pb-2">
+                already submitted
+              </h2>
+              <p className="max-w-[380px] text-[18px] font-medium leading-[1.35] text-[#5B4E7A] text-center font-poppins mt-2">
+                This intake form has already been completed. If you need to update your information, please contact your provider.
+              </p>
+            </motion.div>
           )}
 
           {view === "finish" && (
