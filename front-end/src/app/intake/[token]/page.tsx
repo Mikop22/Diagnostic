@@ -177,7 +177,7 @@ export default function IntakePage() {
 
   const [showButton, setShowButton] = useState(false);
   const [view, setView] = useState<
-    "welcome" | "intro" | "symptoms-intro" | "symptoms-explainer" | "symptoms-input" | "syncing-wearables" | "questions" | "submitting" | "finish"
+    "welcome" | "intro" | "symptoms-intro" | "symptoms-explainer" | "symptoms-input" | "syncing-wearables" | "questions" | "finish"
   >("welcome");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
@@ -214,7 +214,6 @@ export default function IntakePage() {
   // syncing-wearables view is now driven by AppleHealthSync component
   // (onSyncComplete / onSkip callbacks)
 
-  // submitting view transitions to finish via handleSubmit callback
 
   const handleAnswer = (answer: string) => {
     setAnswers((prev) => ({ ...prev, [currentQuestionIndex]: answer }));
@@ -235,7 +234,7 @@ export default function IntakePage() {
   };
 
   const handleSubmit = async (forceDemoData = false) => {
-    setView("submitting");
+    setView("finish");
     setSubmitError(null);
 
     const shouldUseDemoData = forceDemoData || useDemoData;
@@ -400,10 +399,10 @@ export default function IntakePage() {
         throw new Error(body || `Server error: ${res.status}`);
       }
 
-      setView("finish");
     } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : "Submission failed");
-      setView("symptoms-input");
+      // Submission runs in background — patient already sees "thanks" screen.
+      // Log but don't disrupt the patient experience.
+      console.error("Intake submission error:", err);
     }
   };
 
@@ -587,20 +586,6 @@ export default function IntakePage() {
                 onSyncComplete={() => handleSubmit(false)}
                 onSkip={() => handleSubmit(true)}
               />
-            </motion.div>
-          )}
-
-          {view === "submitting" && (
-            <motion.div
-              key="submitting"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="w-full flex flex-col items-center justify-center gap-6"
-            >
-              <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#E9E0F5] border-t-[#5D2EA8]" />
-              <p className="text-[22px] font-medium text-[#1F1B2D] font-poppins">Processing your data…</p>
-              <p className="text-[16px] text-[#6D6885] font-poppins">Running diagnostic analysis pipeline</p>
             </motion.div>
           )}
 
