@@ -303,7 +303,7 @@ export default function IntakePage() {
       setView("finish");
     } catch (err) {
       setSubmitError(err instanceof Error ? err.message : "Submission failed");
-      setView("wearables-permission");
+      setView("symptoms-input");
     }
   };
 
