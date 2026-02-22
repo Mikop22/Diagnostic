@@ -26,5 +26,6 @@ apikeys.txt
 
 # Agent worktrees
 .claude/worktrees/
+.worktrees/
 
 node_modules
