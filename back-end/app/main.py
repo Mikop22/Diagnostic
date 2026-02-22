@@ -26,11 +26,13 @@ from app.routes.paper import router as paper_router
 from app.routes.patients import router as patients_router
 from app.routes.appointments import router as appointments_router
 from app.routes.intake import router as intake_router
+from app.routes.webhook import router as webhook_router
 app.include_router(analyze_router)
 app.include_router(paper_router)
 app.include_router(patients_router)
 app.include_router(appointments_router)
 app.include_router(intake_router)
+app.include_router(webhook_router)
 
 @app.get("/health")
 async def health():
