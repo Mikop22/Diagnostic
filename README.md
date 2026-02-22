@@ -223,6 +223,23 @@ Connects to MongoDB Atlas and runs aggregation pipelines:
 
 The frontend uses Next.js 15 with the **App Router** pattern. Server components handle data fetching; client components handle interactivity and charting.
 
+### Patient Intake Form (`src/`)
+
+A standalone Next.js app in the root `src/` directory that provides the **patient-facing intake questionnaire**. This is the form patients complete before their appointment, built with the Liquid Glass design system and Framer Motion animations. The multi-step flow walks the patient through:
+
+1. **Welcome screen** — Animated "diagnostic" title with a Continue button.
+2. **Pre-visit questions** — Menstrual cycle phase, caffeine consumption, and a 1–10 pain scale (rendered as interactive Liquid Glass buttons).
+3. **Symptom narrative** — A free-text input where the patient describes their symptoms in their own words.
+4. **Wearables permission** — Asks consent to share Apple Watch / wearable data.
+5. **Scan instruction** — Prompts the patient to scan a document.
+6. **Confirmation** — Thanks the patient and explains how the data will be used.
+
+Key components:
+- **`<LiquidButton />`** — A glass-morphism button with 3D parallax tilt, specular highlight tracking, and spring-based hover/tap animations.
+- **`<QuestionCard />`** — Renders a single question step with animated enter/exit transitions.
+- **`<CustomCursor />`** — A translucent lens cursor that follows mouse movement with spring physics.
+- **`<Magnetic />`** (`components/Magnetic.tsx`) — A magnetic hover effect wrapper that pulls child elements toward the cursor.
+
 ### Page: `/patients` (`patients/page.tsx`)
 
 A **client component** that serves as the application's home page. Features:
@@ -493,6 +510,13 @@ Diagnostic/
 │   │       ├── api.ts           # API client functions
 │   │       └── testpayload.json # Mock patient data
 │   └── package.json
+├── src/                         # Patient intake form (standalone Next.js app)
+│   ├── app/
+│   │   ├── page.tsx             # Multi-step patient questionnaire
+│   │   ├── layout.tsx           # Root layout, Poppins font
+│   │   └── globals.css          # Tailwind + global styles
+│   └── components/
+│       └── Magnetic.tsx         # Magnetic hover effect component
 ├── shared/                      # Cross-stack API contract
 │   ├── api-contract.ts          # TypeScript interfaces
 │   └── api_contract.py          # Python Pydantic models
