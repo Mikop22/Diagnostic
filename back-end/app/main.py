@@ -17,7 +17,9 @@ async def lifespan(app: FastAPI):
     app.state.mongo_client.close()
 
 app = FastAPI(title="Diagnostic API", version="0.1.0", lifespan=lifespan)
-app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+_raw = settings.ALLOWED_ORIGINS.strip()
+_origins = ["*"] if _raw == "*" else [o.strip() for o in _raw.split(",") if o.strip()]
+app.add_middleware(CORSMiddleware, allow_origins=_origins, allow_credentials=_raw != "*", allow_methods=["*"], allow_headers=["*"])
 
 from app.routes.analyze import router as analyze_router
 from app.routes.paper import router as paper_router

@@ -47,7 +47,7 @@ async def create_appointment(body: AppointmentCreate, request: Request):
     )
 
     # Build form URL and send email
-    form_url = f"{settings.FRONTEND_URL}/form/{form_token}"
+    form_url = f"{settings.FRONTEND_URL}/intake/{form_token}"
 
     await send_appointment_email(
         patient_email=patient["email"],
