@@ -52,6 +52,16 @@ export async function createPatient(name: string, email: string): Promise<Patien
   return res.json();
 }
 
+export async function getIntakeStatus(
+  token: string
+): Promise<{ biometrics_received: boolean }> {
+  const res = await fetch(`${API_BASE}/api/v1/intake/${encodeURIComponent(token)}/status`, {
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  return res.json();
+}
+
 export async function createAppointment(
   patientId: string,
   date: string,

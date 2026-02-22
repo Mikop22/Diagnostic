@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import { motion, AnimatePresence, useSpring, useMotionValue, useTransform } from "framer-motion";
+import AppleHealthSync from "@/components/AppleHealthSync";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -176,7 +177,7 @@ export default function IntakePage() {
 
   const [showButton, setShowButton] = useState(false);
   const [view, setView] = useState<
-    "welcome" | "intro" | "symptoms-intro" | "symptoms-explainer" | "symptoms-input" | "wearables-permission" | "questions" | "submitting" | "finish"
+    "welcome" | "intro" | "symptoms-intro" | "symptoms-explainer" | "symptoms-input" | "wearables-permission" | "apple-health-sync" | "questions" | "submitting" | "finish"
   >("welcome");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
@@ -227,6 +228,8 @@ export default function IntakePage() {
       setView("questions");
     } else if (view === "wearables-permission") {
       setView("symptoms-input");
+    } else if (view === "apple-health-sync") {
+      setView("wearables-permission");
     }
   };
 
@@ -498,7 +501,7 @@ export default function IntakePage() {
                 <motion.button
                   whileHover={{ scale: 1.05, filter: "brightness(1.18)" }}
                   whileTap={{ scale: 0.96 }}
-                  onClick={handleSubmit}
+                  onClick={() => setView("apple-health-sync")}
                   className="relative w-[184px] h-[51px] bg-[#B58DE0]/15 border border-white/30 rounded-[26px] backdrop-blur-[20px] shadow-[0_2px_12px_rgba(93,46,168,0.12),inset_0_1px_0_rgba(255,255,255,0.35)] flex items-center justify-center cursor-pointer overflow-hidden transition-[filter] duration-300"
                 >
                   <div className="absolute inset-0 rounded-[26px] bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.18)_0%,transparent_55%)] pointer-events-none" />
@@ -515,6 +518,27 @@ export default function IntakePage() {
                   <span className="relative z-10 text-[#4A3270] text-[24px] font-medium font-poppins pt-1">No</span>
                 </motion.button>
               </div>
+            </motion.div>
+          )}
+
+          {view === "apple-health-sync" && (
+            <motion.div
+              key="apple-health-sync"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="relative w-full flex flex-col items-center justify-center"
+            >
+              <GlassBackButton onClick={handleBack} className="absolute top-0 left-0" />
+              <AppleHealthSync
+                token={token}
+                onSyncComplete={() => {
+                  setUseDemoData(false);
+                  handleSubmit();
+                }}
+                onSkip={() => handleSubmit()}
+              />
             </motion.div>
           )}
 
