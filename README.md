@@ -12,12 +12,16 @@ Diagnostic combats pain management bias and medical gaslighting — specifically
 2. [Architecture Overview](#architecture-overview)
 3. [Backend Deep Dive](#backend-deep-dive)
 4. [Frontend Deep Dive](#frontend-deep-dive)
-5. [Shared API Contract](#shared-api-contract)
-6. [Data Models](#data-models)
-7. [The Mock Payload](#the-mock-payload)
-8. [Design System — Liquid Glass](#design-system--liquid-glass)
-9. [Getting Started](#getting-started)
-10. [Project Structure](#project-structure)
+5. [Patient Intake Flow](#patient-intake-flow)
+6. [XRPL Integration](#xrpl-integration)
+7. [Shared API Contract](#shared-api-contract)
+8. [Data Models](#data-models)
+9. [The Mock Payload](#the-mock-payload)
+10. [Design System — Liquid Glass](#design-system--liquid-glass)
+11. [Getting Started](#getting-started)
+12. [Deployment](#deployment)
+13. [Project Structure](#project-structure)
+14. [Testing](#testing)
 
 ---
 
@@ -97,6 +101,7 @@ The Next.js frontend receives the `AnalysisResponse` and renders the F-pattern p
 │                                                          │
 │  /patients         → Patient list, add, schedule         │
 │  /dashboard/[id]   → F-pattern physician dashboard       │
+│  /intake/[token]   → Patient intake form + Apple Health  │
 │  /notes/[id]       → Clinical notes view                 │
 │  /schedule          → Scheduling view                    │
 │                                                          │
@@ -104,6 +109,7 @@ The Next.js frontend receives the `AnalysisResponse` and renders the F-pattern p
 │    <DeltaBadge />                                        │
 │    <BiometricGhostChart />                               │
 │    <DiagnosticNudgeAccordion />                          │
+│    <AppleHealthSync />                                   │
 └──────────────────────────┬──────────────────────────────┘
                            │ HTTP (fetch)
                            ▼
@@ -111,20 +117,26 @@ The Next.js frontend receives the `AnalysisResponse` and renders the F-pattern p
 │                   BACKEND (FastAPI)                       │
 │  Python · Async · LangChain · Pydantic                   │
 │                                                          │
-│  POST /api/v1/analyze-patient  → RAG diagnostic pipeline │
-│  GET  /api/v1/paper/{pmcid}    → PDF proxy (Europe PMC)  │
-│  GET  /api/v1/patients         → List patients           │
-│  POST /api/v1/patients         → Create patient (+XRP)   │
-│  POST /api/v1/appointments     → Schedule + email        │
-│  GET  /api/v1/appointments/:id → List appointments       │
-│  GET  /health                  → Health check            │
+│  POST /api/v1/analyze-patient     → RAG diagnostic pipe  │
+│  GET  /api/v1/paper/{pmcid}       → PDF proxy (PMC)      │
+│  GET  /api/v1/patients            → List patients        │
+│  POST /api/v1/patients            → Create patient (+XRP)│
+│  POST /api/v1/appointments        → Schedule + email     │
+│  GET  /api/v1/appointments/:id    → List appointments    │
+│  POST /api/v1/intake/{token}/submit → Intake orchestrator│
+│  POST /api/v1/webhook/apple-health/{token} → iOS sync    │
+│  GET  /api/v1/intake/{token}/status → Biometric polling  │
+│  GET  /api/v1/patients/{id}/dashboard → Dashboard fetch  │
+│  GET  /health                     → Health check         │
 │                                                          │
 │  Services:                                               │
-│    llm_extractor.py     → GPT structured output          │
-│    embeddings.py        → PubMedBERT encoding            │
-│    vector_search.py     → MongoDB $vectorSearch           │
-│    xrp_wallet.py        → XRP Testnet wallet gen         │
-│    email_service.py     → Async SMTP notifications       │
+│    llm_extractor.py      → GPT structured output         │
+│    embeddings.py         → PubMedBERT encoding           │
+│    vector_search.py      → MongoDB $vectorSearch          │
+│    analysis_pipeline.py  → Reusable RAG orchestration    │
+│    cusum.py              → CUSUM change-point detection   │
+│    xrp_wallet.py         → XRP Testnet wallet gen        │
+│    email_service.py      → Async SMTP notifications      │
 └──────────┬──────────────────────┬───────────────────────┘
            │                      │
            ▼                      ▼
@@ -140,6 +152,8 @@ The Next.js frontend receives the `AnalysisResponse` and renders the F-pattern p
 │                  │   │    text_index ($search)    │
 └──────────────────┘   └──────────────────────────┘
 ```
+
+Additionally, a standalone **Flask XRPL Oracle** server (`app.py` at the project root) handles blockchain transactions — DID registration, MPToken issuance, and escrow finalization — on the XRP Ledger Testnet.
 
 ---
 
@@ -193,6 +207,32 @@ Creates a new patient record and generates an **XRP Testnet wallet** (address + 
 ### Route: `POST /api/v1/appointments` (`routes/appointments.py`)
 
 Creates an appointment record, generates a unique form token, and sends an **HTML email notification** to the patient via async SMTP (Gmail). Updates the patient's status to "In Progress."
+
+### Route: `POST /api/v1/intake/{token}/submit` (`routes/intake.py`)
+
+The **intake orchestrator** — a single-endpoint transaction that processes a completed patient intake form. The flow:
+
+1. Validates the appointment token and checks for double-submission prevention (rejects if `status == "completed"`).
+2. Runs the full ML analysis pipeline (biometric deltas → PubMedBERT embedding → hybrid vector search → LLM extraction).
+3. Persists the analysis results to the patient's record.
+4. Queues an **XRP payout** (10 XRP) as a background task to compensate the patient for data contribution.
+5. Returns the analysis results to the frontend.
+
+### Route: `POST /api/v1/webhook/apple-health/{token}` (`routes/webhook.py`)
+
+Receives raw biometric data from the patient's **iOS Shortcut** (Apple Health export). When a patient scans the QR code in the intake form, the shortcut sends Apple Health data to this endpoint. The route persists the payload to the appointment's `biometrics` field and sets a `biometrics_received` flag for frontend polling.
+
+### Route: `GET /api/v1/intake/{token}/status` (`routes/webhook.py`)
+
+A **polling endpoint** called every ~2 seconds by the frontend `<AppleHealthSync />` component during Apple Health sync. Returns `{"biometrics_received": true/false}` so the intake form can auto-advance once biometric data arrives.
+
+### Service: `analysis_pipeline.py`
+
+A reusable orchestration module (`analyze_patient_pipeline()`) that encapsulates the 7-step RAG diagnostic pipeline. This was extracted from the analyze route to be shared between the direct analysis endpoint and the intake orchestrator. Accepts a `PatientPayload`, MongoDB client, and embedding model; returns an `AnalysisResponse`.
+
+### Service: `cusum.py`
+
+Implements **CUSUM (Cumulative Sum) change-point detection** for biometric time series. The `detect_changepoint()` function uses the first 3 observations as a baseline mean and tracks upward/downward cumulative sums against configurable slack (`k`) and threshold (`h`) parameters. Returns the date, direction, and magnitude of the first detected sustained shift — useful for identifying sudden health events (e.g., an acute HRV crash or sustained heart rate elevation).
 
 ### Service: `llm_extractor.py`
 
@@ -284,6 +324,27 @@ An expandable accordion for the top 5 condition matches:
 - **Collapsed**: Shows condition name, paper title, numbered badge, and similarity percentage.
 - **Expanded**: Shows the clinical snippet text, plus a 600px-tall `<iframe>` that loads the referenced PubMed paper PDF via the backend proxy route. If the PDF fails to load, it gracefully falls back to a "PDF not available" message with a direct PubMed link.
 
+### Component: `<AppleHealthSync />`
+
+Handles the real-time Apple Health data sync flow during patient intake:
+
+- Renders a **QR code** (via `qrcode.react`) that links to the iOS Shortcut for exporting Apple Health data.
+- **Polls** the backend (`GET /api/v1/intake/{token}/status`) every ~2 seconds to detect when biometric data arrives.
+- Auto-advances the intake form once `biometrics_received` is `true`.
+- Includes a **demo mode** toggle that skips the real sync and injects pre-filled mock biometric data.
+
+### Page: `/intake/[token]` (`intake/[token]/page.tsx`)
+
+The **patient-facing intake form**, accessed via a unique token link sent in the appointment email. This is a multi-step wizard built with the Liquid Glass design system and Framer Motion animations:
+
+1. **Welcome** — Intro screen with animated title and Continue button.
+2. **Pre-visit questions** — Menstrual cycle phase, caffeine consumption, and a 1–10 pain scale (rendered as interactive Liquid Glass buttons).
+3. **Symptom narrative** — Free-text input for describing symptoms.
+4. **Wearables permission** — Consent to share Apple Watch data, with a demo toggle.
+5. **Apple Health sync** — `<AppleHealthSync />` component handles QR-based iOS Shortcut data transfer.
+6. **Submission** — Sends the assembled payload (form answers + narrative + biometrics) to `POST /api/v1/intake/{token}/submit`, which runs the full analysis pipeline and triggers XRP compensation.
+7. **Confirmation** — Thanks the patient and explains how the data will be used.
+
 ### API Client (`lib/api.ts`)
 
 The frontend communicates with the backend through typed async functions:
@@ -295,6 +356,91 @@ The frontend communicates with the backend through typed async functions:
 - `createAppointment(patientId, date, time)` — Creates an appointment via `POST /api/v1/appointments`.
 
 The API base URL defaults to `http://localhost:8000` and can be overridden via the `NEXT_PUBLIC_API_URL` environment variable.
+
+---
+
+## Patient Intake Flow
+
+The platform implements a complete patient-to-physician data pipeline. This flow connects the patient intake form, Apple Health hardware sync, ML analysis, and blockchain compensation into a single transaction:
+
+```
+┌────────────────┐   Email link    ┌──────────────────────────┐
+│  Physician     │ ───────────────→│  Patient opens           │
+│  schedules     │                 │  /intake/[token]         │
+│  appointment   │                 └──────────┬───────────────┘
+└────────────────┘                            │
+                                              ▼
+                                   ┌──────────────────────────┐
+                                   │  Multi-step form:        │
+                                   │  1. Pre-visit questions   │
+                                   │  2. Symptom narrative     │
+                                   │  3. Wearable consent      │
+                                   └──────────┬───────────────┘
+                                              │
+                              ┌───────────────┴───────────────┐
+                              ▼                               ▼
+                   ┌─────────────────────┐       ┌────────────────────┐
+                   │  QR → iOS Shortcut  │       │  Demo mode:        │
+                   │  exports Apple      │       │  pre-filled mock   │
+                   │  Health data        │       │  biometric data    │
+                   └──────────┬──────────┘       └────────┬───────────┘
+                              │ POST /webhook/             │
+                              │ apple-health/{token}       │
+                              ▼                            │
+                   ┌─────────────────────┐                 │
+                   │  Frontend polls     │                 │
+                   │  GET /intake/       │                 │
+                   │  {token}/status     │                 │
+                   └──────────┬──────────┘                 │
+                              │ biometrics_received=true    │
+                              ├─────────────────────────────┘
+                              ▼
+                   ┌─────────────────────┐
+                   │  POST /intake/      │
+                   │  {token}/submit     │
+                   │  (full payload)     │
+                   └──────────┬──────────┘
+                              │
+               ┌──────────────┼──────────────┐
+               ▼              ▼              ▼
+        ┌────────────┐ ┌───────────┐ ┌────────────┐
+        │ ML pipeline│ │ Persist   │ │ XRP payout │
+        │ (RAG +     │ │ results   │ │ (10 XRP)   │
+        │  LLM)      │ │ to DB     │ │            │
+        └────────────┘ └───────────┘ └────────────┘
+```
+
+1. **Physician creates an appointment** → patient receives an email with a unique `/intake/[token]` link.
+2. **Patient completes the intake form** — answers pre-visit questions, writes a symptom narrative, and grants wearable data consent.
+3. **Apple Health sync** — The patient scans a QR code that triggers an iOS Shortcut to export Apple Health data. The shortcut POSTs biometric data to `POST /api/v1/webhook/apple-health/{token}`. The frontend polls `GET /api/v1/intake/{token}/status` until the data arrives. A demo mode toggle provides pre-filled mock data for testing.
+4. **Submission** — The intake form submits the assembled payload to `POST /api/v1/intake/{token}/submit`, which runs the full RAG analysis pipeline, persists results, and queues an XRP compensation payout (10 XRP) to the patient's wallet.
+5. **Physician views the dashboard** at `/dashboard/[patientId]` with the complete analysis.
+
+---
+
+## XRPL Integration
+
+The platform integrates with the **XRP Ledger Testnet** to demonstrate blockchain-based patient data provenance and compensation:
+
+### Patient Wallet Generation
+
+When a new patient is created via `POST /api/v1/patients`, an XRP Testnet wallet (address + seed) is automatically generated and stored with the patient record. This wallet serves as the destination for data contribution compensation.
+
+### Data Contribution Compensation
+
+After a patient completes the intake form and their data is analyzed, the intake orchestrator queues a background task that sends **10 XRP** to the patient's wallet as compensation for contributing their health data.
+
+### XRPL Oracle Server (`app.py`)
+
+A standalone **Flask server** at the project root that handles advanced XRP Ledger transactions on Testnet:
+
+- **`POST /webhook/acute`** — Receives biometric data and submits a `DIDSet` transaction (mock patient DID registration) and an `MPTokenIssuanceCreate` transaction (RWA token issuance).
+- **`POST /webhook/longitudinal`** — Receives biometric data and submits an `EscrowFinish` transaction to release held funds.
+- **`GET /health`** — Health check returning network status.
+
+### Escrow Setup (`setup_escrow.py`)
+
+A utility script that creates a self-destination escrow lock on the XRP Ledger Testnet — simulating a clinic holding research compensation funds. It generates a faucet-funded wallet, locks 50 RLUSD equivalent (50,000,000 drops) with a 1-hour `CancelAfter` window, and outputs the clinic address, transaction hash, and sequence number.
 
 ---
 
@@ -462,6 +608,31 @@ The frontend runs on `http://localhost:3000` and communicates with the backend a
 
 ---
 
+## Deployment
+
+### Railway (Production)
+
+The backend is configured for deployment on **Railway.app** via `back-end/railway.toml`:
+
+- **Builder**: Nixpacks (auto-detects Python)
+- **Start command**: `uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}`
+- **Health check**: `GET /health` with a 300-second timeout
+- **Restart policy**: On failure, up to 3 retries
+
+### Heroku
+
+A `back-end/Procfile` is provided for Heroku-compatible platforms:
+
+```
+web: uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
+```
+
+### Local Development with ngrok
+
+For developing against the Vercel-hosted frontend, `back-end/start.sh` starts uvicorn on `127.0.0.1:8000` with `--reload`. Use ngrok to expose the local backend to the internet. See `docs/LOCAL_BACKEND_GUIDE.md` for detailed setup instructions.
+
+---
+
 ## Project Structure
 
 ```
@@ -477,34 +648,54 @@ Diagnostic/
 │   │   │   ├── analyze.py       # RAG diagnostic pipeline
 │   │   │   ├── paper.py         # PDF proxy for PubMed
 │   │   │   ├── patients.py      # Patient CRUD + XRP wallet
-│   │   │   └── appointments.py  # Scheduling + email
+│   │   │   ├── appointments.py  # Scheduling + email
+│   │   │   ├── intake.py        # Intake orchestrator + XRP payout
+│   │   │   └── webhook.py       # Apple Health webhook + status polling
 │   │   └── services/
 │   │       ├── llm_extractor.py # GPT structured output via LangChain
 │   │       ├── embeddings.py    # PubMedBERT sentence-transformers
 │   │       ├── vector_search.py # MongoDB Atlas hybrid search
+│   │       ├── analysis_pipeline.py # Reusable RAG orchestration
+│   │       ├── cusum.py         # CUSUM change-point detection
 │   │       ├── xrp_wallet.py    # XRP Testnet wallet generation
 │   │       └── email_service.py # Async SMTP with HTML templates
+│   ├── tests/                   # Backend test suite
+│   ├── seed_db.py               # Seed medical conditions DB
+│   ├── seed_mock_patients.py    # Seed mock patient records
+│   ├── start.sh                 # Local dev startup script
+│   ├── Procfile                 # Heroku deployment
+│   ├── railway.toml             # Railway deployment config
 │   ├── requirements.txt
-│   ├── seed_db.py
 │   └── .env.example
 ├── front-end/                   # Next.js 15 frontend
 │   ├── src/
 │   │   ├── app/
 │   │   │   ├── page.tsx         # Redirect to /patients
 │   │   │   ├── layout.tsx       # Root layout, fonts
+│   │   │   ├── template.tsx     # App-level layout wrapper
 │   │   │   ├── globals.css      # Tailwind + CSS custom properties
 │   │   │   ├── dashboard/[patientId]/
 │   │   │   │   ├── page.tsx     # F-pattern physician dashboard
+│   │   │   │   ├── DashboardContent.tsx
+│   │   │   │   ├── DashboardClient.tsx
 │   │   │   │   └── ClientCharts.tsx
 │   │   │   ├── patients/
 │   │   │   │   ├── page.tsx     # Patient list & management
 │   │   │   │   └── _components/
 │   │   │   │       ├── AddPatientModal.tsx
 │   │   │   │       └── ScheduleModal.tsx
+│   │   │   ├── intake/[token]/
+│   │   │   │   └── page.tsx     # Patient intake form wizard
+│   │   │   ├── notes/[patientId]/
+│   │   │   │   └── page.tsx     # Clinical notes view
+│   │   │   ├── schedule/
+│   │   │   │   └── page.tsx     # Scheduling view
 │   │   │   └── _components/
 │   │   │       ├── DeltaBadge.tsx
 │   │   │       ├── BiometricGhostChart.tsx
 │   │   │       └── DiagnosticNudgeAccordion.tsx
+│   │   ├── components/
+│   │   │   └── AppleHealthSync.tsx  # Apple Health QR sync component
 │   │   └── lib/
 │   │       ├── types.ts         # TypeScript interfaces
 │   │       ├── api.ts           # API client functions
@@ -520,9 +711,24 @@ Diagnostic/
 ├── shared/                      # Cross-stack API contract
 │   ├── api-contract.ts          # TypeScript interfaces
 │   └── api_contract.py          # Python Pydantic models
-├── docs/plans/                  # Architecture & implementation docs
+├── app.py                       # Flask XRPL oracle server (Testnet)
+├── setup_escrow.py              # XRP escrow setup utility
+├── docs/
+│   ├── plans/                   # Architecture & implementation docs
+│   └── LOCAL_BACKEND_GUIDE.md   # ngrok local dev guide
 ├── CLAUDE.md                    # Project blueprint
 ├── liquid_glass_guide.md        # Design system specification
 ├── testpayload.json             # Root-level mock payload
 └── response.json                # Example API response
+```
+
+---
+
+## Testing
+
+The backend includes a test suite in `back-end/tests/` covering the core pipeline and integration points. Run tests with:
+
+```bash
+cd back-end
+python -m pytest tests/
 ```
