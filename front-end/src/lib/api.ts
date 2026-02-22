@@ -63,6 +63,7 @@ export async function getIntakeStatus(
 ): Promise<{ biometrics_received: boolean }> {
   const res = await fetch(`${API_BASE}/api/v1/intake/${encodeURIComponent(token)}/status`, {
     cache: "no-store",
+    headers: COMMON_HEADERS,
   });
   if (!res.ok) throw new Error(`API error: ${res.status}`);
   return res.json();

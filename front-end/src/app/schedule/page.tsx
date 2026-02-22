@@ -251,7 +251,7 @@ export default function SchedulePage() {
               </div>
             </div>
 
-            <Link href="/dashboard/hc-1" className="glass-purple mt-2 flex h-14 w-full items-center justify-center gap-2 rounded-[28px] transition-all hover:brightness-110 hover:shadow-lg active:scale-[0.98]">
+            <Link href="/dashboard/pt_mock_9a385a00" className="glass-purple mt-2 flex h-14 w-full items-center justify-center gap-2 rounded-[28px] transition-all hover:brightness-110 hover:shadow-lg active:scale-[0.98]">
               <span className="text-[14px] font-medium tracking-[-0.1px] text-white">
                 View Dashboard
               </span>
