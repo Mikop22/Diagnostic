@@ -5,16 +5,13 @@
 Diagnostic combats pain management bias and medical gaslighting — specifically targeting systemic disparities for people of colour in healthcare (Endometriosis, Uterine Fibroids, Breast Cancer). It merges natural language processing (NLP) with multi-modal physiological data from Apple Watch (Heart Rate Variability, Resting Heart Rate, Mobility metrics) to produce an undeniable clinical dashboard for physicians.
 
 ---
-How we make money: 
+## How we make money: 
+http://youtube.com/watch?v=FL_x75Pq-CY
 
 
 
-
-
-
-
-What a populated dashboard looks like:
-[![YouTube video player](https://img.youtube.com/vi/MUIznBSKof4/maxresdefault.jpg)](https://www.youtube.com/watch?v=MUIznBSKof4)
+## What a populated dashboard looks like:
+https://www.youtube.com/watch?v=MUIznBSKof4
 
 ## Table of Contents
 
