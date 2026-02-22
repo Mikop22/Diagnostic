@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* Patient Home palette */
+  --purple-primary: #5D2EA8;
+  --purple-dark: #7B42D8;
+  --purple-light: #B58DE0;
+  --purple-accent: #F294B9;
+  --text-primary: #1F1B2D;
+  --text-secondary: #5B4E7A;
+  --text-muted: #9B93AC;
+  --text-nav: #6D6885;
+  --lavender-bg: #F3EDFA;
+  --lavender-border: #E8DEF8;
+  --avatar-purple-bg: #E8DEF8;
+  --avatar-lavender-bg: #F3E8FA;
+  --green-text: #2E7D32;
+  --green-bg: #E8F5E9;
+  --orange-text: #E65100;
+  --orange-bg: #FFF3E0;
+  --page-bg: #FAFAFE;
+  --red-alert: #E25C5C;
+  --text-body: #2F2646;
+  --border-nav-inactive: rgba(232, 222, 248, 0.27);
+  --table-border-header: 1px solid rgba(232, 222, 248, 0.2);
+  --table-border-row: 1px solid rgba(232, 222, 248, 0.133);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+@layer base {
+  html, body {
+    height: 100%;
+  }
+
+  .font-poppins {
+    font-family: var(--font-poppins), "Poppins", sans-serif;
+  }
+}
+
+/* Glassmorphic card — layered gradient bg + gradient border via background-clip */
+.glass-card {
+  position: relative;
+  border: 1.5px solid transparent;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 8%, rgba(255, 255, 255, 0.53), transparent) padding-box,
+    linear-gradient(225deg, #F5F0FC, #FDFCFE) padding-box,
+    linear-gradient(225deg, rgba(255, 255, 255, 0.93), rgba(232, 222, 248, 0.4) 50%, rgba(255, 255, 255, 0.67)) border-box;
+  background-origin: padding-box, padding-box, border-box;
+  background-clip: padding-box, padding-box, border-box;
+  box-shadow:
+    0 12px 30px -2px rgba(212, 187, 240, 0.13),
+    0 -1px 1px rgba(255, 255, 255, 0.8),
+    3px 3px 24px rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(40px);
+}
+
+/* Glass input/control — lighter glass for search, filter */
+.glass-control {
+  position: relative;
+  border: 1px solid transparent;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 8%, rgba(255, 255, 255, 0.53), transparent) padding-box,
+    linear-gradient(225deg, #F5F0FC, #FDFCFE) padding-box,
+    linear-gradient(225deg, rgba(255, 255, 255, 0.93), rgba(232, 222, 248, 0.4) 50%, rgba(255, 255, 255, 0.67)) border-box;
+  background-origin: padding-box, padding-box, border-box;
+  background-clip: padding-box, padding-box, border-box;
+  backdrop-filter: blur(40px);
+  box-shadow: 0 4px 12px rgba(212, 187, 240, 0.08);
+}
+
+/* Purple CTA glass button */
+.glass-purple {
+  position: relative;
+  border: 1.5px solid transparent;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 10%, rgba(255, 255, 255, 0.27), transparent) padding-box,
+    linear-gradient(225deg, rgba(123, 66, 216, 0.6), rgba(93, 46, 168, 0.53)) padding-box,
+    linear-gradient(225deg, rgba(255, 255, 255, 0.53), rgba(155, 107, 212, 0.2) 50%, rgba(255, 255, 255, 0.27)) border-box;
+  background-origin: padding-box, padding-box, border-box;
+  background-clip: padding-box, padding-box, border-box;
+  backdrop-filter: blur(40px);
+  box-shadow: 0 6px 16px rgba(93, 46, 168, 0.2), 1px 1px 12px rgba(255, 255, 255, 0.13);
+}
+
+/* Active nav pill with gradient border */
+.nav-pill-active {
+  border: 1px solid transparent;
+  background:
+    #F3EDFA padding-box,
+    linear-gradient(225deg, rgba(255, 255, 255, 0.87), rgba(232, 222, 248, 0.4)) border-box;
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 2px 6px rgba(212, 187, 240, 0.09), 1px 1px 8px rgba(255, 255, 255, 0.33);
+}
+
+/* Gradient text for logo */
+.gradient-logo {
+  background: linear-gradient(to bottom, #5D2EA8, #F294B9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
