@@ -8,7 +8,7 @@ import Link from "next/link";
 
 /* ── Diagnostic Nudge Accordion Import ── */
 import { DiagnosticNudgeAccordion } from "@/app/_components/DiagnosticNudgeAccordion";
-import { analyzePatient } from "@/lib/api";
+import { getDashboardData } from "@/lib/api";
 
 /* Number of extra empty ruled lines after content */
 const EMPTY_LINES = 3;
@@ -27,7 +27,7 @@ export default async function NotesPage({
   const patientName = isTestPatient ? "Test Patient" : "Unknown Patient";
 
   // 1. Await the real analysis response from the backend 
-  const result = await analyzePatient(patientId);
+  const result = await getDashboardData(patientId);
 
   // 2. Safely unpack real data
   const { clinical_brief, condition_matches } = result;

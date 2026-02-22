@@ -6,15 +6,16 @@ import {
 } from "lucide-react";
 import { ClientCharts } from "./ClientCharts";
 import { DiagnosticNudgeAccordion } from "@/app/_components/DiagnosticNudgeAccordion";
-import type { AnalysisResponse } from "@/lib/types";
+import type { AnalysisResponse, PatientPayload } from "@/lib/types";
 
 interface DashboardContentProps {
-  data: AnalysisResponse;
+  data: AnalysisResponse & { patient_payload?: PatientPayload };
   patientId: string;
 }
 
 export function DashboardContent({ data, patientId }: DashboardContentProps) {
-  const { clinical_brief, biometric_deltas, condition_matches } = data;
+  const { clinical_brief, biometric_deltas, condition_matches, patient_payload } = data;
+
 
   const guidingQuestions = clinical_brief.guiding_questions || [];
   const symptoms = clinical_brief.key_symptoms.slice(0, 5);
@@ -149,7 +150,16 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
 
       {/* ═══ METRICS ROW ═══ */}
       <div className="flex min-h-0 flex-[9] gap-8">
-        <ClientCharts biometricDeltas={biometric_deltas} />
+        {patient_payload?.data?.acute_7_day?.metrics ? (
+          <ClientCharts
+            biometricDeltas={biometric_deltas}
+            acuteData={patient_payload.data.acute_7_day.metrics}
+          />
+        ) : (
+          <div className="glass-card flex flex-1 items-center justify-center rounded-[24px]">
+            <span className="text-[14px] font-medium text-[var(--text-muted)]">Biometric data unavailable</span>
+          </div>
+        )}
       </div>
 
       {/* ═══ BOTTOM ROW ═══ */}
