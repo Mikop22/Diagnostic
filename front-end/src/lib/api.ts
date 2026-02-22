@@ -20,6 +20,16 @@ export async function analyzePatient(patientId: string): Promise<AnalysisRespons
   return res.json();
 }
 
+export async function getDashboardData(patientId: string): Promise<AnalysisResponse> {
+  const res = await fetch(`${API_BASE}/api/v1/patients/${patientId}/dashboard`, {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error(`API error: ${res.status} ${res.statusText}`);
+  }
+  return res.json();
+}
+
 export function getPaperUrl(pmcid: string): string {
   return `${API_BASE}/api/v1/paper/${pmcid}`;
 }

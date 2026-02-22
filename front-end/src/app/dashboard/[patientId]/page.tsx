@@ -12,7 +12,7 @@ import { ClientCharts } from "./ClientCharts";
 
 /* ── Diagnostic Nudge Accordion Import ── */
 import { DiagnosticNudgeAccordion } from "@/app/_components/DiagnosticNudgeAccordion";
-import { analyzePatient } from "@/lib/api";
+import { getDashboardData } from "@/lib/api";
 
 /* ── Page ── */
 
@@ -27,8 +27,8 @@ export default async function DashboardPage({
   const isTestPatient = patientId === "1e996459-a341-45de-993a-6bf64fa9b51e";
   const patientName = isTestPatient ? "Test Patient" : "Unknown Patient";
 
-  // 1. Await the real analysis response from the backend 
-  const result = await analyzePatient(patientId);
+  // 1. Fetch pre-computed analysis results from the backend (no ML processing)
+  const result = await getDashboardData(patientId);
 
   // 2. Safely unpack real data
   const { clinical_brief, biometric_deltas, condition_matches } = result;
