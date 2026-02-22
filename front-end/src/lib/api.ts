@@ -32,7 +32,9 @@ export function getPaperUrl(pmcid: string): string {
 // --- Patient Management ---
 
 export async function fetchPatients(): Promise<PatientRecord[]> {
-  const res = await fetch(`${API_BASE}/api/v1/patients`);
+  const res = await fetch(`${API_BASE}/api/v1/patients`, {
+    cache: "no-store",
+  });
   if (!res.ok) throw new Error(`API error: ${res.status}`);
   return res.json();
 }
