@@ -63,6 +63,9 @@ export interface BiometricDelta {
   delta: number;
   unit: string;
   clinically_significant: boolean;
+  changepoint_detected: boolean;
+  changepoint_date?: string;
+  changepoint_direction?: string;
 }
 
 export interface ConditionMatch {
