@@ -2,11 +2,15 @@ import type { PatientPayload, AnalysisResponse, PatientRecord, AppointmentRecord
 
 const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/+$/, "");
 
+const COMMON_HEADERS: Record<string, string> = {
+  "ngrok-skip-browser-warning": "true",
+};
+
 export async function analyzePatient(payloadToAnalyze: PatientPayload): Promise<AnalysisResponse> {
 
   const res = await fetch(`${API_BASE}/api/v1/analyze-patient`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...COMMON_HEADERS },
     body: JSON.stringify(payloadToAnalyze),
   });
   if (!res.ok) {
@@ -18,6 +22,7 @@ export async function analyzePatient(payloadToAnalyze: PatientPayload): Promise<
 export async function getDashboardData(patientId: string): Promise<AnalysisResponse> {
   const res = await fetch(`${API_BASE}/api/v1/patients/${patientId}/dashboard`, {
     cache: "no-store",
+    headers: COMMON_HEADERS,
   });
   if (!res.ok) {
     throw new Error(`API error: ${res.status} ${res.statusText}`);
@@ -34,6 +39,7 @@ export function getPaperUrl(pmcid: string): string {
 export async function fetchPatients(): Promise<PatientRecord[]> {
   const res = await fetch(`${API_BASE}/api/v1/patients`, {
     cache: "no-store",
+    headers: COMMON_HEADERS,
   });
   if (!res.ok) throw new Error(`API error: ${res.status}`);
   return res.json();
@@ -42,7 +48,7 @@ export async function fetchPatients(): Promise<PatientRecord[]> {
 export async function createPatient(name: string, email: string): Promise<PatientRecord> {
   const res = await fetch(`${API_BASE}/api/v1/patients`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...COMMON_HEADERS },
     body: JSON.stringify({ name, email }),
   });
   if (!res.ok) {
@@ -69,7 +75,7 @@ export async function createAppointment(
 ): Promise<AppointmentRecord> {
   const res = await fetch(`${API_BASE}/api/v1/appointments`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...COMMON_HEADERS },
     body: JSON.stringify({ patient_id: patientId, date, time }),
   });
   if (!res.ok) {

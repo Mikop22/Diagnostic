@@ -19,7 +19,6 @@ def _build_appointment_email(
     msg = MIMEMultipart("alternative")
     msg["Subject"] = f"Diagnostic — Your Appointment on {appointment_date}"
     msg["From"] = settings.SMTP_USER
-    msg["To"] = ""  # set per-recipient in send function
 
     html = f"""\
     <html>

@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import { motion, AnimatePresence, useSpring, useMotionValue, useTransform } from "framer-motion";
-import AppleHealthSync from "@/components/AppleHealthSync";
 
 const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/+$/, "");
 
@@ -177,7 +176,7 @@ export default function IntakePage() {
 
   const [showButton, setShowButton] = useState(false);
   const [view, setView] = useState<
-    "welcome" | "intro" | "symptoms-intro" | "symptoms-explainer" | "symptoms-input" | "wearables-permission" | "apple-health-sync" | "questions" | "submitting" | "finish"
+    "welcome" | "intro" | "symptoms-intro" | "symptoms-explainer" | "symptoms-input" | "syncing-wearables" | "questions" | "submitting" | "finish"
   >("welcome");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
@@ -211,6 +210,20 @@ export default function IntakePage() {
     }
   }, [view]);
 
+  useEffect(() => {
+    if (view === "syncing-wearables") {
+      const timer = setTimeout(() => setView("submitting"), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [view]);
+
+  useEffect(() => {
+    if (view === "submitting") {
+      const timer = setTimeout(() => setView("finish"), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [view]);
+
   const handleAnswer = (answer: string) => {
     setAnswers((prev) => ({ ...prev, [currentQuestionIndex]: answer }));
     if (currentQuestionIndex < questions.length - 1) {
@@ -226,18 +239,15 @@ export default function IntakePage() {
     } else if (view === "symptoms-input" || view === "symptoms-intro" || view === "symptoms-explainer") {
       setCurrentQuestionIndex(questions.length - 1);
       setView("questions");
-    } else if (view === "wearables-permission") {
-      setView("symptoms-input");
-    } else if (view === "apple-health-sync") {
-      setView("wearables-permission");
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (forceDemoData = false) => {
     setView("submitting");
     setSubmitError(null);
 
-    const payload = useDemoData
+    const shouldUseDemoData = forceDemoData || useDemoData;
+    const payload = shouldUseDemoData
       ? {
         patient_id: token,
         sync_timestamp: new Date().toISOString(),
@@ -281,7 +291,7 @@ export default function IntakePage() {
     try {
       const res = await fetch(`${API_BASE}/api/v1/intake/${token}/submit`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "ngrok-skip-browser-warning": "true" },
         body: JSON.stringify(payload),
       });
 
@@ -455,7 +465,7 @@ export default function IntakePage() {
                   />
                 </div>
                 <div className="w-full max-w-[760px] flex justify-end">
-                  <LiquidButton onClick={() => setView("wearables-permission")} className="w-[140px] h-[48px] text-[20px]">
+                  <LiquidButton onClick={() => setView("syncing-wearables")} className="w-[140px] h-[48px] text-[20px]">
                     Submit
                   </LiquidButton>
                 </div>
@@ -463,82 +473,19 @@ export default function IntakePage() {
             </motion.div>
           )}
 
-          {view === "wearables-permission" && (
+          {view === "syncing-wearables" && (
             <motion.div
-              key="wearables-permission"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              key="syncing-wearables"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.5 }}
-              className="relative w-full flex flex-col items-center justify-center"
+              className="w-full flex flex-col items-center justify-center gap-6"
             >
-              <GlassBackButton onClick={handleBack} className="absolute top-0 left-0" />
-
-              <h2 className="max-w-[680px] text-[34px] font-medium leading-[44px] text-center font-poppins mb-8 bg-linear-to-r from-[#5D2EA8] to-[#F294B9] bg-clip-text text-transparent pb-1">
-                Are you comfortable with sharing data from your electronic wearables?
-              </h2>
-
-              {/* Demo Wearable Data Toggle */}
-              <div className="mb-8 flex items-center gap-3">
-                <button
-                  onClick={() => setUseDemoData(!useDemoData)}
-                  className={`relative w-12 h-7 rounded-full transition-colors duration-300 ${useDemoData ? "bg-[#5D2EA8]" : "bg-white/20 border border-white/30"}`}
-                >
-                  <div
-                    className={`absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow-md transition-transform duration-300 ${useDemoData ? "translate-x-5" : "translate-x-0"}`}
-                  />
-                </button>
-                <span className="text-[16px] font-medium text-[#4A3270] font-poppins">Use Demo Wearable Data</span>
-              </div>
-
-              {submitError && (
-                <div className="mb-6 max-w-[500px] rounded-[16px] bg-red-50 border border-red-200 px-5 py-3 text-center">
-                  <p className="text-[14px] text-red-600 font-medium">{submitError}</p>
-                </div>
-              )}
-
-              <div className="flex items-center gap-[17px]">
-                <motion.button
-                  whileHover={{ scale: 1.05, filter: "brightness(1.18)" }}
-                  whileTap={{ scale: 0.96 }}
-                  onClick={() => setView("apple-health-sync")}
-                  className="relative w-[184px] h-[51px] bg-[#B58DE0]/15 border border-white/30 rounded-[26px] backdrop-blur-[20px] shadow-[0_2px_12px_rgba(93,46,168,0.12),inset_0_1px_0_rgba(255,255,255,0.35)] flex items-center justify-center cursor-pointer overflow-hidden transition-[filter] duration-300"
-                >
-                  <div className="absolute inset-0 rounded-[26px] bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.18)_0%,transparent_55%)] pointer-events-none" />
-                  <span className="relative z-10 text-[#2F1C4E] text-[24px] font-medium font-poppins pt-1">Yes</span>
-                </motion.button>
-
-                <motion.button
-                  whileHover={{ scale: 1.05, filter: "brightness(1.18)" }}
-                  whileTap={{ scale: 0.96 }}
-                  onClick={handleSubmit}
-                  className="relative w-[184px] h-[51px] bg-white/10 border border-white/30 rounded-[26px] backdrop-blur-[20px] shadow-[0_2px_12px_rgba(93,46,168,0.08),inset_0_1px_0_rgba(255,255,255,0.35)] flex items-center justify-center cursor-pointer overflow-hidden transition-[filter] duration-300"
-                >
-                  <div className="absolute inset-0 rounded-[26px] bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,255,255,0.18)_0%,transparent_55%)] pointer-events-none" />
-                  <span className="relative z-10 text-[#4A3270] text-[24px] font-medium font-poppins pt-1">No</span>
-                </motion.button>
-              </div>
-            </motion.div>
-          )}
-
-          {view === "apple-health-sync" && (
-            <motion.div
-              key="apple-health-sync"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="relative w-full flex flex-col items-center justify-center"
-            >
-              <GlassBackButton onClick={handleBack} className="absolute top-0 left-0" />
-              <AppleHealthSync
-                token={token}
-                onSyncComplete={() => {
-                  setUseDemoData(false);
-                  handleSubmit();
-                }}
-                onSkip={() => handleSubmit()}
-              />
+              <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#E9E0F5] border-t-[#5D2EA8]" />
+              <p className="text-[22px] font-medium text-[#1F1B2D] font-poppins">Syncing wearable data…</p>
+              <p className="text-[16px] text-[#6D6885] font-poppins">Connecting to Apple Health</p>
+>>>>>>> 8579dd1 (Fix ngrok browser interstitial blocking Vercel API calls)
             </motion.div>
           )}
 
