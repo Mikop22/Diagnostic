@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
   CircleHelp,
   Info,
@@ -7,6 +8,16 @@ import {
 import { ClientCharts } from "./ClientCharts";
 import { DiagnosticNudgeAccordion } from "@/app/_components/DiagnosticNudgeAccordion";
 import type { AnalysisResponse, PatientPayload } from "@/lib/types";
+
+const sectionVariants = {
+  hidden: { opacity: 0, y: 16, filter: "blur(8px)" },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  }),
+};
 
 interface DashboardContentProps {
   data: AnalysisResponse & { patient_payload?: PatientPayload };
@@ -47,7 +58,7 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
   return (
     <>
       {/* ═══ TOP ROW ═══ */}
-      <div className="flex min-h-0 flex-[14] gap-8">
+      <motion.div custom={0} variants={sectionVariants} initial="hidden" animate="visible" className="flex min-h-0 flex-[14] gap-8">
         {/* Guiding Questions */}
         <div className="glass-card flex w-[32%] shrink-0 flex-col overflow-hidden rounded-[24px]">
           <div className="flex items-center justify-between px-6 py-5">
@@ -146,10 +157,10 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
             })()}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* ═══ METRICS ROW ═══ */}
-      <div className="flex min-h-0 flex-[9] gap-8">
+      <motion.div custom={1} variants={sectionVariants} initial="hidden" animate="visible" className="flex min-h-0 flex-[9] gap-8">
         {patient_payload?.data?.acute_7_day?.metrics ? (
           <ClientCharts
             biometricDeltas={biometric_deltas}
@@ -160,10 +171,10 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
             <span className="text-[14px] font-medium text-[var(--text-muted)]">Biometric data unavailable</span>
           </div>
         )}
-      </div>
+      </motion.div>
 
       {/* ═══ BOTTOM ROW ═══ */}
-      <div className="flex min-h-0 flex-[12] gap-8">
+      <motion.div custom={2} variants={sectionVariants} initial="hidden" animate="visible" className="flex min-h-0 flex-[12] gap-8">
         {/* Screening Count */}
         <div className="glass-card flex flex-1 flex-col overflow-hidden rounded-[24px]">
           <div className="flex items-center justify-between px-[18px] py-3.5">
@@ -269,7 +280,7 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

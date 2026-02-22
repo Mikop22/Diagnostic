@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import type { BiometricDelta } from "@/lib/types";
 
 const METRIC_LABELS: Record<string, string> = {
@@ -12,7 +13,7 @@ const METRIC_LABELS: Record<string, string> = {
   appleSleepingWristTemperature: "Wrist Temp",
 };
 
-export function DeltaBadge({ delta }: { delta: BiometricDelta }) {
+export function DeltaBadge({ delta, index = 0 }: { delta: BiometricDelta; index?: number }) {
   const label = METRIC_LABELS[delta.metric] || delta.metric;
   const isSignificant = delta.clinically_significant;
   const isNegativeDelta = delta.delta < 0;
@@ -21,7 +22,13 @@ export function DeltaBadge({ delta }: { delta: BiometricDelta }) {
   const isBad = isInverted ? delta.delta < 0 : delta.delta > 0;
 
   return (
-    <div className={`rounded-lg border p-4 ${isSignificant ? "bg-red-50 border-red-200" : "bg-slate-50 border-slate-200"}`}>
+    <motion.div
+      initial={{ opacity: 0, y: 12, filter: "blur(6px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ scale: 1.03, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+      className={`rounded-lg border p-4 ${isSignificant ? "bg-red-50 border-red-200" : "bg-slate-50 border-slate-200"}`}
+    >
       <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">{label}</p>
       <p className="text-2xl font-bold text-slate-900">
         {delta.acute_avg} <span className="text-sm font-normal text-slate-500">{delta.unit}</span>
@@ -32,6 +39,6 @@ export function DeltaBadge({ delta }: { delta: BiometricDelta }) {
         </span>
         <span className="text-xs text-slate-400">vs {delta.longitudinal_avg} baseline</span>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ReferenceLine, ResponsiveContainer } from "recharts";
 import type { BiometricDelta, AcuteMetrics } from "@/lib/types";
 
@@ -37,14 +38,21 @@ export function ClientCharts({ biometricDeltas, acuteData }: ClientChartsProps) 
 
     return (
         <>
-            {chartsConfig.map((c) => {
+            {chartsConfig.map((c, i) => {
                 const delta = biometricDeltas?.find(d => d.metric === c.metricKey);
                 const changepointX = delta?.changepoint_detected && delta.changepoint_date
                     ? toChartDate(delta.changepoint_date)
                     : null;
 
                 return (
-                    <div key={c.title} className="glass-card flex flex-1 flex-col overflow-hidden rounded-[24px]">
+                    <motion.div
+                        key={c.title}
+                        initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        transition={{ duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                        whileHover={{ scale: 1.02, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+                        className="glass-card flex flex-1 flex-col overflow-hidden rounded-[24px]"
+                    >
                         <div className="flex items-center px-[18px] py-4">
                             <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">{c.title}</span>
                         </div>
@@ -78,7 +86,7 @@ export function ClientCharts({ biometricDeltas, acuteData }: ClientChartsProps) 
                                 </LineChart>
                             </ResponsiveContainer>
                         </div>
-                    </div>
+                    </motion.div>
                 );
             })}
         </>

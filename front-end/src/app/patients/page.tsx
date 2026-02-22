@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
 import {
   CircleUserRound,
   ChevronDown,
@@ -138,7 +139,12 @@ export default function PatientsPage() {
         {/* Left Column — Patient List */}
         <div className="flex min-h-0 flex-1 flex-col gap-6">
           {/* Welcome header */}
-          <div className="flex items-center justify-between pb-2">
+          <motion.div
+            initial={{ opacity: 0, y: 12, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center justify-between pb-2"
+          >
             <div className="flex flex-col gap-1">
               <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-muted)]">
                 Welcome back,
@@ -150,8 +156,7 @@ export default function PatientsPage() {
             <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-muted)]">
               {new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
             </span>
-          </div>
-
+          </motion.div>
           {/* Section header with search */}
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-1">
@@ -216,9 +221,14 @@ export default function PatientsPage() {
                 </div>
               ) : (
                 filteredPatients.map((patient, index) => (
+                  <motion.div
+                    key={patient.id}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                  >
                   <Link
                     href={`/dashboard/${patient.id}`}
-                    key={patient.id}
                     className={`flex items-center px-6 py-5 transition-colors hover:bg-[rgba(243,237,250,0.5)] ${index < filteredPatients.length - 1
                       ? "[border-bottom:var(--table-border-row)]"
                       : ""
@@ -270,6 +280,7 @@ export default function PatientsPage() {
                       </button>
                     </div>
                   </Link>
+                  </motion.div>
                 ))
               )}
             </div>
@@ -279,7 +290,12 @@ export default function PatientsPage() {
         {/* Right Sidebar */}
         <div className="flex w-[340px] shrink-0 flex-col gap-6">
           {/* Overview card */}
-          <div className="glass-card rounded-[24px] p-7">
+          <motion.div
+            initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="glass-card rounded-[24px] p-7"
+          >
             <h3 className="text-[16px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">
               Overview
             </h3>
@@ -304,10 +320,15 @@ export default function PatientsPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Recent Activity card */}
-          <div className="glass-card flex flex-col gap-5 rounded-[24px] p-7">
+          <motion.div
+            initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="glass-card flex flex-col gap-5 rounded-[24px] p-7"
+          >
             <h3 className="text-[16px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">
               Recent Activity
             </h3>
@@ -329,7 +350,7 @@ export default function PatientsPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Add Patient button */}
           <div className="mt-auto pt-2">
