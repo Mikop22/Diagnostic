@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import { motion, AnimatePresence, useSpring, useMotionValue, useTransform } from "framer-motion";
+import AppleHealthSync from "@/components/AppleHealthSync";
 
 const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/+$/, "");
 
@@ -210,19 +211,10 @@ export default function IntakePage() {
     }
   }, [view]);
 
-  useEffect(() => {
-    if (view === "syncing-wearables") {
-      const timer = setTimeout(() => setView("submitting"), 4000);
-      return () => clearTimeout(timer);
-    }
-  }, [view]);
+  // syncing-wearables view is now driven by AppleHealthSync component
+  // (onSyncComplete / onSkip callbacks)
 
-  useEffect(() => {
-    if (view === "submitting") {
-      const timer = setTimeout(() => setView("finish"), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [view]);
+  // submitting view transitions to finish via handleSubmit callback
 
   const handleAnswer = (answer: string) => {
     setAnswers((prev) => ({ ...prev, [currentQuestionIndex]: answer }));
@@ -247,46 +239,154 @@ export default function IntakePage() {
     setSubmitError(null);
 
     const shouldUseDemoData = forceDemoData || useDemoData;
-    const payload = shouldUseDemoData
-      ? {
-        patient_id: token,
-        sync_timestamp: new Date().toISOString(),
-        hardware_source: "Apple Watch Series 9",
-        patient_narrative: narrative || "Reporting general fatigue and mild discomfort.",
-        data: {
-          acute_7_day: {
-            granularity: "daily_summary",
-            metrics: {
-              heartRateVariabilitySDNN: Array(7).fill({ date: "2026-03-10", value: 35, unit: "ms" }),
-              restingHeartRate: Array(7).fill({ date: "2026-03-10", value: 65, unit: "bpm" }),
-              appleSleepingWristTemperature: Array(7).fill({ date: "2026-03-10", value: 0.1, unit: "degC_deviation" }),
-              respiratoryRate: Array(7).fill({ date: "2026-03-10", value: 14, unit: "breaths/min" }),
-              walkingAsymmetryPercentage: Array(7).fill({ date: "2026-03-10", value: 1.2, unit: "%" }),
-              stepCount: Array(7).fill({ date: "2026-03-10", value: 8000, unit: "count" }),
-              sleepAnalysis_awakeSegments: Array(7).fill({ date: "2026-03-10", value: 1, unit: "count" }),
-            },
-          },
-          longitudinal_6_month: {
-            granularity: "weekly_average",
-            metrics: {
-              restingHeartRate: Array(26).fill({ week_start: "2025-08-24", value: 62, unit: "bpm" }),
-              walkingAsymmetryPercentage: Array(26).fill({ week_start: "2025-08-24", value: 1.1, unit: "%" }),
-            },
-          },
+
+    // Realistic mock biometric data from CLAUDE.md — shows clear acute episode
+    // with clinically significant deltas against a 26-week baseline.
+    const mockBiometricData = {
+      acute_7_day: {
+        granularity: "daily_summary",
+        metrics: {
+          heartRateVariabilitySDNN: [
+            { date: "2026-02-15", value: 48.2, unit: "ms" },
+            { date: "2026-02-16", value: 47.1, unit: "ms" },
+            { date: "2026-02-17", value: 45.9, unit: "ms" },
+            { date: "2026-02-18", value: 22.4, unit: "ms", flag: "severe_drop" },
+            { date: "2026-02-19", value: 24.1, unit: "ms" },
+            { date: "2026-02-20", value: 28.5, unit: "ms" },
+            { date: "2026-02-21", value: 31.0, unit: "ms" },
+          ],
+          restingHeartRate: [
+            { date: "2026-02-15", value: 62, unit: "bpm" },
+            { date: "2026-02-16", value: 63, unit: "bpm" },
+            { date: "2026-02-17", value: 62, unit: "bpm" },
+            { date: "2026-02-18", value: 78, unit: "bpm", flag: "elevated" },
+            { date: "2026-02-19", value: 76, unit: "bpm" },
+            { date: "2026-02-20", value: 74, unit: "bpm" },
+            { date: "2026-02-21", value: 72, unit: "bpm" },
+          ],
+          appleSleepingWristTemperature: [
+            { date: "2026-02-15", value: -0.12, unit: "degC_deviation" },
+            { date: "2026-02-16", value: -0.10, unit: "degC_deviation" },
+            { date: "2026-02-17", value: 0.05, unit: "degC_deviation" },
+            { date: "2026-02-18", value: 0.85, unit: "degC_deviation", flag: "sustained_high" },
+            { date: "2026-02-19", value: 0.92, unit: "degC_deviation" },
+            { date: "2026-02-20", value: 0.80, unit: "degC_deviation" },
+            { date: "2026-02-21", value: 0.75, unit: "degC_deviation" },
+          ],
+          respiratoryRate: [
+            { date: "2026-02-15", value: 14.5, unit: "breaths/min" },
+            { date: "2026-02-16", value: 14.6, unit: "breaths/min" },
+            { date: "2026-02-17", value: 14.5, unit: "breaths/min" },
+            { date: "2026-02-18", value: 18.2, unit: "breaths/min", flag: "elevated" },
+            { date: "2026-02-19", value: 17.8, unit: "breaths/min" },
+            { date: "2026-02-20", value: 16.5, unit: "breaths/min" },
+            { date: "2026-02-21", value: 16.0, unit: "breaths/min" },
+          ],
+          walkingAsymmetryPercentage: [
+            { date: "2026-02-15", value: 1.2, unit: "%" },
+            { date: "2026-02-16", value: 1.5, unit: "%" },
+            { date: "2026-02-17", value: 1.3, unit: "%" },
+            { date: "2026-02-18", value: 8.5, unit: "%", flag: "guarding_detected" },
+            { date: "2026-02-19", value: 8.2, unit: "%" },
+            { date: "2026-02-20", value: 6.0, unit: "%" },
+            { date: "2026-02-21", value: 5.5, unit: "%" },
+          ],
+          stepCount: [
+            { date: "2026-02-15", value: 8500, unit: "count" },
+            { date: "2026-02-16", value: 8200, unit: "count" },
+            { date: "2026-02-17", value: 8600, unit: "count" },
+            { date: "2026-02-18", value: 1200, unit: "count", flag: "mobility_drop" },
+            { date: "2026-02-19", value: 1500, unit: "count" },
+            { date: "2026-02-20", value: 2500, unit: "count" },
+            { date: "2026-02-21", value: 3000, unit: "count" },
+          ],
+          sleepAnalysis_awakeSegments: [
+            { date: "2026-02-15", value: 1, unit: "count" },
+            { date: "2026-02-16", value: 1, unit: "count" },
+            { date: "2026-02-17", value: 2, unit: "count" },
+            { date: "2026-02-18", value: 6, unit: "count", flag: "painsomnia" },
+            { date: "2026-02-19", value: 5, unit: "count" },
+            { date: "2026-02-20", value: 4, unit: "count" },
+            { date: "2026-02-21", value: 3, unit: "count" },
+          ],
         },
-        risk_profile: { factors: [] }
-      }
-      : {
-        patient_id: token,
-        sync_timestamp: new Date().toISOString(),
-        hardware_source: "Apple Watch Series 9",
-        patient_narrative: narrative || "Reporting general fatigue and mild discomfort.",
-        data: {
-          acute_7_day: { granularity: "daily_summary", metrics: { heartRateVariabilitySDNN: [], restingHeartRate: [], appleSleepingWristTemperature: [], respiratoryRate: [], walkingAsymmetryPercentage: [], stepCount: [], sleepAnalysis_awakeSegments: [] } },
-          longitudinal_6_month: { granularity: "weekly_average", metrics: { restingHeartRate: [], walkingAsymmetryPercentage: [] } }
+      },
+      longitudinal_6_month: {
+        granularity: "weekly_average",
+        metrics: {
+          restingHeartRate: [
+            { week_start: "2025-08-24", value: 61.2, unit: "bpm" },
+            { week_start: "2025-08-31", value: 61.5, unit: "bpm" },
+            { week_start: "2025-09-07", value: 61.4, unit: "bpm" },
+            { week_start: "2025-09-14", value: 61.8, unit: "bpm" },
+            { week_start: "2025-09-21", value: 62.1, unit: "bpm" },
+            { week_start: "2025-09-28", value: 62.0, unit: "bpm" },
+            { week_start: "2025-10-05", value: 62.5, unit: "bpm" },
+            { week_start: "2025-10-12", value: 62.8, unit: "bpm" },
+            { week_start: "2025-10-19", value: 63.1, unit: "bpm" },
+            { week_start: "2025-10-26", value: 63.5, unit: "bpm" },
+            { week_start: "2025-11-02", value: 63.8, unit: "bpm" },
+            { week_start: "2025-11-09", value: 64.1, unit: "bpm" },
+            { week_start: "2025-11-16", value: 64.5, unit: "bpm" },
+            { week_start: "2025-11-23", value: 64.7, unit: "bpm" },
+            { week_start: "2025-11-30", value: 65.1, unit: "bpm" },
+            { week_start: "2025-12-07", value: 65.5, unit: "bpm" },
+            { week_start: "2025-12-14", value: 65.8, unit: "bpm" },
+            { week_start: "2025-12-21", value: 66.2, unit: "bpm" },
+            { week_start: "2025-12-28", value: 66.5, unit: "bpm" },
+            { week_start: "2026-01-04", value: 66.8, unit: "bpm" },
+            { week_start: "2026-01-11", value: 67.1, unit: "bpm" },
+            { week_start: "2026-01-18", value: 67.4, unit: "bpm" },
+            { week_start: "2026-01-25", value: 67.7, unit: "bpm" },
+            { week_start: "2026-02-01", value: 68.1, unit: "bpm" },
+            { week_start: "2026-02-08", value: 68.4, unit: "bpm" },
+            { week_start: "2026-02-15", value: 68.8, unit: "bpm", trend: "creeping_elevation" },
+          ],
+          walkingAsymmetryPercentage: [
+            { week_start: "2025-08-24", value: 1.1, unit: "%" },
+            { week_start: "2025-08-31", value: 1.1, unit: "%" },
+            { week_start: "2025-09-07", value: 1.2, unit: "%" },
+            { week_start: "2025-09-14", value: 1.2, unit: "%" },
+            { week_start: "2025-09-21", value: 1.3, unit: "%" },
+            { week_start: "2025-09-28", value: 1.3, unit: "%" },
+            { week_start: "2025-10-05", value: 1.4, unit: "%" },
+            { week_start: "2025-10-12", value: 1.5, unit: "%" },
+            { week_start: "2025-10-19", value: 1.6, unit: "%" },
+            { week_start: "2025-10-26", value: 1.8, unit: "%" },
+            { week_start: "2025-11-02", value: 2.0, unit: "%" },
+            { week_start: "2025-11-09", value: 2.1, unit: "%" },
+            { week_start: "2025-11-16", value: 2.3, unit: "%" },
+            { week_start: "2025-11-23", value: 2.4, unit: "%" },
+            { week_start: "2025-11-30", value: 2.5, unit: "%" },
+            { week_start: "2025-12-07", value: 2.6, unit: "%" },
+            { week_start: "2025-12-14", value: 2.8, unit: "%" },
+            { week_start: "2025-12-21", value: 2.9, unit: "%" },
+            { week_start: "2025-12-28", value: 3.1, unit: "%" },
+            { week_start: "2026-01-04", value: 3.3, unit: "%" },
+            { week_start: "2026-01-11", value: 3.4, unit: "%" },
+            { week_start: "2026-01-18", value: 3.6, unit: "%" },
+            { week_start: "2026-01-25", value: 3.8, unit: "%" },
+            { week_start: "2026-02-01", value: 4.0, unit: "%" },
+            { week_start: "2026-02-08", value: 4.1, unit: "%" },
+            { week_start: "2026-02-15", value: 4.3, unit: "%", trend: "gradual_impairment" },
+          ],
         },
-        risk_profile: { factors: [] }
-      };
+      },
+    };
+
+    const payload = {
+      patient_id: token,
+      sync_timestamp: new Date().toISOString(),
+      hardware_source: "Apple Watch Series 9",
+      patient_narrative: narrative || "Reporting general fatigue and mild discomfort.",
+      // If skipping or using demo data, send mock biometrics.
+      // If Apple Watch synced, send empty arrays — backend merges webhook data.
+      data: shouldUseDemoData ? mockBiometricData : {
+        acute_7_day: { granularity: "daily_summary", metrics: { heartRateVariabilitySDNN: [], restingHeartRate: [], appleSleepingWristTemperature: [], respiratoryRate: [], walkingAsymmetryPercentage: [], stepCount: [], sleepAnalysis_awakeSegments: [] } },
+        longitudinal_6_month: { granularity: "weekly_average", metrics: { restingHeartRate: [], walkingAsymmetryPercentage: [] } },
+      },
+      risk_profile: { factors: [] },
+    };
 
     try {
       const res = await fetch(`${API_BASE}/api/v1/intake/${token}/submit`, {
@@ -480,11 +580,13 @@ export default function IntakePage() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.5 }}
-              className="w-full flex flex-col items-center justify-center gap-6"
+              className="w-full flex flex-col items-center justify-center"
             >
-              <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#E9E0F5] border-t-[#5D2EA8]" />
-              <p className="text-[22px] font-medium text-[#1F1B2D] font-poppins">Syncing wearable data…</p>
-              <p className="text-[16px] text-[#6D6885] font-poppins">Connecting to Apple Health</p>
+              <AppleHealthSync
+                token={token}
+                onSyncComplete={() => handleSubmit(false)}
+                onSkip={() => handleSubmit(true)}
+              />
             </motion.div>
           )}
 
