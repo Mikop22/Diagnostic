@@ -15,6 +15,7 @@ from app.models.patient import (
 from app.services.llm_extractor import extract_clinical_brief
 from app.services.embeddings import encode_text
 from app.services.vector_search import search_conditions
+from app.services.cusum import detect_changepoint
 
 router = APIRouter(prefix="/api/v1", tags=["analysis"])
 
@@ -80,6 +81,11 @@ def _compute_biometric_deltas(payload: PatientPayload) -> list[BiometricDelta]:
         threshold_info = THRESHOLDS.get(metric_name, {"value": 0})
         clinically_significant = delta > threshold_info["value"]
 
+        # CUSUM on acute 7-day series (dates align with charts)
+        cp_values = [p.value for p in acute_points]
+        cp_dates = [p.date for p in acute_points]
+        cp = detect_changepoint(cp_values, cp_dates)
+
         deltas.append(
             BiometricDelta(
                 metric=metric_name,
@@ -88,6 +94,9 @@ def _compute_biometric_deltas(payload: PatientPayload) -> list[BiometricDelta]:
                 delta=round(delta, 2),
                 unit=unit,
                 clinically_significant=clinically_significant,
+                changepoint_detected=cp is not None,
+                changepoint_date=cp["date"] if cp else None,
+                changepoint_direction=cp["direction"] if cp else None,
             )
         )
 
@@ -106,6 +115,11 @@ def _compute_biometric_deltas(payload: PatientPayload) -> list[BiometricDelta]:
         threshold_info = THRESHOLDS.get(metric_name, {"value": 0})
         clinically_significant = delta > threshold_info["value"]
 
+        # CUSUM on acute 7-day series
+        cp_values = [p.value for p in acute_points]
+        cp_dates = [p.date for p in acute_points]
+        cp = detect_changepoint(cp_values, cp_dates)
+
         deltas.append(
             BiometricDelta(
                 metric=metric_name,
@@ -114,6 +128,9 @@ def _compute_biometric_deltas(payload: PatientPayload) -> list[BiometricDelta]:
                 delta=round(delta, 2),
                 unit=unit,
                 clinically_significant=clinically_significant,
+                changepoint_detected=cp is not None,
+                changepoint_date=cp["date"] if cp else None,
+                changepoint_direction=cp["direction"] if cp else None,
             )
         )
 

@@ -81,6 +81,9 @@ class BiometricDelta(BaseModel):
     delta: float
     unit: str
     clinically_significant: bool
+    changepoint_detected: bool = False
+    changepoint_date: Union[str, None] = None
+    changepoint_direction: Union[str, None] = None
 
 
 class ConditionMatch(BaseModel):

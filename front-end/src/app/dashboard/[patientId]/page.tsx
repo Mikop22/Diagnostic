@@ -201,7 +201,7 @@ export default async function DashboardPage({
 
         {/* ═══ METRICS ROW ═══ */}
         <div className="flex min-h-0 flex-[9] gap-8">
-          <ClientCharts />
+          <ClientCharts biometricDeltas={biometric_deltas} />
         </div>
 
         {/* ═══ BOTTOM ROW ═══ */}
