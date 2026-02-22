@@ -6,12 +6,9 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-/* ── Diagnostic Nudge Accordion Import ── */
 import { DiagnosticNudgeAccordion } from "@/app/_components/DiagnosticNudgeAccordion";
-import { getDashboardData } from "@/lib/api";
-
-/* Number of extra empty ruled lines after content */
-const EMPTY_LINES = 3;
+import { getDashboardData, fetchPatients } from "@/lib/api";
+import { NotesEditor } from "./NotesEditor";
 
 /* ── Page ── */
 
@@ -22,24 +19,16 @@ export default async function NotesPage({
 }) {
   const { patientId } = await params;
 
-  // Since we don't have real time-series hardware for this test patient,
-  const isTestPatient = patientId === "1e996459-a341-45de-993a-6bf64fa9b51e";
-  const patientName = isTestPatient ? "Test Patient" : "Unknown Patient";
+  // Fetch dashboard data and patient list in parallel
+  const [result, patients] = await Promise.all([
+    getDashboardData(patientId),
+    fetchPatients().catch(() => []),
+  ]);
 
-  // 1. Await the real analysis response from the backend 
-  const result = await getDashboardData(patientId);
+  const patient = patients.find((p) => p.id === patientId);
+  const patientName = patient?.name ?? "Patient";
 
-  // 2. Safely unpack real data
-  const { clinical_brief, condition_matches } = result;
-
-  // 3. Map to UI 
-  // Map the new structured summary content to the notebook lines
-  const noteLines = [
-    clinical_brief.summary,
-    "",
-    "RECOMMENDED ACTIONS:",
-    ...clinical_brief.recommended_actions.map(action => `- ${action}`),
-  ];
+  const { condition_matches } = result;
 
   return (
     <div className="flex h-full w-full flex-col bg-transparent font-poppins">
@@ -76,47 +65,22 @@ export default async function NotesPage({
           </div>
           <div className="flex items-center gap-2 rounded-[16px] bg-[rgba(243,237,250,0.5)] px-4 py-2">
             <span className="text-[14px] font-medium tracking-[0.5px] uppercase text-[var(--text-secondary)]">Date:</span>
-            <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">Mar. 10, 2026</span>
+            <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">
+              {new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+            </span>
           </div>
         </div>
 
         {/* Main area: notes + research sidebar */}
         <div className="flex min-h-0 flex-1 gap-8">
-          {/* Notes card — ruled notebook */}
-          <div className="glass-card flex min-h-0 flex-1 flex-col overflow-hidden rounded-[24px] px-10 py-8">
-            <div className="mx-auto flex w-full max-w-[800px] flex-1 flex-col">
-              {/* Lines with text */}
-              {noteLines.map((line, i) => (
-                <div
-                  key={i}
-                  className="flex h-[56px] shrink-0 items-end gap-3 [border-bottom:1px_solid_rgba(232,222,248,0.4)]"
-                >
-                  <div className="mb-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--purple-primary)] opacity-40" />
-                  <span className="pb-2 text-[15px] font-medium leading-relaxed tracking-[-0.1px] text-[var(--text-body)]">
-                    {line}
-                  </span>
-                </div>
-              ))}
-
-              {/* Empty ruled lines */}
-              {Array.from({ length: EMPTY_LINES }).map((_, i) => (
-                <div
-                  key={`empty-${i}`}
-                  className={`shrink-0 [border-bottom:1px_solid_rgba(232,222,248,0.4)] ${i === EMPTY_LINES - 1 ? "flex-1" : "h-[56px]"
-                    }`}
-                />
-              ))}
-            </div>
-          </div>
+          {/* Notes card — editable ruled notebook */}
+          <NotesEditor />
 
           {/* Research sidebar */}
           <div className="glass-card flex w-[380px] shrink-0 flex-col gap-5 overflow-y-auto rounded-[24px] px-7 py-8">
             <h3 className="text-[16px] font-semibold tracking-[-0.1px] text-[var(--text-primary)]">
               Notable Research
             </h3>
-
-            {/* Use the new DiagnosticNudgeAccordion directly here, filtering out bad scores if needed, 
-                but mapping directly to the response format */}
             <DiagnosticNudgeAccordion matches={condition_matches} />
           </div>
         </div>
