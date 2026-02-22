@@ -39,7 +39,7 @@ async def submit_intake(
     request: Request,
     background_tasks: BackgroundTasks,
 ):
-    """Intake orchestrator — validates, analyses, persists, and pays out.
+    """Intake orchestrator — validates, analyzes, persists, and pays out.
 
     Path Parameters:
         token: Unique appointment identifier that also serves as the
