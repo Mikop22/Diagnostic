@@ -42,9 +42,9 @@ export default async function NotesPage({
   ];
 
   return (
-    <div className="flex h-full w-full flex-col bg-white font-poppins">
+    <div className="flex h-full w-full flex-col bg-transparent font-poppins">
       {/* ── Navigation Bar ── */}
-      <nav className="flex h-16 shrink-0 items-center justify-between px-8">
+      <nav className="glass-nav flex h-16 shrink-0 items-center justify-between px-8">
         <div className="flex items-center gap-8">
           <Link href="/patients" className="gradient-logo text-[24px] font-medium tracking-[-0.1px]">
             diagnostic

@@ -101,7 +101,7 @@ export default function PatientsPage() {
   return (
     <div className="flex h-full w-full flex-col bg-[var(--page-bg)] font-poppins">
       {/* ── Navigation Bar ── */}
-      <nav className="flex h-16 shrink-0 items-center justify-between px-8">
+      <nav className="glass-nav flex h-16 shrink-0 items-center justify-between px-8">
         <div className="flex items-center gap-8">
           <Link href="/patients" className="gradient-logo text-[24px] font-medium tracking-[-0.1px]">
             diagnostic

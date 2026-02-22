@@ -1,32 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #F8F5FD;
   --foreground: #171717;
 
-  /* Patient Home palette */
+  /* ── Brand palette ── */
   --purple-primary: #5D2EA8;
   --purple-dark: #7B42D8;
   --purple-light: #B58DE0;
   --purple-accent: #F294B9;
+
+  /* ── Typography ── */
   --text-primary: #1F1B2D;
   --text-secondary: #5B4E7A;
   --text-muted: #9B93AC;
   --text-nav: #6D6885;
-  --lavender-bg: #F3EDFA;
-  --lavender-border: #E8DEF8;
-  --avatar-purple-bg: #E8DEF8;
-  --avatar-lavender-bg: #F3E8FA;
-  --green-text: #2E7D32;
-  --green-bg: #E8F5E9;
-  --orange-text: #E65100;
-  --orange-bg: #FFF3E0;
-  --page-bg: #FAFAFE;
-  --red-alert: #E25C5C;
   --text-body: #2F2646;
-  --border-nav-inactive: rgba(232, 222, 248, 0.27);
-  --table-border-header: 1px solid rgba(232, 222, 248, 0.2);
-  --table-border-row: 1px solid rgba(232, 222, 248, 0.133);
+
+  /* ── Translucent fills (glass-compatible) ── */
+  --lavender-bg: rgba(243, 237, 250, 0.55);
+  --lavender-border: rgba(232, 222, 248, 0.6);
+  --avatar-purple-bg: rgba(232, 222, 248, 0.5);
+  --avatar-lavender-bg: rgba(243, 232, 250, 0.5);
+  --green-text: #2E7D32;
+  --green-bg: rgba(232, 245, 233, 0.6);
+  --orange-text: #E65100;
+  --orange-bg: rgba(255, 243, 224, 0.6);
+  --page-bg: transparent;
+  --red-alert: #E25C5C;
+
+  /* ── Glass borders ── */
+  --border-nav-inactive: rgba(255, 255, 255, 0.22);
+  --table-border-header: 1px solid rgba(255, 255, 255, 0.18);
+  --table-border-row: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 @theme inline {
@@ -36,12 +42,168 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ═══════════════════════════════════════════
+   LIQUID GLASS CANVAS — Animated Mesh Gradient
+   ═══════════════════════════════════════════ */
+
+@keyframes drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(80px, -60px) scale(1.05); }
+  50%      { transform: translate(-40px, 40px) scale(0.95); }
+  75%      { transform: translate(60px, 80px) scale(1.02); }
 }
+
+@keyframes drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(-70px, 50px) scale(0.97); }
+  50%      { transform: translate(50px, -70px) scale(1.04); }
+  75%      { transform: translate(-40px, -30px) scale(0.98); }
+}
+
+@keyframes drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(40px, 70px) scale(1.03); }
+  50%      { transform: translate(-80px, -20px) scale(0.96); }
+  75%      { transform: translate(30px, -60px) scale(1.01); }
+}
+
+.liquid-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(135deg, #F8F5FD 0%, #F0EAFA 35%, #EDE7F6 65%, #F5F0FC 100%);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+  will-change: transform;
+}
+
+.blob-1 {
+  width: 520px;
+  height: 520px;
+  background: #C9B8F0;
+  filter: blur(120px);
+  top: -8%;
+  left: 12%;
+  animation: drift-1 25s ease-in-out infinite;
+}
+
+.blob-2 {
+  width: 460px;
+  height: 460px;
+  background: #A8D8F0;
+  filter: blur(130px);
+  top: 35%;
+  right: 8%;
+  animation: drift-2 22s ease-in-out infinite;
+}
+
+.blob-3 {
+  width: 440px;
+  height: 440px;
+  background: #F0B8D0;
+  filter: blur(120px);
+  bottom: -5%;
+  left: 35%;
+  animation: drift-3 28s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════
+   LIQUID GLASS MATERIAL SYSTEM
+   ═══════════════════════════════════════════
+
+   The glass effect requires something colorful and
+   dynamic behind it. The animated mesh gradient canvas
+   provides the refractive substrate.
+
+   Material recipe (from the guide):
+   A. Fill — sheer white (8–12%)
+   B. Blur + Saturation — backdrop-blur 24–28px
+   C. Edges — white/20 to white/30 border
+   D. Shadows — tinted drop + inset specular highlight
+   E. Inner glow — radial gradient baked into background
+   ═══════════════════════════════════════════ */
+
+/* Primary glass surface — cards, panels, containers */
+.glass-card {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.18) 0%, transparent 55%),
+    rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 8px 32px rgba(93, 46, 168, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* Lighter glass — inputs, search bars, filter controls */
+.glass-control {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.12) 0%, transparent 50%),
+    rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  box-shadow:
+    0 4px 16px rgba(93, 46, 168, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Purple CTA glass button */
+.glass-purple {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 30% 10%, rgba(255, 255, 255, 0.20) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(123, 66, 216, 0.80), rgba(93, 46, 168, 0.70));
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 8px 24px rgba(93, 46, 168, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.30);
+}
+
+/* Active nav pill — subtle glass chip */
+.nav-pill-active {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+    rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 2px 8px rgba(93, 46, 168, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.30);
+}
+
+/* Glass nav bar — subtle separation from content */
+.glass-nav {
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.08) 0%, transparent 60%),
+    rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Gradient text for logo */
+.gradient-logo {
+  background: linear-gradient(to right, #5D2EA8, #F294B9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════ */
 
 @layer base {
   html, body {
@@ -53,72 +215,8 @@
   }
 }
 
-/* Glassmorphic card — layered gradient bg + gradient border via background-clip */
-.glass-card {
-  position: relative;
-  border: 1.5px solid transparent;
-  background:
-    radial-gradient(ellipse 70% 50% at 15% 8%, rgba(255, 255, 255, 0.53), transparent) padding-box,
-    linear-gradient(225deg, #F5F0FC, #FDFCFE) padding-box,
-    linear-gradient(225deg, rgba(255, 255, 255, 0.93), rgba(232, 222, 248, 0.4) 50%, rgba(255, 255, 255, 0.67)) border-box;
-  background-origin: padding-box, padding-box, border-box;
-  background-clip: padding-box, padding-box, border-box;
-  box-shadow:
-    0 12px 30px -2px rgba(212, 187, 240, 0.13),
-    0 -1px 1px rgba(255, 255, 255, 0.8),
-    3px 3px 24px rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(40px);
-}
-
-/* Glass input/control — lighter glass for search, filter */
-.glass-control {
-  position: relative;
-  border: 1px solid transparent;
-  background:
-    radial-gradient(ellipse 70% 50% at 15% 8%, rgba(255, 255, 255, 0.53), transparent) padding-box,
-    linear-gradient(225deg, #F5F0FC, #FDFCFE) padding-box,
-    linear-gradient(225deg, rgba(255, 255, 255, 0.93), rgba(232, 222, 248, 0.4) 50%, rgba(255, 255, 255, 0.67)) border-box;
-  background-origin: padding-box, padding-box, border-box;
-  background-clip: padding-box, padding-box, border-box;
-  backdrop-filter: blur(40px);
-  box-shadow: 0 4px 12px rgba(212, 187, 240, 0.08);
-}
-
-/* Purple CTA glass button */
-.glass-purple {
-  position: relative;
-  border: 1.5px solid transparent;
-  background:
-    radial-gradient(ellipse 60% 50% at 20% 10%, rgba(255, 255, 255, 0.27), transparent) padding-box,
-    linear-gradient(225deg, rgba(123, 66, 216, 0.6), rgba(93, 46, 168, 0.53)) padding-box,
-    linear-gradient(225deg, rgba(255, 255, 255, 0.53), rgba(155, 107, 212, 0.2) 50%, rgba(255, 255, 255, 0.27)) border-box;
-  background-origin: padding-box, padding-box, border-box;
-  background-clip: padding-box, padding-box, border-box;
-  backdrop-filter: blur(40px);
-  box-shadow: 0 6px 16px rgba(93, 46, 168, 0.2), 1px 1px 12px rgba(255, 255, 255, 0.13);
-}
-
-/* Active nav pill with gradient border */
-.nav-pill-active {
-  border: 1px solid transparent;
-  background:
-    #F3EDFA padding-box,
-    linear-gradient(225deg, rgba(255, 255, 255, 0.87), rgba(232, 222, 248, 0.4)) border-box;
-  background-origin: padding-box, border-box;
-  background-clip: padding-box, border-box;
-  box-shadow: 0 2px 6px rgba(212, 187, 240, 0.09), 1px 1px 8px rgba(255, 255, 255, 0.33);
-}
-
-/* Gradient text for logo */
-.gradient-logo {
-  background: linear-gradient(to bottom, #5D2EA8, #F294B9);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 body {
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }

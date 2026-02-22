@@ -33,7 +33,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased h-full`}
       >
-        {children}
+        {/* Liquid Glass Canvas — animated mesh gradient substrate */}
+        <div className="liquid-canvas" aria-hidden="true">
+          <div className="blob blob-1" />
+          <div className="blob blob-2" />
+          <div className="blob blob-3" />
+        </div>
+
+        {/* Page content — sits above the canvas */}
+        <div className="relative z-0 h-full">
+          {children}
+        </div>
       </body>
     </html>
   );
