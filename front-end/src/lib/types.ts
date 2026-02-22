@@ -44,6 +44,7 @@ export interface PatientPayload {
       metrics: LongitudinalMetrics;
     };
   };
+  risk_profile?: RiskProfile;
 }
 
 export interface ClinicalBrief {
@@ -52,6 +53,7 @@ export interface ClinicalBrief {
   severity_assessment: string;
   recommended_actions: string[];
   cited_sources: string[];
+  guiding_questions: string[];
 }
 
 export interface BiometricDelta {
@@ -71,36 +73,47 @@ export interface ConditionMatch {
   snippet: string;
 }
 
+export interface RiskFactor {
+  category: string;
+  factor: string;
+  description: string;
+  severity: string;
+  weight: number;
+}
+
+export interface RiskProfile {
+  factors: RiskFactor[];
+}
+
 export interface AnalysisResponse {
   patient_id: string;
   clinical_brief: ClinicalBrief;
   biometric_deltas: BiometricDelta[];
   condition_matches: ConditionMatch[];
+  risk_profile?: RiskProfile;
 }
 
-export const MOCK_CONDITION_MATCHES: ConditionMatch[] = [
-  {
-    condition: "Endometriosis",
-    similarity_score: 0.9412,
-    pmcid: "PMC6263431",
-    title: "Endometriosis: Pathogenesis, diagnosis, and treatment",
-    snippet:
-      "Chronic pelvic pain with acute exacerbation, elevated inflammatory markers, and mobility impairment consistent with deep infiltrating endometriosis.",
-  },
-  {
-    condition: "Uterine Fibroids",
-    similarity_score: 0.8734,
-    pmcid: "PMC5914402",
-    title: "Uterine Fibroids: Current perspectives",
-    snippet:
-      "Heavy menstrual bleeding, pelvic pressure, and pain patterns with autonomic nervous system disruption evidenced by HRV changes.",
-  },
-  {
-    condition: "Adenomyosis",
-    similarity_score: 0.8201,
-    pmcid: "PMC7661568",
-    title: "Adenomyosis: A systematic review of clinical features",
-    snippet:
-      "Diffuse uterine enlargement with severe dysmenorrhea and pelvic pain radiating to lower back.",
-  },
-];
+
+// --- Patient Management Types ---
+
+export interface PatientRecord {
+  id: string;
+  name: string;
+  email: string;
+  xrp_wallet_address: string;
+  xrp_wallet_seed: string;
+  created_at: string;
+  status: string;
+  concern: string;
+}
+
+export interface AppointmentRecord {
+  id: string;
+  patient_id: string;
+  date: string;
+  time: string;
+  status: string;
+  form_token: string;
+  created_at: string;
+}
+

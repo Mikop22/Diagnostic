@@ -190,11 +190,19 @@ async def analyze_patient(payload: PatientPayload, request: Request):
     # Step 5: Format retrieval context from top 3 matches for RAG
     retrieval_context = _format_retrieval_context(raw_matches[:3])
 
-    # Step 6: Call LLM with RAG context
+    # Step 5a: Format the risk profile summary
+    risk_summary_lines = []
+    if hasattr(payload, "risk_profile") and payload.risk_profile.factors:
+        for f in payload.risk_profile.factors:
+            risk_summary_lines.append(f"- **{f.factor}** ({f.category}): {f.severity} severity. {f.description}")
+    risk_summary = "\n".join(risk_summary_lines)
+
+    # Step 6: Call LLM with RAG context and demographic risk
     try:
         clinical_output = await extract_clinical_brief(
             narrative=payload.patient_narrative,
             biometric_summary=biometric_summary,
+            risk_summary=risk_summary,
             retrieval_context=retrieval_context,
         )
     except Exception as e:
@@ -209,6 +217,7 @@ async def analyze_patient(payload: PatientPayload, request: Request):
         severity_assessment=clinical_output.severity_assessment,
         recommended_actions=clinical_output.recommended_actions,
         cited_sources=clinical_output.cited_sources,
+        guiding_questions=clinical_output.guiding_questions,
     )
 
     # Step 7: Format condition matches
@@ -228,4 +237,5 @@ async def analyze_patient(payload: PatientPayload, request: Request):
         clinical_brief=clinical_brief,
         biometric_deltas=biometric_deltas,
         condition_matches=condition_matches,
+        risk_profile=getattr(payload, "risk_profile", None),
     )

@@ -48,20 +48,30 @@ class PatientData(BaseModel):
     longitudinal_6_month: LongitudinalData
 
 
+class RiskFactor(BaseModel):
+    category: str
+    factor: str
+    description: str
+    severity: str
+    weight: int
+
+class RiskProfile(BaseModel):
+    factors: list[RiskFactor]
+
 class PatientPayload(BaseModel):
     patient_id: str
     sync_timestamp: str
     hardware_source: str
     patient_narrative: str
     data: PatientData
-
-
+    risk_profile: RiskProfile
 class ClinicalBrief(BaseModel):
     summary: str
     key_symptoms: list[str]
     severity_assessment: str
     recommended_actions: list[str]
     cited_sources: list[str]
+    guiding_questions: list[str]
 
 
 class BiometricDelta(BaseModel):
@@ -86,3 +96,4 @@ class AnalysisResponse(BaseModel):
     clinical_brief: ClinicalBrief
     biometric_deltas: list[BiometricDelta]
     condition_matches: list[ConditionMatch]
+    risk_profile: Union[RiskProfile, None] = None
