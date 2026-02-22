@@ -107,6 +107,7 @@ async def send_appointment_email(
             start_tls=True,
             username=settings.SMTP_USER,
             password=settings.SMTP_PASSWORD,
+            recipients=[patient_email],
         )
         logger.info(f"Appointment email sent to {patient_email}")
         return True

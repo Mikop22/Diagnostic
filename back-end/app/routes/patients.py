@@ -6,9 +6,11 @@ import uuid
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Request, HTTPException
-from app.models.patient_management import PatientCreate, PatientRecord
+from app.models.patient_management import PatientCreate, PatientRecord, AppointmentRecord
 from app.models.patient import AnalysisResponse
 from app.services.xrp_wallet import create_patient_wallet
+from app.services.email_service import send_appointment_email
+from app.config import settings
 
 router = APIRouter(prefix="/api/v1", tags=["patients"])
 
@@ -46,7 +48,7 @@ async def create_patient(body: PatientCreate, request: Request):
         xrp_wallet_address=wallet_info["address"],
         xrp_wallet_seed=wallet_info["seed"],
         created_at=now,
-        status="Pending",
+        status="In Progress",
         concern="",
     )
 
@@ -54,10 +56,32 @@ async def create_patient(body: PatientCreate, request: Request):
     db = request.app.state.mongo_client[request.app.state.db_name]
     db.patients.insert_one(record.model_dump())
 
+    # Create an appointment with intake form link and send email
+    form_token = str(uuid.uuid4())
+    appointment = AppointmentRecord(
+        id=str(uuid.uuid4()),
+        patient_id=patient_id,
+        date="TBD",
+        time="TBD",
+        status="scheduled",
+        form_token=form_token,
+        created_at=now,
+    )
+    db.appointments.insert_one(appointment.model_dump())
+
+    form_url = f"{settings.FRONTEND_URL}/intake/{form_token}"
+    await send_appointment_email(
+        patient_email=body.email,
+        patient_name=body.name,
+        appointment_date="your upcoming visit",
+        appointment_time="(to be confirmed)",
+        form_url=form_url,
+    )
+
     return record
 
 
-@router.get("/patients/{patient_id}/dashboard", response_model=AnalysisResponse)
+@router.get("/patients/{patient_id}/dashboard")
 async def get_dashboard_data(patient_id: str, request: Request):
     """Return pre-computed analysis results for the patient dashboard.
 
@@ -85,4 +109,9 @@ async def get_dashboard_data(patient_id: str, request: Request):
             detail="Appointment found but analysis results are missing.",
         )
 
-    return AnalysisResponse(**analysis)
+    result = analysis
+    patient_payload = appointment.get("patient_payload")
+    if patient_payload:
+        result["patient_payload"] = patient_payload
+
+    return result
