@@ -41,8 +41,7 @@ interface ScheduleEntry {
 }
 
 const scheduleEntries: ScheduleEntry[] = [
-  { time: "8:30 AM", name: "Jordan Lee", type: "Follow-up", status: "In Progress", dot: "purple", highlighted: true },
-  { time: "9:15 AM", name: "Amara Osei", type: "New Patient", status: "Confirmed", dot: "pink" },
+  { time: "8:30 AM", name: "Amara Osei", type: "New Patient", status: "In Progress", dot: "purple", highlighted: true },
   { time: "10:30 AM", name: "David Chen", type: "Lab Review", status: "Confirmed", dot: "lilac" },
   { time: "11:45 AM", name: "Maria Santos", type: "Consultation", status: "Confirmed", dot: "purple" },
   { time: "2:00 PM", name: "Elijah Brooks", type: "Follow-up", status: "Confirmed", dot: "pink" },
@@ -58,13 +57,13 @@ function resolveAppointments(patients: PatientRecord[]) {
 }
 
 const summaryStats = [
-  { num: "6", label: "Total", color: "text-[var(--purple-primary)]" },
-  { num: "4", label: "Confirmed", color: "text-[var(--purple-primary)]" },
+  { num: "5", label: "Total", color: "text-[var(--purple-primary)]" },
+  { num: "3", label: "Confirmed", color: "text-[var(--purple-primary)]" },
   { num: "1", label: "Pending", color: "text-[var(--purple-accent)]" },
 ];
 
 const typeBreakdown = [
-  { label: "Follow-ups", value: "2" },
+  { label: "Follow-ups", value: "1" },
   { label: "New Patients", value: "1" },
   { label: "Lab Reviews", value: "1" },
   { label: "Consultations", value: "1" },
@@ -148,7 +147,7 @@ export default async function SchedulePage() {
                 Tuesday, March 10
               </h1>
               <span className="text-[13px] font-medium tracking-[-0.1px] text-[var(--text-nav)]">
-                6 appointments today
+                5 appointments today
               </span>
             </div>
 
@@ -251,10 +250,10 @@ export default async function SchedulePage() {
 
             <div className="flex flex-col gap-2">
               <span className="text-[22px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">
-                Jordan Lee
+                Amara Osei
               </span>
               <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-nav)]">
-                8:30 AM &nbsp;&middot;&nbsp; Follow-up
+                8:30 AM &nbsp;&middot;&nbsp; New Patient
               </span>
             </div>
 
@@ -268,7 +267,7 @@ export default async function SchedulePage() {
               <div className="flex items-center gap-3">
                 <FileText className="h-4 w-4 shrink-0 text-[var(--text-muted)]" />
                 <span className="text-[13px] font-medium text-[var(--text-secondary)]">
-                  Chest pain follow-up, labs pending
+                  Pelvic pain, initial consultation
                 </span>
               </div>
             </div>
