@@ -1,46 +1,43 @@
-"""GET /api/v1/paper/{pmcid} — proxy PDF from Europe PMC."""
+"""GET /api/v1/paper/{pmcid} — proxy PDF from Europe PMC with caching."""
 
 from fastapi import APIRouter, HTTPException
-from fastapi.responses import StreamingResponse
+from fastapi.responses import Response
 import httpx
 
 router = APIRouter(prefix="/api/v1", tags=["papers"])
 
+# Simple in-memory PDF cache: pmcid -> bytes
+_pdf_cache: dict[str, bytes] = {}
+# Track failed lookups so we don't retry them
+_failed: set[str] = set()
 
-@router.get("/paper/{pmcid}")
-async def proxy_paper(pmcid: str):
-    """Stream a PDF from Europe PMC for the given PMCID.
 
-    Uses the Europe PMC renderer which returns actual application/pdf
-    content, unlike the NCBI URL which returns HTML pages.
-    """
+async def _fetch_pdf(pmcid: str) -> bytes:
+    """Fetch PDF bytes from Europe PMC, using cache."""
+    if pmcid in _pdf_cache:
+        return _pdf_cache[pmcid]
+    if pmcid in _failed:
+        raise HTTPException(status_code=404, detail=f"PDF not available for {pmcid}")
+
     url = f"https://europepmc.org/backend/ptpmcrender.fcgi?accid={pmcid}&blobtype=pdf"
 
     async with httpx.AsyncClient(follow_redirects=True, timeout=30.0) as client:
-        # Pre-check: HEAD request to verify the PDF exists before streaming
-        head = await client.head(url)
-        if head.status_code != 200:
-            raise HTTPException(
-                status_code=head.status_code,
-                detail=f"PDF not available for {pmcid}",
-            )
+        resp = await client.get(url)
 
-        content_type = head.headers.get("content-type", "")
-        if "pdf" not in content_type:
-            raise HTTPException(
-                status_code=404,
-                detail=f"No PDF found for {pmcid} (got {content_type})",
-            )
+    if resp.status_code != 200 or "pdf" not in resp.headers.get("content-type", ""):
+        _failed.add(pmcid)
+        raise HTTPException(status_code=404, detail=f"PDF not available for {pmcid}")
 
-    # Stream the actual PDF with a new client (previous one closed after HEAD)
-    async def stream_pdf():
-        async with httpx.AsyncClient(follow_redirects=True, timeout=60.0) as client:
-            async with client.stream("GET", url) as response:
-                async for chunk in response.aiter_bytes(chunk_size=8192):
-                    yield chunk
+    _pdf_cache[pmcid] = resp.content
+    return resp.content
 
-    return StreamingResponse(
-        stream_pdf(),
+
+@router.get("/paper/{pmcid}")
+async def proxy_paper(pmcid: str):
+    """Return a cached or freshly-fetched PDF for the given PMCID."""
+    pdf_bytes = await _fetch_pdf(pmcid)
+    return Response(
+        content=pdf_bytes,
         media_type="application/pdf",
         headers={"Content-Disposition": f"inline; filename={pmcid}.pdf"},
     )
