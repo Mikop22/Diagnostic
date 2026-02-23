@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, useSpring, useMotionValue, useTransform } from "framer-motion";
+import WalletDashboard from "@/components/WalletDashboard";
 
 type Question = {
   id: number;
@@ -619,20 +620,7 @@ export default function Page() {
           )}
 
           {view === 'finish' && (
-            <motion.div
-              key="finish"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="w-full flex flex-col items-center justify-center gap-4"
-            >
-              <h2 className="text-[64px] font-medium leading-none text-[#1F1B2D] text-center font-poppins">
-                thanks.
-              </h2>
-              <p className="max-w-[380px] text-[18px] font-medium leading-[1.35] text-[#5B4E7A] text-center font-poppins mt-2">
-                This information will be used to give you a more accurate diagnosis
-              </p>
-            </motion.div>
+            <WalletDashboard walletAddress="rMock...9B1C" />
           )}
         </AnimatePresence>
       </div>
