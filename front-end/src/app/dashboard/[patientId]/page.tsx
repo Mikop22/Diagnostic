@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CircleUserRound,
   ChevronDown,
@@ -6,17 +8,13 @@ import {
   NotebookPen,
 } from "lucide-react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { DashboardClient } from "./DashboardClient";
-import { DashboardContent } from "./DashboardContent";
 
 /* ── Page ── */
 
-export default async function DashboardPage({
-  params,
-}: {
-  params: Promise<{ patientId: string }>;
-}) {
-  const { patientId } = await params;
+export default function DashboardPage() {
+  const { patientId } = useParams<{ patientId: string }>();
 
   return (
     <div className="flex h-screen w-full flex-col bg-transparent font-poppins">
@@ -44,9 +42,7 @@ export default async function DashboardPage({
 
       {/* ── Dashboard Content (SWR polling) ── */}
       <div className="flex min-h-0 flex-1 flex-col gap-8 p-8">
-        <DashboardClient patientId={patientId}>
-          {(data) => <DashboardContent data={data} patientId={patientId} />}
-        </DashboardClient>
+        <DashboardClient patientId={patientId} />
 
         {/* ═══ ACTION ROW ═══ */}
         <div className="mt-2 flex shrink-0 items-center justify-between pb-2">
@@ -60,7 +56,7 @@ export default async function DashboardPage({
             <ChevronRight className="h-[18px] w-[18px] text-[var(--purple-primary)]" />
           </Link>
         </div>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }

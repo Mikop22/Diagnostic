@@ -2,11 +2,15 @@
 
 import useSWR from "swr";
 import type { AnalysisResponse } from "@/lib/types";
+import { DashboardContent } from "./DashboardContent";
 
 const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/+$/, "");
 
 async function fetchDashboard(url: string): Promise<AnalysisResponse> {
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, {
+    cache: "no-store",
+    headers: { "ngrok-skip-browser-warning": "true" },
+  });
   if (!res.ok) {
     const err = new Error("Dashboard data not ready");
     (err as Error & { status: number }).status = res.status;
@@ -17,10 +21,9 @@ async function fetchDashboard(url: string): Promise<AnalysisResponse> {
 
 interface DashboardClientProps {
   patientId: string;
-  children: (data: AnalysisResponse) => React.ReactNode;
 }
 
-export function DashboardClient({ patientId, children }: DashboardClientProps) {
+export function DashboardClient({ patientId }: DashboardClientProps) {
   const { data, error, isLoading } = useSWR<AnalysisResponse>(
     `${API_BASE}/api/v1/patients/${patientId}/dashboard`,
     fetchDashboard,
@@ -62,5 +65,5 @@ export function DashboardClient({ patientId, children }: DashboardClientProps) {
 
   if (!data) return null;
 
-  return <>{children(data)}</>;
+  return <DashboardContent data={data} patientId={patientId} />;
 }

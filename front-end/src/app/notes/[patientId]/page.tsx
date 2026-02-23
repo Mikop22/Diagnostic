@@ -21,14 +21,14 @@ export default async function NotesPage({
 
   // Fetch dashboard data and patient list in parallel
   const [result, patients] = await Promise.all([
-    getDashboardData(patientId),
+    getDashboardData(patientId).catch(() => null),
     fetchPatients().catch(() => []),
   ]);
 
   const patient = patients.find((p) => p.id === patientId);
   const patientName = patient?.name ?? "Patient";
 
-  const { condition_matches } = result;
+  const condition_matches = result?.condition_matches ?? [];
 
   return (
     <div className="flex h-full w-full flex-col bg-transparent font-poppins">

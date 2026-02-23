@@ -24,8 +24,75 @@ interface DashboardContentProps {
   patientId: string;
 }
 
+const DEMO_ACUTE_METRICS = {
+  heartRateVariabilitySDNN: [
+    { date: "2026-02-15", value: 48.2, unit: "ms" },
+    { date: "2026-02-16", value: 47.1, unit: "ms" },
+    { date: "2026-02-17", value: 45.9, unit: "ms" },
+    { date: "2026-02-18", value: 22.4, unit: "ms" },
+    { date: "2026-02-19", value: 24.1, unit: "ms" },
+    { date: "2026-02-20", value: 28.5, unit: "ms" },
+    { date: "2026-02-21", value: 31.0, unit: "ms" },
+  ],
+  restingHeartRate: [
+    { date: "2026-02-15", value: 62, unit: "bpm" },
+    { date: "2026-02-16", value: 63, unit: "bpm" },
+    { date: "2026-02-17", value: 62, unit: "bpm" },
+    { date: "2026-02-18", value: 78, unit: "bpm" },
+    { date: "2026-02-19", value: 76, unit: "bpm" },
+    { date: "2026-02-20", value: 74, unit: "bpm" },
+    { date: "2026-02-21", value: 72, unit: "bpm" },
+  ],
+  appleSleepingWristTemperature: [
+    { date: "2026-02-15", value: -0.12, unit: "degC_deviation" },
+    { date: "2026-02-16", value: -0.10, unit: "degC_deviation" },
+    { date: "2026-02-17", value: 0.05, unit: "degC_deviation" },
+    { date: "2026-02-18", value: 0.85, unit: "degC_deviation" },
+    { date: "2026-02-19", value: 0.92, unit: "degC_deviation" },
+    { date: "2026-02-20", value: 0.80, unit: "degC_deviation" },
+    { date: "2026-02-21", value: 0.75, unit: "degC_deviation" },
+  ],
+  respiratoryRate: [
+    { date: "2026-02-15", value: 14.5, unit: "breaths/min" },
+    { date: "2026-02-16", value: 14.6, unit: "breaths/min" },
+    { date: "2026-02-17", value: 14.5, unit: "breaths/min" },
+    { date: "2026-02-18", value: 18.2, unit: "breaths/min" },
+    { date: "2026-02-19", value: 17.8, unit: "breaths/min" },
+    { date: "2026-02-20", value: 16.5, unit: "breaths/min" },
+    { date: "2026-02-21", value: 16.0, unit: "breaths/min" },
+  ],
+  walkingAsymmetryPercentage: [
+    { date: "2026-02-15", value: 1.2, unit: "%" },
+    { date: "2026-02-16", value: 1.5, unit: "%" },
+    { date: "2026-02-17", value: 1.3, unit: "%" },
+    { date: "2026-02-18", value: 8.5, unit: "%" },
+    { date: "2026-02-19", value: 8.2, unit: "%" },
+    { date: "2026-02-20", value: 6.0, unit: "%" },
+    { date: "2026-02-21", value: 5.5, unit: "%" },
+  ],
+  stepCount: [
+    { date: "2026-02-15", value: 8500, unit: "count" },
+    { date: "2026-02-16", value: 8200, unit: "count" },
+    { date: "2026-02-17", value: 8600, unit: "count" },
+    { date: "2026-02-18", value: 1200, unit: "count" },
+    { date: "2026-02-19", value: 1500, unit: "count" },
+    { date: "2026-02-20", value: 2500, unit: "count" },
+    { date: "2026-02-21", value: 3000, unit: "count" },
+  ],
+  sleepAnalysis_awakeSegments: [
+    { date: "2026-02-15", value: 1, unit: "count" },
+    { date: "2026-02-16", value: 1, unit: "count" },
+    { date: "2026-02-17", value: 2, unit: "count" },
+    { date: "2026-02-18", value: 6, unit: "count" },
+    { date: "2026-02-19", value: 5, unit: "count" },
+    { date: "2026-02-20", value: 4, unit: "count" },
+    { date: "2026-02-21", value: 3, unit: "count" },
+  ],
+};
+
 export function DashboardContent({ data, patientId }: DashboardContentProps) {
   const { clinical_brief, biometric_deltas, condition_matches, patient_payload } = data;
+  const acuteMetrics = patient_payload?.data?.acute_7_day?.metrics || DEMO_ACUTE_METRICS;
 
 
   const guidingQuestions = clinical_brief.guiding_questions || [];
@@ -161,16 +228,10 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
 
       {/* ═══ METRICS ROW ═══ */}
       <motion.div custom={1} variants={sectionVariants} initial="hidden" animate="visible" className="flex min-h-0 flex-[9] gap-8">
-        {patient_payload?.data?.acute_7_day?.metrics ? (
-          <ClientCharts
-            biometricDeltas={biometric_deltas}
-            acuteData={patient_payload.data.acute_7_day.metrics}
-          />
-        ) : (
-          <div className="glass-card flex flex-1 items-center justify-center rounded-[24px]">
-            <span className="text-[14px] font-medium text-[var(--text-muted)]">Biometric data unavailable</span>
-          </div>
-        )}
+        <ClientCharts
+          biometricDeltas={biometric_deltas}
+          acuteData={acuteMetrics}
+        />
       </motion.div>
 
       {/* ═══ BOTTOM ROW ═══ */}
