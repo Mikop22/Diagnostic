@@ -30,10 +30,19 @@ THRESHOLDS = {
     "sleepAnalysis_awakeSegments": {"value": 2, "unit": "count"},
     "appleSleepingWristTemperature": {"value": 0.5, "unit": "degC_deviation"},
     "walkingAsymmetryPercentage": {"value": 3, "unit": "%"},
+    "bloodOxygenSaturation": {"value": 2, "unit": "%"},
+    "walkingStepLength": {"value": 0.05, "unit": "meters"},
+    "walkingDoubleSupportPercentage": {"value": 3, "unit": "%"},
 }
 
 # Metrics present in both acute and longitudinal data
-SHARED_METRICS = {"restingHeartRate", "walkingAsymmetryPercentage"}
+SHARED_METRICS = {
+    "restingHeartRate",
+    "walkingAsymmetryPercentage",
+    "bloodOxygenSaturation",
+    "walkingStepLength",
+    "walkingDoubleSupportPercentage",
+}
 
 # Acute-only metrics: use first 3 days as baseline, last 4 as acute
 ACUTE_ONLY_METRICS = {
@@ -73,6 +82,9 @@ def _compute_biometric_deltas(payload: PatientPayload) -> list[BiometricDelta]:
             longitudinal_metrics, metric_name
         )
 
+        if not acute_points or not longitudinal_points:
+            continue
+
         acute_avg = _avg([p.value for p in acute_points])
         longitudinal_avg = _avg([p.value for p in longitudinal_points])
         delta = abs(acute_avg - longitudinal_avg)
@@ -103,6 +115,9 @@ def _compute_biometric_deltas(payload: PatientPayload) -> list[BiometricDelta]:
     # --- Acute-only metrics: first 3 days (baseline) vs last 4 days (acute) ---
     for metric_name in ACUTE_ONLY_METRICS:
         acute_points: list[MetricDataPoint] = getattr(acute_metrics, metric_name)
+
+        if not acute_points:
+            continue
 
         baseline_values = [p.value for p in acute_points[:3]]
         acute_values = [p.value for p in acute_points[3:]]

@@ -1,6 +1,6 @@
 """Pydantic models for patient data — mirrors shared/api_contract.py."""
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Union
 
 
@@ -18,6 +18,13 @@ class LongitudinalDataPoint(BaseModel):
     trend: Union[str, None] = None
 
 
+class StringMetricDataPoint(BaseModel):
+    date: str
+    value: str
+    unit: str
+    flag: Union[str, None] = None
+
+
 class AcuteMetrics(BaseModel):
     heartRateVariabilitySDNN: list[MetricDataPoint]
     restingHeartRate: list[MetricDataPoint]
@@ -26,11 +33,18 @@ class AcuteMetrics(BaseModel):
     walkingAsymmetryPercentage: list[MetricDataPoint]
     stepCount: list[MetricDataPoint]
     sleepAnalysis_awakeSegments: list[MetricDataPoint]
+    bloodOxygenSaturation: list[MetricDataPoint] = []
+    walkingStepLength: list[MetricDataPoint] = []
+    walkingDoubleSupportPercentage: list[MetricDataPoint] = []
+    menstrualCyclePhase: list[StringMetricDataPoint] = []
 
 
 class LongitudinalMetrics(BaseModel):
     restingHeartRate: list[LongitudinalDataPoint]
     walkingAsymmetryPercentage: list[LongitudinalDataPoint]
+    bloodOxygenSaturation: list[LongitudinalDataPoint] = []
+    walkingStepLength: list[LongitudinalDataPoint] = []
+    walkingDoubleSupportPercentage: list[LongitudinalDataPoint] = []
 
 
 class AcuteData(BaseModel):
@@ -95,6 +109,8 @@ class ConditionMatch(BaseModel):
 
 
 class AnalysisResponse(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
     patient_id: str
     clinical_brief: ClinicalBrief
     biometric_deltas: list[BiometricDelta]

@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 
 from fastapi import APIRouter, Request, HTTPException
 from app.models.patient_management import AppointmentCreate, AppointmentRecord
+from app.models.patient import AnalysisResponse
 from app.services.email_service import send_appointment_email
 from app.config import settings
 
@@ -58,6 +59,32 @@ async def create_appointment(body: AppointmentCreate, request: Request):
     )
 
     return record
+
+
+@router.get("/appointments/{id}/dashboard", response_model=AnalysisResponse)
+async def get_appointment_dashboard(id: str, request: Request):
+    """Return pre-computed analysis for a specific appointment.
+
+    Reads the analysis_result stored during intake submission.
+    Does NOT trigger LLM or vector search — lightweight read path only.
+
+    Path Parameters:
+        id: The appointment UUID (not the patient ID).
+    """
+    db = request.app.state.mongo_client[request.app.state.db_name]
+
+    appointment = db.appointments.find_one({"id": id}, {"_id": 0})
+    if not appointment:
+        raise HTTPException(status_code=404, detail="Appointment not found.")
+
+    analysis = appointment.get("analysis_result")
+    if not analysis:
+        raise HTTPException(
+            status_code=404,
+            detail="Analysis not yet available for this appointment.",
+        )
+
+    return AnalysisResponse(**analysis)
 
 
 @router.get("/appointments/{patient_id}", response_model=list[AppointmentRecord])
