@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import { ShieldCheck } from "lucide-react";
 import { ClientCharts } from "./ClientCharts";
 import { ClinicalAbstract } from "./ClinicalAbstract";
+import { LongitudinalDrift } from "./LongitudinalDrift";
 import { StratifiedProtocols } from "./StratifiedProtocols";
 import { DiagnosticNudgeAccordion } from "@/app/_components/DiagnosticNudgeAccordion";
 import type { AnalysisResponse, PatientPayload } from "@/lib/types";
@@ -164,7 +165,7 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
         <XRPLBadge />
       </motion.div>
 
-      {/* ══ TOP ROW: Clinical Intake (narrative) + Clinical Abstract ══════════ */}
+      {/* ══ TOP ROW: 25% Intake | 45% Abstract | 30% Longitudinal Drift ═══════ */}
       <motion.div
         custom={1}
         variants={sectionVariants}
@@ -172,8 +173,8 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
         animate="visible"
         className="flex min-h-0 flex-[10] gap-8"
       >
-        {/* Clinical Intake — patient narrative only */}
-        <div className="glass-card flex w-[28%] shrink-0 flex-col overflow-hidden rounded-[24px]">
+        {/* Col 1 — Clinical Intake (25%): patient narrative */}
+        <div className="glass-card flex w-[25%] shrink-0 flex-col overflow-hidden rounded-[24px]">
           <div className="flex shrink-0 items-center px-5 py-4">
             <span className="text-[15px] font-semibold tracking-[-0.2px] text-[var(--text-primary)]">
               Clinical Intake
@@ -186,13 +187,21 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
           </div>
         </div>
 
-        {/* Clinical Abstract — AI synthesis with three sections + velocity footer */}
+        {/* Col 2 — Clinical Abstract (flex-1 ≈ 45%): AI synthesis */}
         <ClinicalAbstract
           clinicalBrief={clinical_brief}
           biometricDeltas={biometric_deltas}
           patientNarrative={narrative}
           acuteMetrics={acuteMetrics}
         />
+
+        {/* Col 3 — Longitudinal Drift (30%): 6-month baseline vs acute */}
+        <div className="flex w-[30%] shrink-0 flex-col">
+          <LongitudinalDrift
+            biometricDeltas={biometric_deltas}
+            acuteMetrics={acuteMetrics}
+          />
+        </div>
       </motion.div>
 
       {/* ══ METRICS ROW: 4 Biometric Charts (delta embedded) ═══════════════ */}
