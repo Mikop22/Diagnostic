@@ -260,30 +260,17 @@ export function ClientCharts({ biometricDeltas, acuteData }: ClientChartsProps) 
         delta={tempDelta?.delta ?? null}
         alert={tempDelta?.clinically_significant ?? false}
         title="Inflammatory"
-        subtitle="Wrist Temp · Luteal Phase"
+        subtitle="Wrist Temp Deviation"
       >
         <ComposedChart data={tempData} margin={{ top: 6, right: 8, left: -22, bottom: 0 }}>
           <XAxis dataKey="time" {...xAxisProps} />
           <YAxis {...yAxisProps} dx={-3} tickFormatter={(v) => `${v}°`} />
           <Tooltip {...sharedTooltipProps} />
-          {/* Luteal phase background shading */}
-          <ReferenceArea
-            x1={BREACH_START}
-            x2={BREACH_END}
-            fill="rgba(242,148,185,0.16)"
-            label={{
-              value: "Luteal Phase",
-              position: "insideTopLeft",
-              fontSize: 9,
-              fill: "rgba(242,148,185,0.9)",
-              fontWeight: 600,
-            }}
-          />
           {/* Clinical breach overlay */}
           <ReferenceArea
             x1={BREACH_START}
             x2={BREACH_END}
-            fill="rgba(226,92,92,0.04)"
+            fill="rgba(226,92,92,0.06)"
           />
           {/* Ghost: 26-wk baseline (zero deviation) */}
           <ReferenceLine
