@@ -176,14 +176,16 @@ function Spinner() {
   );
 }
 
+/* ─── Constants ─── */
+const XRP_TO_USD_RATE = 2.5; // mock XRP → USD exchange rate
+
 /* ─── Main Wallet Dashboard ─── */
 export default function WalletDashboard({ walletAddress = "rMock...9B1C" }: { walletAddress?: string }) {
   const [cashOutState, setCashOutState] = useState<"idle" | "loading" | "success">("idle");
   const [showToast, setShowToast] = useState(false);
 
   const balance = useCountUp(35.0, 45.0, 1.8);
-  const fiatRate = 2.5; // mock XRP → USD rate
-  const fiatValue = balance * fiatRate;
+  const fiatValue = balance * XRP_TO_USD_RATE;
 
   const handleCashOut = () => {
     if (cashOutState !== "idle") return;
@@ -315,7 +317,7 @@ export default function WalletDashboard({ walletAddress = "rMock...9B1C" }: { wa
       <AnimatePresence>
         {showToast && (
           <Toast
-            message="Transfer of $112.50 initiated via RippleNet"
+            message={`Transfer of $${(45.0 * XRP_TO_USD_RATE).toFixed(2)} initiated via RippleNet`}
             onClose={() => setShowToast(false)}
           />
         )}
