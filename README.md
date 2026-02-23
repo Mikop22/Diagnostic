@@ -2,16 +2,9 @@
 
 **A full-stack healthcare advocacy platform that translates subjective patient narratives into objective clinical evidence.**
 
-Diagnostic combats pain management bias and medical gaslighting — specifically targeting systemic disparities for people of colour in healthcare (Endometriosis, Uterine Fibroids, Breast Cancer). It merges natural language processing (NLP) with multi-modal physiological data from Apple Watch (Heart Rate Variability, Resting Heart Rate, Mobility metrics) to produce an undeniable clinical dashboard for physicians.
-
----
-## How we make money: 
-http://youtube.com/watch?v=FL_x75Pq-CY
+Diagnostic combats systemic disparities for people of colour in healthcare. It merges natural language processing (NLP) with multi-modal physiological data from Apple Watch (Heart Rate Variability, Resting Heart Rate, Mobility metrics) to produce an undeniable clinical dashboard for physicians.
 
 
-
-## What a populated dashboard looks like:
-https://www.youtube.com/watch?v=MUIznBSKof4
 
 ## Table of Contents
 
