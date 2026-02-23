@@ -19,41 +19,6 @@ function formatDelta(val: number, unit: string): string {
   return `${sign}${display} ${unit}`;
 }
 
-function computeVelocity(deltas: BiometricDelta[]): {
-  count: number;
-  total: number;
-  level: "critical" | "elevated" | "mild";
-} {
-  const count = deltas.filter((d) => d.clinically_significant).length;
-  const total = deltas.length || 1;
-  const ratio = count / total;
-  return {
-    count,
-    total,
-    level: ratio >= 0.6 ? "critical" : ratio >= 0.3 ? "elevated" : "mild",
-  };
-}
-
-const velocityConfig = {
-  critical: {
-    label: "Critical",
-    color: "var(--red-alert)",
-    bg: "rgba(226,92,92,0.08)",
-    textColor: "var(--red-alert)",
-  },
-  elevated: {
-    label: "Elevated",
-    color: "var(--purple-primary)",
-    bg: "rgba(93,46,168,0.08)",
-    textColor: "var(--purple-primary)",
-  },
-  mild: {
-    label: "Moderate",
-    color: "var(--text-secondary)",
-    bg: "var(--lavender-bg)",
-    textColor: "var(--text-secondary)",
-  },
-};
 
 function SectionBlock({
   roman,
@@ -97,10 +62,6 @@ export function ClinicalAbstract({
   const steps = findDelta(biometricDeltas, "stepCount");
   const gait  = findDelta(biometricDeltas, "walkingAsymmetryPercentage");
   const sleep = findDelta(biometricDeltas, "sleepAnalysis_awakeSegments");
-
-  const velocity = computeVelocity(biometricDeltas);
-  const vCfg = velocityConfig[velocity.level];
-  const velocityPct = Math.round((velocity.count / velocity.total) * 100);
 
   // I. Presentation
   const presentation =
@@ -148,49 +109,10 @@ export function ClinicalAbstract({
       </div>
 
       {/* Three sections */}
-      <div className="flex min-h-0 flex-1 flex-col gap-3.5 overflow-y-auto px-5 pb-3">
+      <div className="flex min-h-0 flex-1 flex-col gap-3.5 overflow-y-auto px-5 pb-4">
         <SectionBlock roman="I"   label="Presentation"        color="var(--purple-primary)" body={presentation} />
         <SectionBlock roman="II"  label="Physiological Burden" color="var(--red-alert)"      body={burden} />
         <SectionBlock roman="III" label="Functional Impact"    color="var(--purple-accent)"  body={impact} />
-      </div>
-
-      {/* Symptom Velocity footer */}
-      <div
-        className="mx-4 mb-4 mt-2 shrink-0 rounded-[14px] px-4 py-3"
-        style={{ background: vCfg.bg }}
-      >
-        <div className="mb-2 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div
-              className="h-1.5 w-1.5 animate-pulse rounded-full"
-              style={{ background: vCfg.color }}
-            />
-            <span
-              className="text-[10px] font-semibold uppercase tracking-[0.4px]"
-              style={{ color: vCfg.textColor }}
-            >
-              Symptom Velocity
-            </span>
-            <span
-              className="rounded-[6px] px-1.5 py-0.5 text-[10px] font-bold"
-              style={{ background: `${vCfg.color}18`, color: vCfg.textColor }}
-            >
-              {vCfg.label}
-            </span>
-          </div>
-          <span className="text-[10px] font-semibold" style={{ color: vCfg.textColor }}>
-            {velocity.count}/{velocity.total} flags
-          </span>
-        </div>
-        <div
-          className="h-1.5 w-full overflow-hidden rounded-[3px]"
-          style={{ background: "rgba(255,255,255,0.35)" }}
-        >
-          <div
-            className="h-full rounded-[3px] transition-all duration-700"
-            style={{ width: `${velocityPct}%`, background: vCfg.color }}
-          />
-        </div>
       </div>
     </div>
   );
