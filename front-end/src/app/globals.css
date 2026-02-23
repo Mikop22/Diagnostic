@@ -220,3 +220,128 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ═══════════════════════════════════════════
+   MICROINTERACTIONS
+   ═══════════════════════════════════════════ */
+
+/* Glass card hover glow — subtle lift + shadow bloom */
+.glass-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 12px 40px rgba(93, 46, 168, 0.14),
+    0 4px 16px rgba(93, 46, 168, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.40);
+}
+
+/* Row hover lift — patient & schedule table rows */
+.row-hover {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease;
+}
+
+.row-hover:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(93, 46, 168, 0.08);
+}
+
+/* Logo hover shimmer — gradient angle shift */
+.gradient-logo {
+  transition: filter 0.4s ease;
+}
+
+.gradient-logo:hover {
+  background: linear-gradient(135deg, #7B42D8, #F294B9, #5D2EA8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: brightness(1.1);
+}
+
+/* Progress bar fill animation */
+@keyframes fill-bar {
+  from { width: 0; }
+}
+
+.animate-fill-bar {
+  animation: fill-bar 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Skeleton pulse */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+.skeleton-pulse {
+  animation: skeleton-pulse 1.8s ease-in-out infinite;
+  background: linear-gradient(90deg,
+    rgba(232, 222, 248, 0.3) 0%,
+    rgba(232, 222, 248, 0.5) 50%,
+    rgba(232, 222, 248, 0.3) 100%);
+  background-size: 200% 100%;
+  border-radius: 8px;
+}
+
+/* Custom scrollbar — thin purple-tinted */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(93, 46, 168, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(93, 46, 168, 0.25);
+}
+
+/* Glass tooltip */
+.glass-tooltip {
+  position: absolute;
+  z-index: 50;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.20) 0%, transparent 55%),
+              rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 16px rgba(93, 46, 168, 0.12),
+              inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.tooltip-trigger:hover .glass-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Count-up number animation */
+@keyframes count-fade-in {
+  from { opacity: 0; transform: translateY(6px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0);   filter: blur(0); }
+}
+
+.count-animate {
+  animation: count-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

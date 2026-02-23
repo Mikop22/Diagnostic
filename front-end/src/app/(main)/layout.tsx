@@ -4,6 +4,7 @@ import {
   CircleUserRound,
   ChevronDown,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -11,14 +12,20 @@ function NavPill({ href, label, active }: { href: string; label: string; active:
   return (
     <Link
       href={href}
-      className={
-        active
-          ? "nav-pill-active flex items-center justify-center rounded-[20px] px-5 py-2"
-          : "flex items-center justify-center rounded-[20px] border border-[var(--border-nav-inactive)] bg-transparent px-5 py-2 transition-colors hover:bg-[var(--lavender-bg)]"
-      }
+      className="relative flex items-center justify-center rounded-[20px] px-5 py-2 transition-colors"
     >
+      {active && (
+        <motion.div
+          layoutId="nav-pill-active"
+          className="nav-pill-active absolute inset-0 rounded-[20px]"
+          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+        />
+      )}
+      {!active && (
+        <div className="absolute inset-0 rounded-[20px] border border-[var(--border-nav-inactive)] bg-transparent transition-colors hover:bg-[var(--lavender-bg)]" />
+      )}
       <span
-        className={`text-[14px] font-medium tracking-[-0.1px] ${
+        className={`relative z-10 text-[14px] font-medium tracking-[-0.1px] ${
           active ? "text-[var(--purple-primary)]" : "text-[var(--text-nav)]"
         }`}
       >

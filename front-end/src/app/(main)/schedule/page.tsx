@@ -7,6 +7,7 @@ import {
 import Link from "next/link";
 import { fetchPatients } from "@/lib/api";
 import type { PatientRecord } from "@/lib/types";
+import { AnimatedRow, AnimatedSidebar } from "./_components/AnimatedScheduleRows";
 
 /* ── Appointment data ── */
 
@@ -114,15 +115,15 @@ export default async function SchedulePage() {
             </div>
 
             <div className="flex items-center gap-2">
-              <button className="flex h-10 w-10 items-center justify-center rounded-[20px] border border-[var(--border-nav-inactive)] transition-colors hover:bg-[var(--lavender-bg)]">
+              <button className="flex h-10 w-10 items-center justify-center rounded-[20px] border border-[var(--border-nav-inactive)] transition-all hover:bg-[var(--lavender-bg)] active:scale-[0.92]">
                 <ChevronLeft className="h-[18px] w-[18px] text-[var(--purple-primary)]" />
               </button>
-              <button className="flex items-center justify-center rounded-[18px] border border-[var(--border-nav-inactive)] px-6 py-2 transition-colors hover:bg-[var(--lavender-bg)]">
+              <button className="flex items-center justify-center rounded-[18px] border border-[var(--border-nav-inactive)] px-6 py-2 transition-all hover:bg-[var(--lavender-bg)] active:scale-[0.96]">
                 <span className="text-[13px] font-medium text-[var(--purple-primary)]">
                   Today
                 </span>
               </button>
-              <button className="flex h-10 w-10 items-center justify-center rounded-[20px] border border-[var(--border-nav-inactive)] transition-colors hover:bg-[var(--lavender-bg)]">
+              <button className="flex h-10 w-10 items-center justify-center rounded-[20px] border border-[var(--border-nav-inactive)] transition-all hover:bg-[var(--lavender-bg)] active:scale-[0.92]">
                 <ChevronLeft className="h-[18px] w-[18px] rotate-180 text-[var(--purple-primary)]" />
               </button>
             </div>
@@ -157,7 +158,7 @@ export default async function SchedulePage() {
                 ? "text-[var(--text-muted)]"
                 : "text-[var(--text-secondary)]";
 
-              const rowClass = `flex items-center px-6 py-5 transition-colors hover:bg-[rgba(243,237,250,0.5)] ${appt.highlighted ? "rounded-[12px] bg-[rgba(93,46,168,0.04)]" : ""}`;
+              const rowClass = `row-hover flex items-center px-6 py-5 hover:bg-[rgba(243,237,250,0.5)] ${appt.highlighted ? "rounded-[12px] bg-[rgba(93,46,168,0.04)]" : ""}`;
 
               const rowContent = (
                 <>
@@ -185,7 +186,7 @@ export default async function SchedulePage() {
               );
 
               return (
-                <div key={appt.name}>
+                <AnimatedRow key={appt.name} index={i}>
                   {appt.patientId ? (
                     <Link href={`/dashboard/${appt.patientId}`} className={`${rowClass} cursor-pointer`}>
                       {rowContent}
@@ -196,7 +197,7 @@ export default async function SchedulePage() {
                     </div>
                   )}
                   {i < appointments.length - 1 && <Divider />}
-                </div>
+                </AnimatedRow>
               );
             })}
           </div>
@@ -205,6 +206,7 @@ export default async function SchedulePage() {
         {/* Right Sidebar */}
         <div className="flex w-[340px] shrink-0 flex-col gap-8">
           {/* Next Up card */}
+          <AnimatedSidebar delay={0.1}>
           <div className="glass-card flex flex-col gap-6 rounded-[24px] p-7">
             <h3 className="text-[16px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">
               Next Up
@@ -241,8 +243,10 @@ export default async function SchedulePage() {
               <ArrowRight className="h-4 w-4 text-white" />
             </Link>
           </div>
+          </AnimatedSidebar>
 
           {/* Today's Summary card */}
+          <AnimatedSidebar delay={0.2}>
           <div className="glass-card flex flex-col gap-6 rounded-[24px] p-7">
             <h3 className="text-[16px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">
               Today&apos;s Summary
@@ -285,6 +289,7 @@ export default async function SchedulePage() {
               ))}
             </div>
           </div>
+          </AnimatedSidebar>
         </div>
       </div>
   );

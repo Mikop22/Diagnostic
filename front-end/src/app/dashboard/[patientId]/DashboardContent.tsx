@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   CircleHelp,
   Info,
@@ -90,6 +91,21 @@ const DEMO_ACUTE_METRICS = {
   ],
 };
 
+function GlassTooltip({ text, children }: { text: string; children: React.ReactNode }) {
+  const [show, setShow] = useState(false);
+  return (
+    <div className="relative inline-flex" onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
+      {children}
+      <div
+        className="glass-tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2"
+        style={{ opacity: show ? 1 : 0, transform: show ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(4px)" }}
+      >
+        {text}
+      </div>
+    </div>
+  );
+}
+
 export function DashboardContent({ data, patientId }: DashboardContentProps) {
   const { clinical_brief, biometric_deltas, condition_matches, patient_payload } = data;
   const acuteMetrics = patient_payload?.data?.acute_7_day?.metrics || DEMO_ACUTE_METRICS;
@@ -133,7 +149,9 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
               <CircleHelp className="h-5 w-5 text-[var(--purple-primary)]" />
               <span className="text-[16px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">Guiding Questions</span>
             </div>
-            <Info className="h-[18px] w-[18px] text-[var(--text-nav)]" />
+            <GlassTooltip text="AI-generated clinical questions based on patient data">
+              <Info className="h-[18px] w-[18px] text-[var(--text-nav)] cursor-help" />
+            </GlassTooltip>
           </div>
           <div className="flex flex-col gap-2.5 px-5 pb-4 pt-1">
             {guidingQuestions.map((q) => (
@@ -170,7 +188,7 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
           {/* Top 2 deltas */}
           <div className="flex flex-1 gap-3">
             {criticalDeltas.slice(0, 2).map((d) => (
-              <div key={d.label} className="glass-card flex flex-1 flex-col justify-center gap-1 rounded-[20px] px-[18px] py-4">
+              <div key={d.label} className="glass-card flex flex-1 flex-col justify-center gap-1 rounded-[20px] px-[18px] py-4 cursor-default">
                 <span className="text-[12px] font-medium tracking-[-0.1px] text-[var(--text-nav)] truncate">{d.label}</span>
                 <span className="text-[28px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">{d.value}</span>
                 <span className="text-[11px] font-medium tracking-[-0.1px] text-[var(--text-nav)]">{d.unit}</span>
@@ -213,7 +231,7 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
                     <span className="mb-1 text-[16px] font-medium tracking-[-0.1px] text-[var(--text-muted)]">%</span>
                   </div>
                   <div className="flex h-1.5 overflow-hidden rounded-[3px] bg-[var(--lavender-border)]">
-                    <div className="rounded-[3px] bg-gradient-to-r from-[var(--purple-primary)] to-[var(--red-alert)]" style={{ width: `${fillWidth}%` }} />
+                    <div className="animate-fill-bar rounded-[3px] bg-gradient-to-r from-[var(--purple-primary)] to-[var(--red-alert)]" style={{ width: `${fillWidth}%` }} />
                   </div>
                   <div className="flex justify-between items-center w-full mt-1">
                     <span className={`text-[11px] font-medium ${severityColor}`}>{severityText}</span>
@@ -240,7 +258,9 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
         <div className="glass-card flex flex-1 flex-col overflow-hidden rounded-[24px]">
           <div className="flex items-center justify-between px-[18px] py-3.5">
             <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">Screening Count</span>
-            <Info className="h-4 w-4 text-[var(--text-nav)]" />
+            <GlassTooltip text="Expected vs average screening frequency">
+              <Info className="h-4 w-4 text-[var(--text-nav)] cursor-help" />
+            </GlassTooltip>
           </div>
           <div className="flex items-center px-[18px]">
             <div className="nav-pill-active flex items-center gap-1.5 rounded-[14px] px-3 py-[5px]">
@@ -254,7 +274,7 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
               <span className="mr-8">Avg</span>
             </div>
             <div className="mt-3 flex h-1.5 overflow-hidden rounded-[3px] bg-[var(--lavender-border)]">
-              <div className="w-[65%] rounded-[3px] bg-gradient-to-r from-[var(--purple-primary)] to-[var(--purple-accent)]" />
+              <div className="animate-fill-bar w-[65%] rounded-[3px] bg-gradient-to-r from-[var(--purple-primary)] to-[var(--purple-accent)]" />
             </div>
             <div className="mt-2.5 flex justify-between text-[11px] font-medium text-[var(--text-secondary)]">
               <span>25</span>
@@ -288,7 +308,9 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
                   <div className="flex items-center gap-2 justify-end">
                     <svg className="h-2 w-2 shrink-0 flex-none" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill={style.dot} /></svg>
                     <svg className="h-1.5 shrink-0 flex-none" style={{ width: style.width }}>
-                      <rect width={style.width} height="6" rx="3" fill={"gradient" in style ? style.gradient : style.fill} />
+                      <rect height="6" rx="3" fill={"gradient" in style ? style.gradient : style.fill}>
+                        <animate attributeName="width" from="0" to={String(style.width)} dur="0.8s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1" keyTimes="0;1" begin={`${i * 0.1}s`} />
+                      </rect>
                     </svg>
                     <Info className="h-3.5 w-3.5 shrink-0 text-[var(--text-nav)]" />
                   </div>
@@ -305,7 +327,9 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
           <div className="flex flex-1 flex-col">
             <div className="flex items-center gap-2 px-[18px] py-3.5">
               <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">Possible Diagnosis</span>
-              <Info className="h-3.5 w-3.5 text-[var(--text-nav)]" />
+              <GlassTooltip text="PubMedBERT vector similarity matches">
+                <Info className="h-3.5 w-3.5 text-[var(--text-nav)] cursor-help" />
+              </GlassTooltip>
             </div>
             <svg className="absolute h-0 w-0">
               <defs>
@@ -327,7 +351,9 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
                       </svg>
                       <div className="flex items-center">
                         <svg className="h-[5px] shrink-0 flex-none" style={{ width: barWidth }}>
-                          <rect width={barWidth} height="5" rx="3" fill={isTopMatch ? "url(#diagGrad)" : "var(--lavender-border)"} />
+                          <rect height="5" rx="3" fill={isTopMatch ? "url(#diagGrad)" : "var(--lavender-border)"}>
+                            <animate attributeName="width" from="0" to={String(barWidth)} dur="0.7s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1" keyTimes="0;1" begin={`${i * 0.08}s`} />
+                          </rect>
                         </svg>
                         <span className="ml-2 text-[10px] text-[var(--text-body)] truncate max-w-[80px]" title={match.condition}>{match.condition}</span>
                       </div>

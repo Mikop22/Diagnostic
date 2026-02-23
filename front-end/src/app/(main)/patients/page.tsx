@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { fetchPatients } from "@/lib/api";
 import type { PatientRecord } from "@/lib/types";
+import { useCountUp } from "@/lib/useCountUp";
 import { AddPatientModal } from "./_components/AddPatientModal";
 import { ScheduleModal } from "./_components/ScheduleModal";
 
@@ -48,15 +49,44 @@ function truncateAddress(addr: string) {
   return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
 }
 
-function StatusBadge({ status }: { status: string }) {
+function StatusBadge({ status, delay = 0 }: { status: string; delay?: number }) {
   const style = statusStyles[status as Status] || statusStyles.Pending;
   return (
-    <span
+    <motion.span
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3, delay, ease: [0.16, 1, 0.3, 1] }}
       className={`inline-flex items-center justify-center rounded-[12px] px-3 py-1 text-[11px] font-medium ${style}`}
     >
       {status}
-    </span>
+    </motion.span>
   );
+}
+
+function SkeletonRow({ index }: { index: number }) {
+  return (
+    <div
+      className={`flex items-center px-6 py-5 ${index < 4 ? "[border-bottom:var(--table-border-row)]" : ""}`}
+      style={{ animationDelay: `${index * 0.1}s` }}
+    >
+      <div className="flex w-[280px] items-center gap-3">
+        <div className="skeleton-pulse h-9 w-9 shrink-0 rounded-[16px]" />
+        <div className="flex flex-col gap-1.5">
+          <div className="skeleton-pulse h-3.5 w-28 rounded" />
+          <div className="skeleton-pulse h-2.5 w-36 rounded" />
+        </div>
+      </div>
+      <div className="flex-1 pr-6"><div className="skeleton-pulse h-3.5 w-32 rounded" /></div>
+      <div className="w-[160px]"><div className="skeleton-pulse h-3.5 w-24 rounded" /></div>
+      <div className="w-[120px]"><div className="skeleton-pulse h-6 w-20 rounded-[12px]" /></div>
+      <div className="w-[120px]"><div className="skeleton-pulse h-8 w-24 rounded-[14px]" /></div>
+    </div>
+  );
+}
+
+function CountUpStat({ target, className }: { target: number; className: string }) {
+  const value = useCountUp(target);
+  return <span className={className}>{value}</span>;
 }
 
 const activities = [
@@ -145,7 +175,7 @@ export default function PatientsPage() {
                   className="flex-1 bg-transparent text-[15px] font-medium tracking-[-0.1px] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none"
                 />
               </div>
-              <button className="glass-control shadow-sm border border-[var(--border-nav-inactive)] flex h-12 items-center gap-2 rounded-[24px] px-6 transition-opacity hover:bg-[rgba(243,237,250,0.5)]">
+              <button className="glass-control shadow-sm border border-[var(--border-nav-inactive)] flex h-12 items-center gap-2 rounded-[24px] px-6 transition-all hover:bg-[rgba(243,237,250,0.5)] active:scale-[0.97]">
                 <SlidersHorizontal className="h-4 w-4 shrink-0 text-[var(--text-nav)]" />
                 <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-nav)]">
                   Filters
@@ -178,9 +208,7 @@ export default function PatientsPage() {
             {/* Patient rows */}
             <div className="flex-1 overflow-y-auto">
               {loading ? (
-                <div className="flex items-center justify-center py-16">
-                  <span className="text-[14px] text-[var(--text-muted)]">Loading patients...</span>
-                </div>
+                <div>{[0,1,2,3,4].map(i => <SkeletonRow key={i} index={i} />)}</div>
               ) : filteredPatients.length === 0 ? (
                 <div className="flex items-center justify-center py-16">
                   <span className="text-[14px] text-[var(--text-muted)]">No patients found</span>
@@ -195,7 +223,7 @@ export default function PatientsPage() {
                   >
                   <Link
                     href={`/dashboard/${patient.id}`}
-                    className={`flex items-center px-6 py-5 transition-colors hover:bg-[rgba(243,237,250,0.5)] ${index < filteredPatients.length - 1
+                    className={`row-hover flex items-center px-6 py-5 hover:bg-[rgba(243,237,250,0.5)] ${index < filteredPatients.length - 1
                       ? "[border-bottom:var(--table-border-row)]"
                       : ""
                       }`}
@@ -234,12 +262,12 @@ export default function PatientsPage() {
                       )}
                     </div>
                     <div className="w-[120px]">
-                      <StatusBadge status={patient.status} />
+                      <StatusBadge status={patient.status} delay={index * 0.04 + 0.2} />
                     </div>
                     <div className="w-[120px]">
                       <button
                         onClick={(e) => { e.preventDefault(); setScheduleTarget(patient); }}
-                        className="flex items-center gap-2 rounded-[14px] border border-[var(--border-nav-inactive)] px-4 py-2 text-[13px] font-medium text-[var(--purple-primary)] transition-colors hover:bg-[var(--lavender-bg)]"
+                        className="flex items-center gap-2 rounded-[14px] border border-[var(--border-nav-inactive)] px-4 py-2 text-[13px] font-medium text-[var(--purple-primary)] transition-all hover:bg-[var(--lavender-bg)] active:scale-[0.96]"
                       >
                         <CalendarPlus className="h-[16px] w-[16px]" />
                         Schedule
@@ -267,9 +295,9 @@ export default function PatientsPage() {
             </h3>
             <div className="mt-6 flex flex-col gap-4">
               {[
-                { num: String(totalCount), label: "Total Patients" },
-                { num: String(reviewCount), label: "Needs Review" },
-                { num: String(stableCount), label: "Stable Condition" },
+                { target: totalCount, label: "Total Patients" },
+                { target: reviewCount, label: "Needs Review" },
+                { target: stableCount, label: "Stable Condition" },
               ].map((s) => (
                 <div
                   key={s.label}
@@ -278,11 +306,10 @@ export default function PatientsPage() {
                   <span className="text-[14px] font-medium text-[var(--text-primary)]">
                     {s.label}
                   </span>
-                  <span
+                  <CountUpStat
+                    target={s.target}
                     className={`text-[24px] font-medium tracking-[-0.3px] ${statColor[s.label.split(" ")[0]] || "text-[var(--purple-primary)]"}`}
-                  >
-                    {s.num}
-                  </span>
+                  />
                 </div>
               ))}
             </div>
