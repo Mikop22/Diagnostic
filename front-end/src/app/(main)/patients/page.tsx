@@ -3,8 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import {
-  CircleUserRound,
-  ChevronDown,
   Search,
   SlidersHorizontal,
   Plus,
@@ -101,40 +99,7 @@ export default function PatientsPage() {
   const stableCount = patients.filter((p) => p.status === "Stable").length;
 
   return (
-    <div className="flex h-full w-full flex-col bg-[var(--page-bg)] font-poppins">
-      {/* ── Navigation Bar ── */}
-      <nav className="glass-nav flex h-16 shrink-0 items-center justify-between px-8">
-        <div className="flex items-center gap-8">
-          <Link href="/patients" className="gradient-logo text-[24px] font-medium tracking-[-0.1px]">
-            diagnostic
-          </Link>
-
-          <div className="flex gap-2">
-            <Link href="/patients" className="nav-pill-active flex items-center justify-center rounded-[20px] px-5 py-2">
-              <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--purple-primary)]">
-                Patients
-              </span>
-            </Link>
-            <Link href="/schedule" className="flex items-center justify-center rounded-[20px] border border-[var(--border-nav-inactive)] bg-transparent px-5 py-2 transition-colors hover:bg-[var(--lavender-bg)]">
-              <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-nav)]">
-                Schedule
-              </span>
-            </Link>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <CircleUserRound
-            className="h-7 w-7 text-[var(--purple-primary)]"
-            strokeWidth={1.5}
-          />
-          <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">
-            Dr. Patel
-          </span>
-          <ChevronDown className="h-4 w-4 text-[var(--text-nav)]" />
-        </div>
-      </nav>
-
+    <>
       {/* ── Main Content ── */}
       <div className="flex min-h-0 flex-1 gap-8 p-8">
         {/* Left Column — Patient List */}
@@ -384,6 +349,6 @@ export default function PatientsPage() {
           onScheduled={loadPatients}
         />
       )}
-    </div>
+    </>
   );
 }
