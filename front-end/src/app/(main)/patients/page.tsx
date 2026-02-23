@@ -7,7 +7,6 @@ import {
   SlidersHorizontal,
   Plus,
   CalendarPlus,
-  Wallet,
 } from "lucide-react";
 import Link from "next/link";
 import { fetchPatients } from "@/lib/api";
@@ -32,21 +31,67 @@ const statColor: Record<string, string> = {
   Stable: "text-[var(--green-text)]",
 };
 
-// Fallback hardcoded patients for when API is unreachable
 const HARDCODED_PATIENTS: PatientRecord[] = [];
 
 function getInitials(name: string) {
-  return name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
+  return name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
 }
 
-function truncateAddress(addr: string) {
-  if (!addr || addr.length < 12) return addr || "—";
-  return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
+// ─── Priority — derived from patient status ───────────────────────────────────
+type Priority = "High Priority" | "Review Needed" | "Stable";
+
+function getPriority(patient: PatientRecord): Priority {
+  switch (patient.status) {
+    case "Review":       return "High Priority";
+    case "In Progress":
+    case "Pending":      return "Review Needed";
+    default:             return "Stable";
+  }
+}
+
+const priorityStyles: Record<Priority, React.CSSProperties> = {
+  "High Priority": {
+    background: "rgba(226,92,92,0.11)",
+    color: "var(--red-alert)",
+  },
+  "Review Needed": {
+    background: "var(--orange-bg)",
+    color: "var(--orange-text)",
+  },
+  "Stable": {
+    background: "var(--green-bg)",
+    color: "var(--green-text)",
+  },
+};
+
+// ─── Last Sync — relative time from created_at (proxy for initial health sync) ─
+function getRelativeTime(dateStr: string): string {
+  if (!dateStr) return "—";
+  const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return "—";
+  const diffMs = Date.now() - date.getTime();
+  const diffHrs = Math.floor(diffMs / 36e5);
+  const diffDays = Math.floor(diffHrs / 24);
+  if (diffHrs < 1) return "Just now";
+  if (diffHrs < 24) return `${diffHrs} hr${diffHrs > 1 ? "s" : ""} ago`;
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays < 7) return `${diffDays}d ago`;
+  return `${Math.floor(diffDays / 7)}w ago`;
+}
+
+// ─── Priority pill ────────────────────────────────────────────────────────────
+function PriorityBadge({ priority, delay = 0 }: { priority: Priority; delay?: number }) {
+  return (
+    <motion.span
+      initial={{ opacity: 0, scale: 0.82 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3, delay, ease: [0.16, 1, 0.3, 1] }}
+      className="inline-flex items-center justify-center rounded-[12px] px-3 py-1 text-[11px] font-semibold"
+      style={priorityStyles[priority]}
+    >
+      {priority}
+    </motion.span>
+  );
 }
 
 function StatusBadge({ status, delay = 0 }: { status: string; delay?: number }) {
@@ -63,6 +108,7 @@ function StatusBadge({ status, delay = 0 }: { status: string; delay?: number }) 
   );
 }
 
+// Updated skeleton to match the new 6-column layout
 function SkeletonRow({ index }: { index: number }) {
   return (
     <div
@@ -76,10 +122,11 @@ function SkeletonRow({ index }: { index: number }) {
           <div className="skeleton-pulse h-2.5 w-36 rounded" />
         </div>
       </div>
-      <div className="flex-1 pr-6"><div className="skeleton-pulse h-3.5 w-32 rounded" /></div>
-      <div className="w-[160px]"><div className="skeleton-pulse h-3.5 w-24 rounded" /></div>
-      <div className="w-[120px]"><div className="skeleton-pulse h-6 w-20 rounded-[12px]" /></div>
-      <div className="w-[120px]"><div className="skeleton-pulse h-8 w-24 rounded-[14px]" /></div>
+      <div className="flex-1 pr-4"><div className="skeleton-pulse h-3.5 w-32 rounded" /></div>
+      <div className="w-[130px]"><div className="skeleton-pulse h-6 w-24 rounded-[12px]" /></div>
+      <div className="w-[130px]"><div className="skeleton-pulse h-3.5 w-20 rounded" /></div>
+      <div className="w-[110px]"><div className="skeleton-pulse h-6 w-20 rounded-[12px]" /></div>
+      <div className="w-[110px]"><div className="skeleton-pulse h-8 w-24 rounded-[14px]" /></div>
     </div>
   );
 }
@@ -105,10 +152,8 @@ export default function PatientsPage() {
   const loadPatients = useCallback(async () => {
     try {
       const data = await fetchPatients();
-      // Merge API patients with hardcoded fallback patients
       setPatients([...HARDCODED_PATIENTS as PatientRecord[], ...data]);
     } catch {
-      // If API unreachable, show hardcoded patients
       setPatients(HARDCODED_PATIENTS as PatientRecord[]);
     } finally {
       setLoading(false);
@@ -130,7 +175,6 @@ export default function PatientsPage() {
 
   return (
     <>
-      {/* ── Main Content ── */}
       <div className="flex min-h-0 flex-1 gap-8 p-8">
         {/* Left Column — Patient List */}
         <div className="flex min-h-0 flex-1 flex-col gap-6">
@@ -150,9 +194,15 @@ export default function PatientsPage() {
               </h1>
             </div>
             <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-muted)]">
-              {new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
+              {new Date().toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
             </span>
           </motion.div>
+
           {/* Section header with search */}
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-1">
@@ -186,7 +236,7 @@ export default function PatientsPage() {
 
           {/* Patient table card */}
           <div className="glass-card flex min-h-0 flex-1 flex-col overflow-hidden rounded-[24px]">
-            {/* Column headers */}
+            {/* Column headers — XRP WALLET removed; PRIORITY + LAST SYNC added */}
             <div className="flex shrink-0 items-center px-6 py-5 [border-bottom:var(--table-border-header)] bg-[rgba(255,255,255,0.4)] backdrop-blur-md">
               <div className="w-[280px] text-[12px] font-semibold tracking-[1px] uppercase text-[var(--text-secondary)]">
                 Patient
@@ -194,13 +244,16 @@ export default function PatientsPage() {
               <div className="flex-1 text-[12px] font-semibold tracking-[1px] uppercase text-[var(--text-secondary)]">
                 Primary Concern
               </div>
-              <div className="w-[160px] text-[12px] font-semibold tracking-[1px] uppercase text-[var(--text-secondary)]">
-                XRP Wallet
+              <div className="w-[130px] text-[12px] font-semibold tracking-[1px] uppercase text-[var(--text-secondary)]">
+                Priority
               </div>
-              <div className="w-[120px] text-[12px] font-semibold tracking-[1px] uppercase text-[var(--text-secondary)]">
+              <div className="w-[130px] text-[12px] font-semibold tracking-[1px] uppercase text-[var(--text-secondary)]">
+                Last Sync
+              </div>
+              <div className="w-[110px] text-[12px] font-semibold tracking-[1px] uppercase text-[var(--text-secondary)]">
                 Status
               </div>
-              <div className="w-[120px] text-[12px] font-semibold tracking-[1px] uppercase text-[var(--text-secondary)]">
+              <div className="w-[110px] text-[12px] font-semibold tracking-[1px] uppercase text-[var(--text-secondary)]">
                 Actions
               </div>
             </div>
@@ -208,82 +261,95 @@ export default function PatientsPage() {
             {/* Patient rows */}
             <div className="flex-1 overflow-y-auto">
               {loading ? (
-                <div>{[0,1,2,3,4].map(i => <SkeletonRow key={i} index={i} />)}</div>
+                <div>{[0, 1, 2, 3, 4].map((i) => <SkeletonRow key={i} index={i} />)}</div>
               ) : filteredPatients.length === 0 ? (
                 <div className="flex items-center justify-center py-16">
                   <span className="text-[14px] text-[var(--text-muted)]">No patients found</span>
                 </div>
               ) : (
-                filteredPatients.map((patient, index) => (
-                  <motion.div
-                    key={patient.id}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                  <Link
-                    href={`/dashboard/${patient.id}`}
-                    className={`row-hover flex items-center px-6 py-5 hover:bg-[rgba(243,237,250,0.5)] ${index < filteredPatients.length - 1
-                      ? "[border-bottom:var(--table-border-row)]"
-                      : ""
-                      }`}
-                  >
-                    <div className="flex w-[280px] items-center gap-3">
-                      <div
-                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-[16px] text-[13px] font-medium ${index % 2 === 0
-                          ? "bg-[var(--avatar-purple-bg)] text-[var(--purple-primary)]"
-                          : "bg-[var(--avatar-lavender-bg)] text-[var(--purple-dark)]"
-                          }`}
+                filteredPatients.map((patient, index) => {
+                  const priority = getPriority(patient);
+                  const syncTime = getRelativeTime(patient.created_at);
+
+                  return (
+                    <motion.div
+                      key={patient.id}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <Link
+                        href={`/dashboard/${patient.id}`}
+                        className={`row-hover flex items-center px-6 py-5 hover:bg-[rgba(243,237,250,0.5)] ${
+                          index < filteredPatients.length - 1
+                            ? "[border-bottom:var(--table-border-row)]"
+                            : ""
+                        }`}
                       >
-                        {getInitials(patient.name)}
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">
-                          {patient.name}
-                        </span>
-                        <span className="text-[11px] text-[var(--text-muted)]">
-                          {patient.email}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex-1 pr-6 text-[14px] font-medium tracking-[-0.1px] text-[var(--text-secondary)]">
-                      {patient.concern || "—"}
-                    </div>
-                    <div className="w-[160px] flex items-center gap-1.5">
-                      {patient.xrp_wallet_address ? (
-                        <>
-                          <Wallet className="h-[15px] w-[15px] text-[var(--purple-primary)]" />
-                          <span className="text-[13px] font-mono text-[var(--text-secondary)]">
-                            {truncateAddress(patient.xrp_wallet_address)}
+                        {/* Patient */}
+                        <div className="flex w-[280px] items-center gap-3">
+                          <div
+                            className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-[16px] text-[13px] font-medium ${
+                              index % 2 === 0
+                                ? "bg-[var(--avatar-purple-bg)] text-[var(--purple-primary)]"
+                                : "bg-[var(--avatar-lavender-bg)] text-[var(--purple-dark)]"
+                            }`}
+                          >
+                            {getInitials(patient.name)}
+                          </div>
+                          <div className="flex min-w-0 flex-col">
+                            <span className="text-[14px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">
+                              {patient.name}
+                            </span>
+                            <span className="truncate text-[11px] text-[var(--text-muted)]">
+                              {patient.email}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Primary Concern */}
+                        <div className="flex-1 pr-4 text-[14px] font-medium tracking-[-0.1px] text-[var(--text-secondary)]">
+                          {patient.concern || "—"}
+                        </div>
+
+                        {/* Priority — replaces the XRP Wallet column */}
+                        <div className="w-[130px]">
+                          <PriorityBadge priority={priority} delay={index * 0.04 + 0.15} />
+                        </div>
+
+                        {/* Last Sync */}
+                        <div className="w-[130px]">
+                          <span className="text-[13px] font-medium text-[var(--text-secondary)]">
+                            {syncTime}
                           </span>
-                        </>
-                      ) : (
-                        <span className="text-[13px] text-[var(--text-muted)]">—</span>
-                      )}
-                    </div>
-                    <div className="w-[120px]">
-                      <StatusBadge status={patient.status} delay={index * 0.04 + 0.2} />
-                    </div>
-                    <div className="w-[120px]">
-                      <button
-                        onClick={(e) => { e.preventDefault(); setScheduleTarget(patient); }}
-                        className="flex items-center gap-2 rounded-[14px] border border-[var(--border-nav-inactive)] px-4 py-2 text-[13px] font-medium text-[var(--purple-primary)] transition-all hover:bg-[var(--lavender-bg)] active:scale-[0.96]"
-                      >
-                        <CalendarPlus className="h-[16px] w-[16px]" />
-                        Schedule
-                      </button>
-                    </div>
-                  </Link>
-                  </motion.div>
-                ))
+                        </div>
+
+                        {/* Status */}
+                        <div className="w-[110px]">
+                          <StatusBadge status={patient.status} delay={index * 0.04 + 0.2} />
+                        </div>
+
+                        {/* Actions */}
+                        <div className="w-[110px]">
+                          <button
+                            onClick={(e) => { e.preventDefault(); setScheduleTarget(patient); }}
+                            className="flex items-center gap-2 rounded-[14px] border border-[var(--border-nav-inactive)] px-4 py-2 text-[13px] font-medium text-[var(--purple-primary)] transition-all hover:bg-[var(--lavender-bg)] active:scale-[0.96]"
+                          >
+                            <CalendarPlus className="h-[16px] w-[16px]" />
+                            Schedule
+                          </button>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  );
+                })
               )}
             </div>
           </div>
         </div>
 
-        {/* Right Sidebar */}
+        {/* Right Sidebar — unchanged */}
         <div className="flex w-[340px] shrink-0 flex-col gap-6">
-          {/* Overview card */}
           <motion.div
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -299,23 +365,21 @@ export default function PatientsPage() {
                 { target: reviewCount, label: "Needs Review" },
                 { target: stableCount, label: "Stable Condition" },
               ].map((s) => (
-                <div
-                  key={s.label}
-                  className="flex items-center justify-between"
-                >
+                <div key={s.label} className="flex items-center justify-between">
                   <span className="text-[14px] font-medium text-[var(--text-primary)]">
                     {s.label}
                   </span>
                   <CountUpStat
                     target={s.target}
-                    className={`text-[24px] font-medium tracking-[-0.3px] ${statColor[s.label.split(" ")[0]] || "text-[var(--purple-primary)]"}`}
+                    className={`text-[24px] font-medium tracking-[-0.3px] ${
+                      statColor[s.label.split(" ")[0]] || "text-[var(--purple-primary)]"
+                    }`}
                   />
                 </div>
               ))}
             </div>
           </motion.div>
 
-          {/* Recent Activity card */}
           <motion.div
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -328,10 +392,9 @@ export default function PatientsPage() {
             {activities.map((activity) => (
               <div key={activity.name} className="flex items-center gap-3">
                 <div
-                  className={`h-2 w-2 shrink-0 rounded-full ${activity.active
-                    ? "bg-[var(--purple-primary)]"
-                    : "bg-[var(--text-muted)]"
-                    }`}
+                  className={`h-2 w-2 shrink-0 rounded-full ${
+                    activity.active ? "bg-[var(--purple-primary)]" : "bg-[var(--text-muted)]"
+                  }`}
                 />
                 <div className="flex flex-1 flex-col gap-0.5">
                   <span className="text-[13px] font-medium tracking-[-0.1px] text-[var(--text-primary)]">
@@ -345,7 +408,6 @@ export default function PatientsPage() {
             ))}
           </motion.div>
 
-          {/* Add Patient button */}
           <div className="mt-auto pt-2">
             <button
               onClick={() => setShowAddModal(true)}
@@ -360,7 +422,6 @@ export default function PatientsPage() {
         </div>
       </div>
 
-      {/* Modals */}
       <AddPatientModal
         open={showAddModal}
         onClose={() => setShowAddModal(false)}
