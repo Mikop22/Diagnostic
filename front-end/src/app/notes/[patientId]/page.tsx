@@ -81,7 +81,7 @@ export default async function NotesPage({
             <h3 className="text-[16px] font-semibold tracking-[-0.1px] text-[var(--text-primary)]">
               Notable Research
             </h3>
-            <DiagnosticNudgeAccordion matches={condition_matches} />
+            <DiagnosticNudgeAccordion matches={condition_matches} showPdf />
           </div>
         </div>
 

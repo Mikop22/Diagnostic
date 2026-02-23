@@ -122,7 +122,7 @@ function SkeletonRow({ index }: { index: number }) {
           <div className="skeleton-pulse h-2.5 w-36 rounded" />
         </div>
       </div>
-      <div className="flex-1 pr-4"><div className="skeleton-pulse h-3.5 w-32 rounded" /></div>
+      <div className="min-w-0 flex-1 pr-4"><div className="skeleton-pulse h-3.5 w-32 rounded" /></div>
       <div className="w-[130px]"><div className="skeleton-pulse h-6 w-24 rounded-[12px]" /></div>
       <div className="w-[130px]"><div className="skeleton-pulse h-3.5 w-20 rounded" /></div>
       <div className="w-[110px]"><div className="skeleton-pulse h-6 w-20 rounded-[12px]" /></div>
@@ -307,9 +307,11 @@ export default function PatientsPage() {
                           </div>
                         </div>
 
-                        {/* Primary Concern */}
-                        <div className="flex-1 pr-4 text-[14px] font-medium tracking-[-0.1px] text-[var(--text-secondary)]">
-                          {patient.concern || "—"}
+                        {/* Primary Concern — min-w-0 lets the flex item shrink/wrap freely */}
+                        <div className="min-w-0 flex-1 pr-4 text-[14px] font-medium tracking-[-0.1px] text-[var(--text-secondary)]">
+                          <span className="block whitespace-normal break-words">
+                            {patient.concern || "—"}
+                          </span>
                         </div>
 
                         {/* Priority — replaces the XRP Wallet column */}

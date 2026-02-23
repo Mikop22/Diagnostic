@@ -124,12 +124,14 @@ function PdfViewer({ pmcid, title }: { pmcid: string | null; title: string }) {
 
 interface AccordionProps {
   matches: ConditionMatch[];
+  showPdf?: boolean;
 }
 
-export function DiagnosticNudgeAccordion({ matches }: AccordionProps) {
+export function DiagnosticNudgeAccordion({ matches, showPdf = false }: AccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  usePrefetchPdfs(matches.map((m) => m.pmcid));
+  // Only prefetch PDFs when the viewer will actually be shown (notes page)
+  usePrefetchPdfs(showPdf ? matches.map((m) => m.pmcid) : []);
 
   return (
     <div className="flex flex-col gap-2">
@@ -232,8 +234,8 @@ export function DiagnosticNudgeAccordion({ matches }: AccordionProps) {
                   >
                     <p className="text-[12px] leading-[1.6] text-[var(--text-body)]">{match.snippet}</p>
                   </div>
-                  {/* Inline PDF viewer */}
-                  <PdfViewer pmcid={isOpen ? match.pmcid : null} title={match.title} />
+                  {/* Inline PDF viewer — only rendered in the notes section */}
+                  {showPdf && <PdfViewer pmcid={isOpen ? match.pmcid : null} title={match.title} />}
                 </motion.div>
               )}
             </AnimatePresence>
