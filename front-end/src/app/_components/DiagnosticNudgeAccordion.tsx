@@ -116,7 +116,7 @@ function PdfViewer({ pmcid, title }: { pmcid: string | null; title: string }) {
   }
 
   return (
-    <div className="h-[360px]" style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }}>
+    <div className="h-[520px]" style={{ borderTop: "1px solid rgba(255,255,255,0.15)" }}>
       <iframe src={url} className="h-full w-full border-0" title={`Paper: ${title}`} />
     </div>
   );

@@ -77,7 +77,7 @@ export default async function NotesPage({
           <NotesEditor />
 
           {/* Research sidebar */}
-          <div className="glass-card flex w-[380px] shrink-0 flex-col gap-5 overflow-y-auto rounded-[24px] px-7 py-8">
+          <div className="glass-card flex w-[760px] shrink-0 flex-col gap-5 overflow-y-auto rounded-[24px] px-7 py-8">
             <h3 className="text-[16px] font-semibold tracking-[-0.1px] text-[var(--text-primary)]">
               Notable Research
             </h3>
