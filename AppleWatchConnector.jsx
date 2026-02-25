@@ -1,7 +1,7 @@
 import React from "react";
 
 const qrSrc =
-  "https://quickchart.io/qr?text=shortcuts://run-shortcut?name=Fetching%20Apple%20Health%20Data&size=200&margin=2";
+  "https://quickchart.io/qr?text=[PASTE_YOUR_ICLOUD_LINK_HERE]&size=200&margin=2";
 
 const styles = {
   wrapper: {
@@ -75,8 +75,9 @@ export default function AppleWatchConnector() {
         <span style={styles.badge}>Web3 Health Bridge</span>
         <h2 style={styles.title}>Sync Apple Health</h2>
         <p style={styles.subtitle}>
-          Scan the QR code with your iPhone camera to instantly securely extract
-          your Apple Watch biometric data into the decentralized backend.
+          Scan this QR code with your iPhone to install the DiagnosticSync
+          shortcut. Once added, tap it to securely extract your biometric data
+          to our Web3 backend.
         </p>
         <div style={styles.qrFrame}>
           <img src={qrSrc} alt="Apple Health sync shortcut QR code" style={styles.qrImage} />
