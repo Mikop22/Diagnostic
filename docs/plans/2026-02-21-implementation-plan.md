@@ -673,7 +673,7 @@ async def extract_clinical_brief(
 ) -> ClinicalBriefOutput:
     """Extract a structured clinical brief from patient narrative + biometrics."""
     llm = ChatOpenAI(
-        model="gpt-4o",
+        model="gpt-5.2-2025-12-11",
         api_key=settings.OPENAI_API_KEY,
         temperature=0.1,
     )

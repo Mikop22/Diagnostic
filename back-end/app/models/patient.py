@@ -81,6 +81,8 @@ class PatientPayload(BaseModel):
     risk_profile: RiskProfile
 class ClinicalBrief(BaseModel):
     summary: str
+    clinical_intake: str
+    primary_concern: str
     key_symptoms: list[str]
     severity_assessment: str
     recommended_actions: list[str]

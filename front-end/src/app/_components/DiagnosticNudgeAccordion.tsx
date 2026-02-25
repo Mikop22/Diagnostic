@@ -137,7 +137,6 @@ export function DiagnosticNudgeAccordion({ matches, showPdf = false }: Accordion
     <div className="flex flex-col gap-2">
       {matches.map((match, i) => {
         const isOpen = openIndex === i;
-        const scorePercent = (match.similarity_score * 100).toFixed(1);
         const isTopMatch = i === 0;
 
         return (
@@ -186,21 +185,12 @@ export function DiagnosticNudgeAccordion({ matches, showPdf = false }: Accordion
                   >
                     {match.condition}
                   </p>
-                  <p className="mt-0.5 truncate text-[11px] text-[var(--text-muted)]">
+                  <p className="mt-0.5 text-[11px] leading-[1.4] text-[var(--text-muted)]">
                     PMCID: {match.pmcid} · {match.title}
                   </p>
                 </div>
               </div>
               <div className="ml-3 flex shrink-0 items-center gap-2.5">
-                <span
-                  className="rounded-[8px] px-2 py-0.5 font-mono text-[11px] font-semibold"
-                  style={{
-                    background: isTopMatch ? "rgba(93,46,168,0.10)" : "var(--lavender-bg)",
-                    color: isTopMatch ? "var(--purple-primary)" : "var(--text-muted)",
-                  }}
-                >
-                  {scorePercent}%
-                </span>
                 <motion.svg
                   animate={{ rotate: isOpen ? 180 : 0 }}
                   transition={{ type: "spring", stiffness: 300, damping: 25 }}

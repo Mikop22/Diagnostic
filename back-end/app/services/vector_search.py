@@ -57,7 +57,7 @@ async def search_conditions(
                                             "text": {
                                                 "query": query_text,
                                                 "path": [
-                                                    "condition",
+                                                    {"value": "condition", "multi": 3.0},
                                                     "title",
                                                     "snippet",
                                                 ],

@@ -30,3 +30,4 @@ apikeys.txt
 .worktrees/
 
 node_modules
+.vercel

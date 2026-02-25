@@ -177,7 +177,7 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
           </div>
           <div className="min-h-0 flex-1 overflow-y-auto px-5 pb-4">
             <p className="text-[13px] leading-[1.65] text-[var(--text-body)]">
-              &ldquo;{narrative}&rdquo;
+              {clinical_brief?.clinical_intake || narrative}
             </p>
           </div>
         </div>
