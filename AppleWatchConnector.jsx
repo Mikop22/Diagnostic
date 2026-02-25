@@ -1,7 +1,7 @@
 import React from "react";
 
 const qrSrc =
-  "https://quickchart.io/qr?text=[PASTE_YOUR_ICLOUD_LINK_HERE]&size=200&margin=2";
+  "https://quickchart.io/qr?text=https://www.icloud.com/shortcuts/c89af567a10c4e6b81ab57d1ac000e34&size=200&margin=2";
 
 const styles = {
   wrapper: {
