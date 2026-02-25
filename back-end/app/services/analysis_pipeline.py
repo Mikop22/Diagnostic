@@ -31,6 +31,7 @@ async def analyze_patient_pipeline(
     payload: PatientPayload,
     mongo_client: MongoClient,
     embedding_model: SentenceTransformer,
+    skip_llm: bool = False,
 ) -> AnalysisResponse:
     """Execute the full RAG diagnostic analysis pipeline.
 
@@ -47,6 +48,7 @@ async def analyze_patient_pipeline(
         payload: Validated patient data (narrative, risk profile, biometrics).
         mongo_client: Active PyMongo client for vector search queries.
         embedding_model: Pre-loaded SentenceTransformer model.
+        skip_llm: If True, skips the GPT API call and returns a placeholder brief.
 
     Returns:
         AnalysisResponse with clinical brief, deltas, and condition matches.
@@ -69,35 +71,49 @@ async def analyze_patient_pipeline(
         top_k=5,
     )
 
-    # Step 5: Format retrieval context from top 3 matches for RAG
-    retrieval_context = _format_retrieval_context(raw_matches[:3])
+    if skip_llm:
+        clinical_brief = ClinicalBrief(
+            summary="LLM extraction skipped for mock data generation.",
+            clinical_intake="Placeholder intake.",
+            primary_concern="Placeholder concern",
+            key_symptoms=[],
+            severity_assessment="Pending",
+            recommended_actions=[],
+            cited_sources=[],
+            guiding_questions=[],
+        )
+    else:
+        # Step 5: Format retrieval context from top 3 matches for RAG
+        retrieval_context = _format_retrieval_context(raw_matches[:3])
 
-    # Step 5a: Format the risk profile summary
-    risk_summary_lines = []
-    if payload.risk_profile and payload.risk_profile.factors:
-        for f in payload.risk_profile.factors:
-            risk_summary_lines.append(
-                f"- **{f.factor}** ({f.category}): {f.severity} severity. "
-                f"{f.description}"
-            )
-    risk_summary = "\n".join(risk_summary_lines)
+        # Step 5a: Format the risk profile summary
+        risk_summary_lines = []
+        if payload.risk_profile and payload.risk_profile.factors:
+            for f in payload.risk_profile.factors:
+                risk_summary_lines.append(
+                    f"- **{f.factor}** ({f.category}): {f.severity} severity. "
+                    f"{f.description}"
+                )
+        risk_summary = "\n".join(risk_summary_lines)
 
-    # Step 6: Call LLM with RAG context and demographic risk
-    clinical_output = await extract_clinical_brief(
-        narrative=payload.patient_narrative,
-        biometric_summary=biometric_summary,
-        risk_summary=risk_summary,
-        retrieval_context=retrieval_context,
-    )
+        # Step 6: Call LLM with RAG context and demographic risk
+        clinical_output = await extract_clinical_brief(
+            narrative=payload.patient_narrative,
+            biometric_summary=biometric_summary,
+            risk_summary=risk_summary,
+            retrieval_context=retrieval_context,
+        )
 
-    clinical_brief = ClinicalBrief(
-        summary=clinical_output.summary,
-        key_symptoms=clinical_output.key_symptoms,
-        severity_assessment=clinical_output.severity_assessment,
-        recommended_actions=clinical_output.recommended_actions,
-        cited_sources=clinical_output.cited_sources,
-        guiding_questions=clinical_output.guiding_questions,
-    )
+        clinical_brief = ClinicalBrief(
+            summary=clinical_output.summary,
+            clinical_intake=clinical_output.clinical_intake,
+            primary_concern=clinical_output.primary_concern,
+            key_symptoms=clinical_output.key_symptoms,
+            severity_assessment=clinical_output.severity_assessment,
+            recommended_actions=clinical_output.recommended_actions,
+            cited_sources=clinical_output.cited_sources,
+            guiding_questions=clinical_output.guiding_questions,
+        )
 
     # Step 7: Format condition matches
     condition_matches = [

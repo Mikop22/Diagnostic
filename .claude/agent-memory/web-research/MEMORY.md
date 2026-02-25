@@ -46,6 +46,17 @@
 - No-change sessions auto-clean; sessions with changes prompt keep/remove
 - Can also use `git worktree add` manually for more control
 
+## Verified PMC Article IDs — Diagnostic Project
+
+PMC redirects: ncbi.nlm.nih.gov/pmc/articles/PMC{id}/ now 301s to pmc.ncbi.nlm.nih.gov — always use the pmc. subdomain directly.
+
+Round-number PMCIDs (e.g. PMC5555555) are almost always fabricated — verify before use.
+
+Confirmed real open-access PMCIDs for uterine fibroids/anemia/HMB topic cluster:
+- PMC9699995 — "Cardiometabolic Risk and Cardiovascular Disease in Young Women With Uterine Fibroids" (NHANES, CVD odds ratio 3.10)
+- PMC11494454 — "A Multicenter Retrospective Cohort Study Assessing the Incidence of Anemia in Patients Associated With Uterine Fibroids" (75% submucosal fibroid patients had anemia)
+- PMC6142441 — "Heavy menstrual bleeding: work-up and management" (broad differential: uterine, ovulatory, coagulation causes)
+
 ## Full-Stack (FastAPI + Next.js) Patterns
 
 - Use 2-3 agent approach: Planner (read-only), Backend agent, Frontend agent

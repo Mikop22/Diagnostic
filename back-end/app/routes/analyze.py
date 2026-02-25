@@ -245,6 +245,8 @@ async def analyze_patient(payload: PatientPayload, request: Request):
 
     clinical_brief = ClinicalBrief(
         summary=clinical_output.summary,
+        clinical_intake=clinical_output.clinical_intake,
+        primary_concern=clinical_output.primary_concern,
         key_symptoms=clinical_output.key_symptoms,
         severity_assessment=clinical_output.severity_assessment,
         recommended_actions=clinical_output.recommended_actions,
@@ -263,6 +265,17 @@ async def analyze_patient(payload: PatientPayload, request: Request):
         )
         for m in raw_matches
     ]
+
+    # Step 8: Update patient record with the new primary concern
+    try:
+        mongo_client = request.app.state.mongo_client
+        db = mongo_client[request.app.state.settings.MONGODB_DB_NAME]
+        db.patients.update_one(
+            {"id": payload.patient_id},
+            {"$set": {"concern": clinical_brief.primary_concern}}
+        )
+    except Exception as e:
+        print(f"Warning: Failed to update patient concern: {e}")
 
     return AnalysisResponse(
         patient_id=payload.patient_id,

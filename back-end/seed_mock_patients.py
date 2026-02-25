@@ -125,7 +125,7 @@ def create_patient_and_appointment(pt_data):
         "xrp_wallet_seed": "sMockSeed...",
         "created_at": now,
         "status": "completed",
-        "concern": pt_data["narrative"][:50] + "..."
+        "concern": pt_data.get("clinical_brief", {}).get("primary_concern", pt_data["narrative"][:50] + "...")
     }
     
     appointment_record = {
@@ -174,6 +174,8 @@ amara = {
     },
     "menstrual_phases": ["Luteal", "Luteal", "Luteal", "Luteal", "Luteal", "Luteal", "Menstrual"],
     "clinical_brief": {
+        "primary_concern": "Severe Pelvic & Leg Pain",
+        "clinical_intake": "Patient presents with severe, stabbing pelvic pain radiating down her leg. Historically dismissed as normal cramps.",
         "summary": "Patient presents with severe cyclic pelvic and radiating leg pain with acute biometric decomposition over the past 3 days. Walking asymmetry spiked 383% above baseline, wrist temperature sustained +0.8\u00b0C deviation, and sleep fragmentation increased 5x — collectively indicating an acute inflammatory or endometriotic flare.",
         "key_symptoms": ["Severe stabbing pelvic pain radiating to left leg", "Cyclic pain pattern worsening during luteal phase", "Significant gait guarding and mobility impairment", "Sleep fragmentation due to nocturnal pain episodes", "Sustained low-grade inflammatory temperature elevation"],
         "severity_assessment": "High",
@@ -227,6 +229,8 @@ maria = {
     },
     "menstrual_phases": ["Menstrual", "Menstrual", "Menstrual", "Follicular", "Follicular", "Follicular", "Follicular"],
     "clinical_brief": {
+        "primary_concern": "Menorrhagia & Fatigue",
+        "clinical_intake": "Patient reports extreme fatigue, heavy bleeding soaking through pads rapidly, and shortness of breath upon exertion.",
         "summary": "Symptomatic anemia strongly correlated with suspected uterine fibroids. Longitudinal data reveals a 6-month creeping RHR elevation from 65 to 85 bpm — the body progressively compensating for reduced hemoglobin. Acute step count has dropped 44% from baseline, confirming functional cardiovascular decompensation.",
         "key_symptoms": ["Extreme fatigue unrelieved by rest", "Shortness of breath climbing a single flight of stairs", "Menorrhagia — soaking through protection every 45 minutes", "Orthostatic lightheadedness upon standing", "Progressive exercise intolerance over 6 months"],
         "severity_assessment": "High",
@@ -279,6 +283,8 @@ jordan = {
     },
     "menstrual_phases": ["Follicular", "Follicular", "Follicular", "Follicular", "Ovulatory", "Follicular", "Follicular"],
     "clinical_brief": {
+        "primary_concern": "Orthostatic Dizziness & Tachycardia",
+        "clinical_intake": "Patient experiences severe dizziness upon standing, brain fog, and racing heart after mild exertion following a viral illness.",
         "summary": "Presents with highly erratic heart rate variability (swinging 10-50ms within days) and RHR spikes to 110 bpm independent of exertion. HRV has collapsed 67% below 6-month baseline. Pattern is consistent with post-viral autonomic dysfunction (POTS) — the body's fight-or-flight system is misfiring at rest.",
         "key_symptoms": ["Severe orthostatic dizziness — near-syncope upon standing", "Persistent cognitive dysfunction (brain fog) affecting work", "Inappropriate tachycardia to 110 bpm without physical exertion", "Exercise intolerance — unable to complete previously routine activities", "Post-exertional malaise lasting 24-48 hours"],
         "severity_assessment": "High",
@@ -331,6 +337,8 @@ david = {
     },
     "menstrual_phases": [],
     "clinical_brief": {
+        "primary_concern": "Morning Joint Stiffness",
+        "clinical_intake": "Patient describes worsening morning joint stiffness in knees and fingers over the past month, with known history of psoriasis.",
         "summary": "Progressive walking asymmetry creeping from 2% to 7.5% over 6 months reveals silent joint deterioration — a pattern that precedes radiographic damage by 12-18 months. Combined with acute sleep fragmentation (4-5x baseline), the data indicates an active inflammatory arthropathy in a patient with known psoriasis.",
         "key_symptoms": ["Morning joint stiffness lasting >45 minutes in fingers and knees", "Progressive gait asymmetry worsening over 6 months", "Nocturnal pain causing 4-5 awakenings per night", "Dactylitis (sausage digit) reported in right index finger", "Fatigue disproportionate to activity level"],
         "severity_assessment": "Moderate to High",
@@ -382,6 +390,8 @@ elijah = {
     },
     "menstrual_phases": [],
     "clinical_brief": {
+        "primary_concern": "Sleep Apnea & Fatigue",
+        "clinical_intake": "Patient reports waking up gasping for air, severe unrefreshing sleep leading to chronic daytime fatigue, and morning headaches.",
         "summary": "Respiratory rate spikes to 26-28 breaths/min during sleep align precisely with extreme sleep fragmentation (12-18 awakenings/night) — a 300% increase over baseline. This pattern, combined with witnessed apneic episodes and morning headaches, constitutes a textbook severe OSA presentation detectable through wearable data alone.",
         "key_symptoms": ["Witnessed apneic episodes — gasping and choking during sleep", "Excessive daytime sleepiness despite 8+ hours in bed", "Morning headaches resolving within 1-2 hours of waking", "Nocturia (2-3 bathroom trips per night)", "Unrefreshing sleep with cognitive impairment during the day"],
         "severity_assessment": "High — Urgent",
@@ -434,6 +444,8 @@ priya = {
     },
     "menstrual_phases": ["Follicular", "Follicular", "Late_Follicular", "Anovulatory", "Anovulatory", "Anovulatory", "Late_Follicular"],
     "clinical_brief": {
+        "primary_concern": "Weight Gain & Oligomenorrhea",
+        "clinical_intake": "Patient presents with sudden 8lb weight fluctuation, irregular cycles skipping months, and signs of systemic inflammation.",
         "summary": "Wrist temperature data reveals complete absence of the normal biphasic ovulatory pattern — confirming chronic anovulation. Combined with HRV depressed 37% below baseline (indicating sustained sympathetic activation) and erratic temperature swings of \u00b11.2\u00b0C, the biometric profile strongly correlates with PCOS-driven hormonal and metabolic dysregulation.",
         "key_symptoms": ["Irregular menstrual cycles — ranging from 21 to 65 days apart", "Unexplained weight gain of 8 lbs in 6 weeks", "Persistent adult-onset acne along jawline and chin", "Thinning hair on scalp with excess facial hair growth (hirsutism)", "Chronic fatigue with afternoon energy crashes"],
         "severity_assessment": "Moderate to High",
@@ -485,6 +497,8 @@ zoe = {
     },
     "menstrual_phases": ["Luteal", "Luteal", "Luteal", "Luteal", "Menstrual", "Menstrual", "Follicular"],
     "clinical_brief": {
+        "primary_concern": "Malar Rash & Polyarthralgia",
+        "clinical_intake": "Patient presents with butterfly rash across cheeks exacerbating with sun, severe joint pain, profound fatigue, and recent hair thinning.",
         "summary": "Patient presents with classic lupus flare: HRV crashed 55% below baseline over 3 consecutive days while wrist temperature sustained +0.9C deviation. RHR spiked to 95 bpm during the flare window, and step count collapsed 60% from baseline, confirming systemic inflammatory decompensation.",
         "key_symptoms": ["Butterfly malar rash worsening with UV exposure", "Polyarthralgia affecting hands, wrists, and knees", "Profound fatigue unrelieved by rest lasting 3+ weeks", "Recent hair thinning and scalp tenderness", "Photosensitivity with skin lesion flares"],
         "severity_assessment": "High",
@@ -537,6 +551,8 @@ aaliyah = {
     },
     "menstrual_phases": ["Follicular", "Follicular", "Menstrual", "Menstrual", "Menstrual", "Follicular", "Follicular"],
     "clinical_brief": {
+        "primary_concern": "Vaso-occlusive Pain Crisis",
+        "clinical_intake": "Patient presents in acute distress with severe pain in chest, back, and extremities. Reports extreme fatigue and disrupted sleep.",
         "summary": "Biometric data captures a vaso-occlusive crisis in real time: SpO2 plummeted to 88.5% while RHR spiked to 112 bpm over days 3-5. HRV collapsed to 10ms — near-total autonomic shutdown consistent with severe pain crisis. Step count dropped 85% confirming immobilization from pain.",
         "key_symptoms": ["Severe vaso-occlusive pain in chest, back, and extremities", "SpO2 dropping below 90% during crisis episodes", "Extreme fatigue with baseline hemoglobin 7-8 g/dL", "Sleep completely fragmented by pain — 7-8 awakenings per night", "History of pain being dismissed as drug-seeking behavior"],
         "severity_assessment": "High — Urgent",
@@ -589,6 +605,8 @@ fatima = {
     },
     "menstrual_phases": ["Irregular", "Irregular", "Anovulatory", "Anovulatory", "Irregular", "Irregular", "Irregular"],
     "clinical_brief": {
+        "primary_concern": "Peripheral Neuropathy Progression",
+        "clinical_intake": "Patient reports progressive bilateral numbness in hands and feet, persistent fatigue, and postprandial blurred vision.",
         "summary": "Progressive peripheral neuropathy signature: step length declining from 0.65m to 0.54m over 6 months with double support percentage rising 22%. HRV shows steady downward trend confirming autonomic neuropathy. Postprandial vision changes suggest poor glycemic control with osmotic lens effects.",
         "key_symptoms": ["Bilateral numbness and tingling in stocking-glove distribution", "Progressive fatigue worsening over 6 months", "Blurry vision after meals resolving within 1-2 hours", "Nocturia — waking 2-3 times nightly to urinate", "Shortened stride with increasing gait instability"],
         "severity_assessment": "Moderate",
@@ -640,6 +658,8 @@ naomi = {
     },
     "menstrual_phases": ["Luteal", "Luteal", "Luteal", "Luteal", "Menstrual", "Menstrual", "Follicular"],
     "clinical_brief": {
+        "primary_concern": "Extreme Fatigue & Weight Gain",
+        "clinical_intake": "Patient reports crushing fatigue despite 10+ hours of sleep, unexplained 15-pound weight gain, brain fog, and cold intolerance.",
         "summary": "Bradycardia pattern with RHR at 53-57 bpm combined with persistently low wrist temperature deviation (-0.15C) indicates metabolic slowing consistent with hypothyroidism. Step count declining 150 steps/day over the acute window reflects progressive exercise intolerance from fatigue.",
         "key_symptoms": ["Extreme fatigue despite 10+ hours of sleep", "Unexplained weight gain of 15 pounds over 3 months", "Cold intolerance — wearing layers indoors", "Brain fog with difficulty concentrating at work", "Constipation and dry skin worsening over weeks"],
         "severity_assessment": "Moderate",
@@ -691,6 +711,8 @@ sofia = {
     },
     "menstrual_phases": ["Luteal", "Luteal", "Luteal", "Menstrual", "Menstrual", "Menstrual", "Follicular"],
     "clinical_brief": {
+        "primary_concern": "Chronic Suprapubic Pain",
+        "clinical_intake": "Patient reports chronic pelvic pain and burning, severe urinary urgency every 30 minutes, and massive sleep disruption.",
         "summary": "Pelvic guarding signature with walking asymmetry spiking to 5.5% and double support percentage reaching 31%. Sleep fragmentation severe at 5-6 awakenings from nocturia. HRV dropped 30% during pain flare days, confirming autonomic stress response to chronic bladder pain.",
         "key_symptoms": ["Chronic suprapubic pain and burning sensation", "Urinary frequency exceeding 20 voids per day", "Nocturia causing 5-6 awakenings per night", "Pelvic floor guarding affecting gait mechanics", "Pain worsening with bladder filling and menstruation"],
         "severity_assessment": "Moderate",
@@ -742,6 +764,8 @@ kezia = {
     },
     "menstrual_phases": ["Menstrual", "Menstrual", "Menstrual", "Menstrual", "Menstrual", "Late_Menstrual", "Follicular"],
     "clinical_brief": {
+        "primary_concern": "Sciatic Endometriosis Flare",
+        "clinical_intake": "Patient presents with severe radiating pain from pelvis down both legs, painful bowel movements, and a history of infertility.",
         "summary": "Extreme gait impairment with walking asymmetry reaching 11% and double support at 38% — the highest pelvic guarding signature in the cohort. HRV crashed to 13ms during menstrual peak while step length shortened to 0.42m. Pattern is pathognomonic for deep-infiltrating endometriosis with sciatic nerve involvement.",
         "key_symptoms": ["Severe bilateral leg pain radiating from pelvis — sciatic pattern", "Dyschezia — painful bowel movements during menstruation", "Walking asymmetry exceeding 10% during flare", "Complete mobility collapse — step count dropping 84% from baseline", "10-year diagnostic odyssey across 6 providers"],
         "severity_assessment": "High",
@@ -794,6 +818,8 @@ renata = {
     },
     "menstrual_phases": ["Menstrual", "Menstrual", "Late_Menstrual", "Follicular", "Follicular", "Follicular", "Follicular"],
     "clinical_brief": {
+        "primary_concern": "Chronic Menstrual Migraines",
+        "clinical_intake": "Patient experiences debilitating headaches 15+ days a month with visual aura, photophobia, and nausea, causing severe disability.",
         "summary": "Clear attack-day biometric signature: HRV crashes from 42ms baseline to 18ms on attack days while RHR spikes to 85 bpm. Step count collapses 89% on worst attack day. Pattern repeats 3 times in 7 days, correlating with menstrual onset — confirming menstrual migraine phenotype.",
         "key_symptoms": ["Debilitating headache 15+ days per month", "Visual aura preceding attacks — scotomas and zigzag lines", "Severe photophobia and phonophobia during attacks", "Nausea and vomiting preventing oral medication tolerance", "Complete functional disability during attack days"],
         "severity_assessment": "Moderate to High",
@@ -845,6 +871,8 @@ yasmin = {
     },
     "menstrual_phases": ["Postpartum", "Postpartum", "Postpartum", "Postpartum", "Postpartum", "Postpartum", "Postpartum"],
     "clinical_brief": {
+        "primary_concern": "Postpartum Anxiety & Insomnia",
+        "clinical_intake": "Four months postpartum patient reports severe insomnia, intrusive thoughts regarding infant safety, racing heart, and daily crying.",
         "summary": "Sustained sleep fragmentation across all 7 days (5-6 awakenings nightly independent of infant care) with episodic RHR spikes to 90 bpm and HRV dips to 18ms. The pattern of sympathetic overdrive without physical exertion is characteristic of postpartum anxiety-depression comorbidity.",
         "key_symptoms": ["Inability to sleep even when infant sleeps through the night", "Intrusive distressing thoughts about infant safety", "Daily crying spells lasting 30+ minutes", "Episodic racing heart without physical trigger", "Anhedonia — loss of interest in activities previously enjoyed"],
         "severity_assessment": "Moderate to High",
@@ -896,6 +924,8 @@ camille = {
     },
     "menstrual_phases": ["Follicular", "Follicular", "Follicular", "Follicular", "Ovulatory", "Follicular", "Follicular"],
     "clinical_brief": {
+        "primary_concern": "Widespread Pain & Painsomnia",
+        "clinical_intake": "Patient reports unpredictable, widespread pain across all four body quadrants, crushing fatigue, and severe sleep fragmentation.",
         "summary": "Sustained sleep fragmentation across 5 of 7 days with 4-5 painsomnia awakenings nightly. HRV depressed 25% below baseline with intermittent crashes to 20ms. Step length shortened 15% during flare, and step count collapsed 50% — consistent with widespread fibromyalgia pain flare without focal pathology.",
         "key_symptoms": ["Widespread pain across all four body quadrants", "Non-restorative sleep with 4-5 awakenings nightly", "Migratory pain pattern — shifting between locations", "Cognitive dysfunction (fibro fog)", "Fatigue disproportionate to activity level"],
         "severity_assessment": "Moderate",
@@ -947,6 +977,8 @@ imani = {
     },
     "menstrual_phases": ["Anovulatory", "Anovulatory", "Anovulatory", "Anovulatory", "Anovulatory", "Anovulatory", "Anovulatory"],
     "clinical_brief": {
+        "primary_concern": "Pelvic Bloating & Oligomenorrhea",
+        "clinical_intake": "Patient reports severe pelvic pressure, irregular periods skipping months, and sharp unilateral pain during presumed ovulation.",
         "summary": "Pelvic guarding pattern with walking asymmetry reaching 6% and DSP at 32% during acute pain episodes. Temperature elevation of +0.9C during pain days suggests inflammatory component from cyst. Chronic anovulatory pattern across all 7 days correlates with complex ovarian pathology disrupting normal hormonal cycling.",
         "key_symptoms": ["Severe unilateral pelvic pressure and bloating", "Amenorrhea — cycles skipping 2-3 months", "Sharp pain during attempted ovulation", "Pelvic guarding affecting gait symmetry", "Early satiety from abdominal mass effect"],
         "severity_assessment": "Moderate to High",
@@ -998,6 +1030,8 @@ beatrice = {
     },
     "menstrual_phases": ["Irregular", "Irregular", "Follicular", "Follicular", "Irregular", "Irregular", "Follicular"],
     "clinical_brief": {
+        "primary_concern": "Routine Evaluation",
+        "clinical_intake": "Patient presents for routine evaluation.",
         "summary": "Mild inflammatory biometric signal with wrist temperature elevation to +0.45C and HRV dip to 28ms on day of abnormal bleeding. While biometric changes are moderate, the HSIL cytology and high-risk HPV status represent the critical clinical finding requiring urgent colposcopic evaluation to exclude invasive disease.",
         "key_symptoms": ["Intermenstrual vaginal bleeding — spotting between periods", "Mild chronic pelvic discomfort", "HSIL on Pap smear — high-grade pre-cancerous changes", "High-risk HPV (types 16/18) positive", "Anxiety-related sleep disruption following abnormal results"],
         "severity_assessment": "Moderate",
@@ -1049,6 +1083,8 @@ chidinma = {
     },
     "menstrual_phases": ["Oligomenorrhea", "Oligomenorrhea", "Oligomenorrhea", "Oligomenorrhea", "Oligomenorrhea", "Oligomenorrhea", "Oligomenorrhea"],
     "clinical_brief": {
+        "primary_concern": "Undiagnosed Pelvic Pain",
+        "clinical_intake": "Patient complains of severe lower back pain, pelvic pressure, and painful periods that cause her to miss work.",
         "summary": "Sustained tachycardia with RHR reaching 115 bpm and HRV crashing to 12ms reflects thyroid hormone excess driving cardiac hyperexcitability. Wrist temperature sustained at +1.2C deviation — the highest in the cohort — confirms hypermetabolic state. Pattern of every-other-day symptom spikes is consistent with fluctuating thyroid storm activity.",
         "key_symptoms": ["Persistent tachycardia with RHR 90-115 bpm at rest", "Fine hand tremor interfering with fine motor tasks", "Heat intolerance — unable to tolerate room temperature", "Unintentional weight loss of 10 pounds in 6 weeks", "Severe anxiety with insomnia"],
         "severity_assessment": "High",
@@ -1100,6 +1136,8 @@ adaeze = {
     },
     "menstrual_phases": ["Follicular", "Follicular", "Follicular", "Ovulatory", "Ovulatory", "Luteal", "Luteal"],
     "clinical_brief": {
+        "primary_concern": "Routine Evaluation",
+        "clinical_intake": "Patient presents for routine evaluation.",
         "summary": "Symmetric small-joint stiffness with biometric inflammatory signature: wrist temperature elevated to +0.65C during flare days while HRV dropped 30% to 24ms. Step length shortened 18% and DSP rose to 30%, indicating pain-avoidant gait mechanics consistent with active inflammatory arthropathy.",
         "key_symptoms": ["Morning stiffness lasting >60 minutes in fingers and wrists", "Symmetric small-joint swelling — MCP and PIP joints", "Low-grade fevers accompanying joint flares", "Fatigue disproportionate to activity", "Grip weakness affecting daily tasks"],
         "severity_assessment": "Moderate",
@@ -1151,6 +1189,8 @@ saoirse = {
     },
     "menstrual_phases": ["Follicular", "Follicular", "Follicular", "Ovulatory", "Luteal", "Luteal", "Luteal"],
     "clinical_brief": {
+        "primary_concern": "Routine Evaluation",
+        "clinical_intake": "Patient presents for routine evaluation.",
         "summary": "Severe gait dysfunction with step length crashing to 0.38m and DSP reaching 38.5% — the most extreme mobility signature in the cohort. HRV collapsed to 16ms during the relapse window. Combined with recent optic neuritis and cognitive fog, the biometric pattern is consistent with an active MS relapse causing pyramidal tract dysfunction.",
         "key_symptoms": ["Extreme fatigue — unable to sustain activity beyond 2 hours", "Lower extremity weakness and heaviness in both legs", "Cognitive fog — word-finding difficulty and memory lapses", "Prior optic neuritis episode with transient monocular vision loss", "Very shortened stride with severe gait instability"],
         "severity_assessment": "High",
@@ -1203,6 +1243,8 @@ maya = {
     },
     "menstrual_phases": ["Follicular", "Follicular", "Ovulatory", "Ovulatory", "Luteal", "Luteal", "Luteal"],
     "clinical_brief": {
+        "primary_concern": "Premature Ovarian Insufficiency",
+        "clinical_intake": "Patient reports cessation of menses for 6 months, severe hot flashes, vaginal dryness, and mood swings at age 34.",
         "summary": "Compensatory tachycardia reaching 90 bpm with SpO2 dipping to 92.5% confirms significant anemia. Longitudinal RHR trending upward over 6 months while SpO2 trends downward — the body progressively failing to compensate for iron malabsorption. GI symptoms with glossitis point to celiac-driven malabsorption as the root cause.",
         "key_symptoms": ["Chronic bloating and abdominal pain postprandially", "Profound fatigue with exercise intolerance", "Dizziness upon standing — near-syncope episodes", "Glossitis — painful tongue sores and smooth tongue", "Unintentional weight loss despite normal appetite"],
         "severity_assessment": "Moderate to High",
@@ -1254,6 +1296,8 @@ lena = {
     },
     "menstrual_phases": ["Postmenopausal", "Postmenopausal", "Postmenopausal", "Postmenopausal", "Postmenopausal", "Postmenopausal", "Postmenopausal"],
     "clinical_brief": {
+        "primary_concern": "Routine Evaluation",
+        "clinical_intake": "Patient presents for routine evaluation.",
         "summary": "Extremely erratic RHR with spikes to 135 bpm followed by normalizations — classic paroxysmal AFib on wearable data. HRV crashed to 6ms during episodes reflecting chaotic atrial activity. SpO2 dipping to 93.5% during episodes confirms hemodynamic compromise requiring anticoagulation assessment.",
         "key_symptoms": ["Paroxysmal palpitations — sudden onset and offset", "Shortness of breath during palpitation episodes", "SpO2 desaturation to 93.5% during episodes", "Post-episode fatigue lasting hours", "Exercise intolerance on episode days"],
         "severity_assessment": "High",
@@ -1305,6 +1349,8 @@ marcus = {
     },
     "menstrual_phases": [],
     "clinical_brief": {
+        "primary_concern": "Routine Evaluation",
+        "clinical_intake": "Patient presents for routine evaluation.",
         "summary": "Sustained RHR elevation at 92-108 bpm with longitudinal upward trend over 6 months reflects chronic pressure overload from uncontrolled hypertension. HRV depressed to 18ms during exertional episodes. SpO2 dipping to 94% with exertion suggests early cardiac decompensation. Black men face 2x hypertension mortality risk requiring aggressive management.",
         "key_symptoms": ["Persistent morning headaches with visual disturbance", "Shortness of breath with moderate exertion — climbing one flight", "Chest tightness and pressure during physical activity", "Nocturia — 2-3 bathroom trips per night", "Exercise intolerance worsening over months"],
         "severity_assessment": "High",
@@ -1356,6 +1402,8 @@ aisha = {
     },
     "menstrual_phases": ["Luteal", "Luteal", "Menstrual", "Menstrual", "Menstrual", "Follicular", "Follicular"],
     "clinical_brief": {
+        "primary_concern": "Heart Palpitations & Tremors",
+        "clinical_intake": "Patient presents with sudden weight loss of 10 lbs, hand tremors, severe heat intolerance, and resting tachycardia.",
         "summary": "Active Crohn's flare signature: wrist temperature sustained at +0.8C with HRV crashing to 18ms and RHR spiking to 88 bpm over 3 consecutive days. Sleep fragmented by bowel urgency at 5-6 awakenings nightly. Step count dropped 55% from baseline, confirming systemic inflammatory decompensation.",
         "key_symptoms": ["Severe abdominal cramping with bloody diarrhea 8-10x daily", "Profound fatigue unrelieved by rest", "Bilateral joint pain in knees and ankles (enteropathic)", "Sleep completely disrupted by nocturnal bowel urgency", "Unintentional weight loss during flare"],
         "severity_assessment": "Moderate to High",
@@ -1408,6 +1456,8 @@ tanya = {
     },
     "menstrual_phases": ["Ovulatory", "Ovulatory", "Luteal", "Luteal", "Luteal", "Luteal", "Menstrual"],
     "clinical_brief": {
+        "primary_concern": "Routine Evaluation",
+        "clinical_intake": "Patient presents for routine evaluation.",
         "summary": "Highly erratic heart rate pattern with RHR swinging between 60-100 bpm and HRV oscillating 12-38ms — characteristic of MVP-dysautonomia syndrome. SpO2 dipping to 94.5% during palpitation episodes confirms hemodynamic compromise. Episodic nature with 3 discrete events in 7 days suggests paroxysmal autonomic dysfunction.",
         "key_symptoms": ["Paroxysmal palpitations — sudden onset without provocation", "Sharp left-sided chest pain during palpitation episodes", "Orthostatic dizziness — lightheadedness upon standing", "SpO2 desaturation during symptomatic episodes", "Post-episode fatigue and malaise"],
         "severity_assessment": "Moderate",
@@ -1459,6 +1509,8 @@ grace = {
     },
     "menstrual_phases": ["Irregular", "Irregular", "Irregular", "Perimenopause", "Perimenopause", "Irregular", "Irregular"],
     "clinical_brief": {
+        "primary_concern": "Routine Evaluation",
+        "clinical_intake": "Patient presents for routine evaluation.",
         "summary": "Subtle biometric changes with mild HRV depression and temperature elevation over recent days, in context of BRCA1 carrier status and 3-month history of vague pelvic pressure, bloating, and early satiety. These non-specific symptoms are the most common presenting complaints of ovarian cancer and demand urgent investigation given genetic risk.",
         "key_symptoms": ["Persistent pelvic pressure and bloating for 3 months", "Early satiety — unable to finish normal-sized meals", "Increased urinary frequency without infection", "BRCA1 mutation carrier status", "Mild fatigue with subtle biometric changes"],
         "severity_assessment": "Moderate to High",
@@ -1510,6 +1562,8 @@ blessing = {
     },
     "menstrual_phases": ["Postpartum", "Postpartum", "Postpartum", "Postpartum", "Postpartum", "Postpartum", "Postpartum"],
     "clinical_brief": {
+        "primary_concern": "Routine Evaluation",
+        "clinical_intake": "Patient presents for routine evaluation.",
         "summary": "Sustained RHR elevation at 82-88 bpm with longitudinal upward trend over 6 months postpartum reflects persistent cardiovascular injury from preeclampsia. HRV depressed at 20ms during symptomatic days. Pedal edema and headaches 6 months after delivery indicate the cardiovascular insult is not resolving spontaneously.",
         "key_symptoms": ["Persistent headaches 6 months postpartum", "Bilateral lower extremity edema", "Fatigue out of proportion to new parenthood demands", "Sustained elevated heart rate at rest", "Blood pressure not normalizing post-delivery"],
         "severity_assessment": "Moderate to High",
@@ -1561,6 +1615,8 @@ latoya = {
     },
     "menstrual_phases": ["Menstrual", "Menstrual", "Menstrual", "Menstrual", "Menstrual", "Late_Menstrual", "Follicular"],
     "clinical_brief": {
+        "primary_concern": "Routine Evaluation",
+        "clinical_intake": "Patient presents for routine evaluation.",
         "summary": "Severe menorrhagia signature: HRV crashing to 16ms with RHR spiking to 94 bpm during heaviest bleeding days. SpO2 dipping to 92% confirms significant anemia. Longitudinal data shows RHR trending upward and SpO2 trending downward over 6 months — the body progressively decompensating from chronic blood loss. DSP elevated to 29% from pelvic mass pressure.",
         "key_symptoms": ["Menorrhagia — periods lasting 10+ days with heavy flow", "Pelvic fullness and pressure from large fibroid burden", "Urinary frequency — voiding every hour from bladder compression", "Extreme fatigue with compensatory tachycardia", "SpO2 dropping during menstrual phase — active hemorrhagic anemia"],
         "severity_assessment": "Moderate to High",
@@ -1613,6 +1669,8 @@ devon = {
     },
     "menstrual_phases": ["Follicular", "Follicular", "Follicular", "Ovulatory", "Luteal", "Luteal", "Luteal"],
     "clinical_brief": {
+        "primary_concern": "Routine Evaluation",
+        "clinical_intake": "Patient presents for routine evaluation.",
         "summary": "Profound post-exertional malaise captured digitally: step count crashes to 400 following even minimal activity, with HRV collapsing to 10ms during PEM episodes. Sleep fragmented across all 7 days (5-7 awakenings nightly) yet completely unrefreshing. DSP reaching 34.5% during crashes indicates severe functional impairment consistent with moderate-severe ME/CFS.",
         "key_symptoms": ["Post-exertional malaise — symptoms worsen 24-72 hours after minimal activity", "Orthostatic intolerance — cannot stand >10 minutes", "Non-restorative sleep despite extended time in bed", "Crushing fatigue unrelieved by rest", "Cognitive dysfunction — difficulty with concentration and memory"],
         "severity_assessment": "High",
@@ -1665,6 +1723,8 @@ kwame = {
     },
     "menstrual_phases": [],
     "clinical_brief": {
+        "primary_concern": "Routine Evaluation",
+        "clinical_intake": "Patient presents for routine evaluation.",
         "summary": "Life-threatening presentation: two syncope episodes during exertion with RHR spiking to 125 bpm and SpO2 crashing to 91% during episodes. HRV collapsing to 8ms reflects severe cardiac electrical instability. Combined with family history of sudden cardiac death at 45, this pattern demands urgent evaluation for hypertrophic cardiomyopathy with obstruction.",
         "key_symptoms": ["Exertional syncope — two fainting episodes during basketball", "Chest pain with moderate exertion", "Progressive exertional dyspnea worsening over months", "SpO2 desaturation to 91% during symptomatic episodes", "Family history of sudden cardiac death (father at age 45)"],
         "severity_assessment": "High — Urgent",
@@ -1695,13 +1755,82 @@ def seed_db():
     print("Clearing old appointments and patients...")
     db.appointments.delete_many({})
     db.patients.delete_many({})
-    
-    for pt in patients_list:
-        p_record, a_record = create_patient_and_appointment(pt)
-        db.patients.insert_one(p_record)
-        db.appointments.insert_one(a_record)
-        print(f"Inserted: {pt['name']} for {pt['time']}")
-        
+
+    # Mock analyze pipeline imports
+    import asyncio
+    from app.services.embeddings import load_embedding_model
+    from app.services.analysis_pipeline import analyze_patient_pipeline
+    from app.models.patient import PatientPayload, RiskProfile, RiskFactor
+
+    print("Loading embedding model for dynamic condition matching...")
+    embedding_model = load_embedding_model()
+
+    async def _process_mock_patients():
+        for pt in patients_list:
+            p_record, a_record = create_patient_and_appointment(pt)
+
+            try:
+                # Build a real PatientPayload to run through the pipeline
+                payload_dict = {
+                    "patient_id": p_record["id"],
+                    "patient_narrative": pt["narrative"],
+                    "risk_profile": pt.get("risk_profile"),
+                    "sync_timestamp": "2026-03-05T12:00:00Z",
+                    "hardware_source": "apple_watch",
+                    "data": {
+                        "acute_7_day": {
+                            "granularity": "daily",
+                            "metrics": {
+                                "restingHeartRate": [],
+                                "heartRateVariabilitySDNN": [],
+                                "appleSleepingWristTemperature": [],
+                                "respiratoryRate": [],
+                                "walkingAsymmetryPercentage": [],
+                                "stepCount": [],
+                                "sleepAnalysis_awakeSegments": [],
+                                "bloodOxygenSaturation": [],
+                                "walkingStepLength": [],
+                                "walkingDoubleSupportPercentage": [],
+                            }
+                        },
+                        "longitudinal_6_month": {
+                            "granularity": "monthly",
+                            "metrics": {
+                                "restingHeartRate": [],
+                                "walkingAsymmetryPercentage": [],
+                                "bloodOxygenSaturation": [],
+                                "walkingStepLength": [],
+                                "walkingDoubleSupportPercentage": [],
+                            }
+                        }
+                    }
+                }
+                payload = PatientPayload(**payload_dict)
+
+                print(f"Running vector search for {pt['name']}...")
+                # Run the actual pipeline (this will fetch conditions + LLM brief)
+                analysis_response = await analyze_patient_pipeline(
+                    payload, db.client, embedding_model, skip_llm=True
+                )
+
+                # Overwrite the pipeline's generated brief/deltas with the hand-crafted mock ones
+                # We do this so the dashboard still displays the carefully crafted mock data,
+                # but uses the dynamically fetched condition_matches.
+                analysis_dict = analysis_response.model_dump()
+                analysis_dict["clinical_brief"] = pt["clinical_brief"]
+                analysis_dict["biometric_deltas"] = pt["deltas"]
+
+                a_record["analysis_result"] = analysis_dict
+
+            except Exception as e:
+                print(f"Error analyzing {pt['name']}: {e}")
+                
+            db.patients.insert_one(p_record)
+            db.appointments.insert_one(a_record)
+            print(f"Inserted: {pt['name']} for {pt['time']}")
+
+    asyncio.run(_process_mock_patients())
+
     print(f"Database seeded successfully with {len(patients_list)} mock patients.")
 
 if __name__ == "__main__":

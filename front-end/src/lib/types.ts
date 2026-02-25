@@ -49,6 +49,8 @@ export interface PatientPayload {
 
 export interface ClinicalBrief {
   summary: string;
+  clinical_intake: string;
+  primary_concern: string;
   key_symptoms: string[];
   severity_assessment: string;
   recommended_actions: string[];

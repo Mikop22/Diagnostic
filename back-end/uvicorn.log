@@ -1,0 +1,1734 @@
+/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:     Started server process [94484]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 48] error while attempting to bind on address ('127.0.0.1', 8000): address already in use
+INFO:     Waiting for appINFO:     127.0.0.1:54746 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54746 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54764 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54769 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54770 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54769 - "OPTIONS /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54770 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54769 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54769 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54769 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54769 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54769 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54769 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54769 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54822 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54832 - "OPTIONS /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54832 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54832 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54832 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54833 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     64.23.166.32:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     64.23.166.32:0 - "GET / HTTP/1.1" 404 Not Found
+INFO:     146.190.113.252:0 - "GET / HTTP/1.1" 404 Not Found
+INFO:     146.190.113.252:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     44.204.190.113:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     44.204.190.113:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_6e135a4c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6e135a4c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6e135a4c/dashboard HTTP/1.1" 200 OK
+INFO:     44.204.190.113:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     44.204.190.113:0 - "GET /api/v1/patients/pt_mock_6e135a4c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC9999999 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC6543210 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC8123456 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC9999999 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     44.204.190.113:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC6543210 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_backends/anyio.py", line 37, in read
+    return b""
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1138, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 121, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 107, in app
+    response = await f(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 426, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 314, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 38, in proxy_paper
+    pdf_bytes = await _fetch_pdf(pmcid)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 25, in _fetch_pdf
+    resp = await client.get(url)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1768, in get
+    return await self.request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC8123456 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_backends/anyio.py", line 37, in read
+    return b""
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1138, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 121, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 107, in app
+    response = await f(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 426, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 314, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 38, in proxy_paper
+    pdf_bytes = await _fetch_pdf(pmcid)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 25, in _fetch_pdf
+    resp = await client.get(url)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1768, in get
+    return await self.request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_24c9a52c/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     44.204.190.113:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     44.204.190.113:0 - "GET /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     44.204.190.113:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC5555555 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC7721903 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC3378201 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC7721903 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC3378201 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC5555555 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_backends/anyio.py", line 37, in read
+    return b""
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1138, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 121, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 107, in app
+    response = await f(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 426, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 314, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 38, in proxy_paper
+    pdf_bytes = await _fetch_pdf(pmcid)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 25, in _fetch_pdf
+    resp = await client.get(url)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1768, in get
+    return await self.request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+INFO:     137.184.92.203:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     146.190.141.72:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     137.184.92.203:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     146.190.141.72:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     3.236.116.233:0 - "GET /api/v1/patients/pt_mock_5d3701ad/dashboard HTTP/1.1" 200 OK
+INFO:     3.236.116.233:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC3378201 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC7721903 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC5555555 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_783010e2/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_783010e2/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_783010e2/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_783010e2/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_783010e2/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_783010e2/dashboard HTTP/1.1" 200 OK
+INFO:     3.92.76.31:0 - "GET /api/v1/patients/pt_mock_783010e2/dashboard HTTP/1.1" 200 OK
+INFO:     3.92.76.31:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC9012345 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC7890123 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC8901234 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC7890123 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC8901234 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC9012345 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_backends/anyio.py", line 37, in read
+    return b""
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1138, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 121, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 107, in app
+    response = await f(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 426, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 314, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 38, in proxy_paper
+    pdf_bytes = await _fetch_pdf(pmcid)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 25, in _fetch_pdf
+    resp = await client.get(url)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1768, in get
+    return await self.request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55377 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55377 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55377 - "OPTIONS /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55377 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55377 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55382 - "GET /api/v1/patients/pt_mock_6f6d977e/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55383 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55377 - "OPTIONS /api/v1/paper/PMC7777777 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55384 - "OPTIONS /api/v1/paper/PMC8834521 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55385 - "OPTIONS /api/v1/paper/PMC6190234 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC9012345 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55384 - "GET /api/v1/paper/PMC8834521 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55377 - "GET /api/v1/paper/PMC7777777 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55385 - "GET /api/v1/paper/PMC6190234 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_backends/anyio.py", line 37, in read
+    return b""
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1138, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 121, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 107, in app
+    response = await f(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 426, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 314, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 38, in proxy_paper
+    pdf_bytes = await _fetch_pdf(pmcid)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 25, in _fetch_pdf
+    resp = await client.get(url)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1768, in get
+    return await self.request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+INFO:     127.0.0.1:55402 - "GET /api/v1/paper/PMC6190234 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55458 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55459 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55674 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55674 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55682 - "OPTIONS /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55682 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55682 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55682 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55682 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55682 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55682 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55690 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55691 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55682 - "OPTIONS /api/v1/paper/PMC10210381 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55695 - "OPTIONS /api/v1/paper/PMC9300131 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55694 - "OPTIONS /api/v1/paper/PMC8475133 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55696 - "OPTIONS /api/v1/paper/PMC8872164 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55697 - "OPTIONS /api/v1/paper/PMC5895379 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55694 - "GET /api/v1/paper/PMC8475133 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55682 - "GET /api/v1/paper/PMC10210381 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55695 - "GET /api/v1/paper/PMC9300131 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55696 - "GET /api/v1/paper/PMC8872164 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_backends/anyio.py", line 37, in read
+    return b""
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1138, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 121, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 107, in app
+    response = await f(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 426, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 314, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 38, in proxy_paper
+    pdf_bytes = await _fetch_pdf(pmcid)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 25, in _fetch_pdf
+    resp = await client.get(url)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1768, in get
+    return await self.request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+INFO:     127.0.0.1:55697 - "GET /api/v1/paper/PMC5895379 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_backends/anyio.py", line 37, in read
+    return b""
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1138, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 121, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 107, in app
+    response = await f(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 426, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 314, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 38, in proxy_paper
+    pdf_bytes = await _fetch_pdf(pmcid)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 25, in _fetch_pdf
+    resp = await client.get(url)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1768, in get
+    return await self.request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+INFO:     127.0.0.1:55746 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55747 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55754 - "GET /api/v1/paper/PMC10210381 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55755 - "GET /api/v1/paper/PMC8475133 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55756 - "GET /api/v1/paper/PMC9300131 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55770 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55771 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55758 - "GET /api/v1/paper/PMC5895379 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_backends/anyio.py", line 37, in read
+    return b""
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1138, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 121, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 107, in app
+    response = await f(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 426, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 314, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 38, in proxy_paper
+    pdf_bytes = await _fetch_pdf(pmcid)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 25, in _fetch_pdf
+    resp = await client.get(url)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1768, in get
+    return await self.request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+INFO:     127.0.0.1:55757 - "GET /api/v1/paper/PMC8872164 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_backends/anyio.py", line 37, in read
+    return b""
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1138, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 121, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 107, in app
+    response = await f(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 426, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 314, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 38, in proxy_paper
+    pdf_bytes = await _fetch_pdf(pmcid)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 25, in _fetch_pdf
+    resp = await client.get(url)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1768, in get
+    return await self.request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_a62066cc/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55793 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "OPTIONS /api/v1/patients/pt_mock_7b3a44a1/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55793 - "GET /api/v1/patients/pt_mock_7b3a44a1/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /api/v1/patients/pt_mock_7b3a44a1/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55807 - "GET /api/v1/patients/pt_mock_7b3a44a1/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55807 - "GET /api/v1/patients/pt_mock_7b3a44a1/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55812 - "GET /api/v1/patients/pt_mock_7b3a44a1/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55813 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55807 - "OPTIONS /api/v1/paper/PMC7837943 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55815 - "OPTIONS /api/v1/paper/PMC7821117 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55816 - "OPTIONS /api/v1/paper/PMC7370081 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55807 - "GET /api/v1/paper/PMC7837943 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55816 - "GET /api/v1/paper/PMC7370081 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55815 - "GET /api/v1/paper/PMC7821117 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55943 - "GET /api/v1/paper/PMC10210381 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55944 - "GET /api/v1/paper/PMC7837943 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55945 - "GET /api/v1/paper/PMC7821117 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55946 - "GET /api/v1/paper/PMC8475133 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55947 - "GET /api/v1/paper/PMC7370081 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55959 - "GET /api/v1/paper/PMC10210381 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55960 - "GET /api/v1/paper/PMC7837943 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55961 - "GET /api/v1/paper/PMC7821117 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55962 - "GET /api/v1/paper/PMC8475133 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55963 - "GET /api/v1/paper/PMC7370081 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55960 - "GET /api/v1/paper/PMC10210381 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55961 - "GET /api/v1/paper/PMC7837943 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55959 - "GET /api/v1/paper/PMC7821117 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55962 - "GET /api/v1/paper/PMC8475133 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55963 - "GET /api/v1/paper/PMC7370081 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55975 - "GET /api/v1/patients/pt_mock_7b3a44a1/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55975 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55977 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "OPTIONS /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55995 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55996 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /api/v1/paper/PMC8475133 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55997 - "GET /api/v1/paper/PMC7821117 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55999 - "GET /api/v1/paper/PMC10210381 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56000 - "GET /api/v1/paper/PMC7370081 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55998 - "GET /api/v1/paper/PMC5895379 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55998 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56003 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55998 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56003 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56008 - "OPTIONS /api/v1/patients/pt_mock_766141e0/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56008 - "GET /api/v1/patients/pt_mock_766141e0/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56008 - "GET /api/v1/patients/pt_mock_766141e0/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56008 - "GET /api/v1/patients/pt_mock_766141e0/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56008 - "GET /api/v1/patients/pt_mock_766141e0/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56008 - "GET /api/v1/patients/pt_mock_766141e0/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56008 - "GET /api/v1/patients/pt_mock_766141e0/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56014 - "GET /api/v1/patients/pt_mock_766141e0/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56015 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56008 - "OPTIONS /api/v1/paper/PMC6852804 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56017 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56018 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56017 - "OPTIONS /api/v1/patients/pt_mock_6775f1af/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56018 - "GET /api/v1/patients/pt_mock_6775f1af/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56021 - "GET /api/v1/patients/pt_mock_6775f1af/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56022 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56017 - "GET /api/v1/paper/PMC7837943 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56018 - "OPTIONS /api/v1/paper/PMC9300131 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56024 - "OPTIONS /api/v1/paper/PMC8872164 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56017 - "GET /api/v1/paper/PMC9300131 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56008 - "GET /api/v1/paper/PMC6852804 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56027 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56028 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56030 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56027 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56028 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56030 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56027 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56028 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56030 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56035 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56036 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56038 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56035 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56036 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56038 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56018 - "GET /api/v1/paper/PMC8872164 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+    data = await self._network_stream.read(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_backends/anyio.py", line 37, in read
+    return b""
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadTimeout
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1138, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 121, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 107, in app
+    response = await f(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 426, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 314, in run_endpoint_function
+    return await dependant.call(**values)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 38, in proxy_paper
+    pdf_bytes = await _fetch_pdf(pmcid)
+  File "/Users/user/Desktop/diagnostic/back-end/app/routes/paper.py", line 25, in _fetch_pdf
+    resp = await client.get(url)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1768, in get
+    return await self.request(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 135, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadTimeout
+INFO:     127.0.0.1:56042 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56043 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57287 - "OPTIONS /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57287 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57287 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57287 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57289 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57287 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57289 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57302 - "OPTIONS /api/v1/patients/pt_mock_179b156e/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57302 - "GET /api/v1/patients/pt_mock_179b156e/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57302 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57303 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57307 - "GET /app HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57307 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57307 - "GET /app HTTP/1.1" 404 Not Found
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     32.192.24.139:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     32.192.24.139:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     32.192.24.139:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     32.192.24.139:0 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC8475133 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC10210381 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC7370081 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC5895379 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC7821117 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC8475133 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC10210381 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC7821117 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC7370081 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC5895379 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     32.192.24.139:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     32.192.24.139:0 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_c08fbc59/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_c08fbc59/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_c08fbc59/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_d441ef54/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/pt_mock_ae7cd815/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_ae7cd815/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/pt_mock_ae7cd815/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "POST /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/intake/b0284693-068f-4b49-9e4c-33df54c13764/status HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/intake/b0284693-068f-4b49-9e4c-33df54c13764/status HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "POST /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/intake/844e990f-8ef7-477a-8c43-7d428c1b7cee/status HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/intake/844e990f-8ef7-477a-8c43-7d428c1b7cee/status HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/intake/844e990f-8ef7-477a-8c43-7d428c1b7cee/submit HTTP/1.1" 200 OK
+/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/pydantic/main.py:464: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `none` - serialized value may not be as expected [field_name='parsed', input_value=ClinicalBriefOutput(summa... to usual analgesics?']), input_type=ClinicalBriefOutput])
+  return self.__pydantic_serializer__.to_python(
+INFO:     129.100.255.82:0 - "POST /api/v1/intake/844e990f-8ef7-477a-8c43-7d428c1b7cee/submit HTTP/1.1" 200 OK
+XRP_RESEARCH_FUND_SEED not set — generating a disposable faucet wallet for this payout (dev/demo only).
+XRPL payout of 10 XRP to 844e990f-8ef7-477a-8c43-7d428c1b7cee failed: Error processing Destination: Invalid value to construct an AccountID: expected valid classic address or X-Address, received str.
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1138, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 121, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 108, in app
+    await response(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/responses.py", line 167, in __call__
+    await self.background()
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/background.py", line 42, in __call__
+    await task()
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/background.py", line 27, in __call__
+    await self.func(*self.args, **self.kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/app/services/xrp_wallet.py", line 89, in process_research_payout
+    result = await loop.run_in_executor(
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/concurrent/futures/thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/app/services/xrp_wallet.py", line 67, in _send_xrp_sync
+    response = submit_and_wait(payment, client, fund_wallet)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/transaction/reliable_submission.py", line 47, in submit_and_wait
+    return asyncio.run(
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/asyncio/transaction/reliable_submission.py", line 206, in submit_and_wait
+    signed_transaction = await _get_signed_tx(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/asyncio/transaction/reliable_submission.py", line 170, in _get_signed_tx
+    return sign(transaction, wallet, multisign=False)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/asyncio/transaction/main.py", line 122, in sign
+    serialized_for_signing = encode_for_signing(transaction_json)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/core/binarycodec/main.py", line 48, in encode_for_signing
+    return _serialize_json(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/core/binarycodec/main.py", line 155, in _serialize_json
+    buffer += bytes(STObject.from_value(json, signing_only))
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/core/binarycodec/types/st_object.py", line 203, in from_value
+    associated_value = field.associated_type.from_value(*args)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/core/binarycodec/types/account_id.py", line 77, in from_value
+    raise XRPLBinaryCodecException(
+xrpl.core.binarycodec.exceptions.XRPLBinaryCodecException: Error processing Destination: Invalid value to construct an AccountID: expected valid classic address or X-Address, received str.
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     34.123.170.104:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     34.123.170.104:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     34.122.147.229:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     34.122.147.229:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     34.116.160.124:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     34.116.160.124:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     54.163.13.156:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     54.163.13.156:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC5895379 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC8475133 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC7821117 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC7370081 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/paper/PMC10210381 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC5895379 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC8475133 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC7370081 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC10210381 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/paper/PMC7821117 HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58157 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58309 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58309 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "OPTIONS /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "GET /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "OPTIONS /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "GET /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "OPTIONS /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "GET /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "OPTIONS /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "GET /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "OPTIONS /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "GET /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "OPTIONS /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "GET /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "OPTIONS /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "GET /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "OPTIONS /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "GET /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "OPTIONS /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "GET /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "OPTIONS /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "GET /api/v1/patients/pt_mock_2950ccd7/dashboard HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58320 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58339 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58339 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/751cd952-dcbc-44d7-911a-e9ba6a6acf9e/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "POST /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/intake/5bf1f600-22ef-408f-95a4-3c914abc817b/status HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/intake/5bf1f600-22ef-408f-95a4-3c914abc817b/status HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "POST /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 404 Not Found
+INFO:     34.239.169.13:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     34.239.169.13:0 - "GET /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/intake/5bf1f600-22ef-408f-95a4-3c914abc817b/submit HTTP/1.1" 200 OK
+/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/pydantic/main.py:464: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `none` - serialized value may not be as expected [field_name='parsed', input_value=ClinicalBriefOutput(summa...the cited literature?']), input_type=ClinicalBriefOutput])
+  return self.__pydantic_serializer__.to_python(
+INFO:     129.100.255.82:0 - "POST /api/v1/intake/5bf1f600-22ef-408f-95a4-3c914abc817b/submit HTTP/1.1" 200 OK
+XRP_RESEARCH_FUND_SEED not set — generating a disposable faucet wallet for this payout (dev/demo only).
+XRPL payout of 10 XRP to 5bf1f600-22ef-408f-95a4-3c914abc817b failed: Error processing Destination: Invalid value to construct an AccountID: expected valid classic address or X-Address, received str.
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/protocols/http/httptools_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1138, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 121, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/fastapi/routing.py", line 108, in app
+    await response(scope, receive, send)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/responses.py", line 167, in __call__
+    await self.background()
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/background.py", line 42, in __call__
+    await task()
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/starlette/background.py", line 27, in __call__
+    await self.func(*self.args, **self.kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/app/services/xrp_wallet.py", line 89, in process_research_payout
+    result = await loop.run_in_executor(
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/concurrent/futures/thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/user/Desktop/diagnostic/back-end/app/services/xrp_wallet.py", line 67, in _send_xrp_sync
+    response = submit_and_wait(payment, client, fund_wallet)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/transaction/reliable_submission.py", line 47, in submit_and_wait
+    return asyncio.run(
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/asyncio/transaction/reliable_submission.py", line 206, in submit_and_wait
+    signed_transaction = await _get_signed_tx(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/asyncio/transaction/reliable_submission.py", line 170, in _get_signed_tx
+    return sign(transaction, wallet, multisign=False)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/asyncio/transaction/main.py", line 122, in sign
+    serialized_for_signing = encode_for_signing(transaction_json)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/core/binarycodec/main.py", line 48, in encode_for_signing
+    return _serialize_json(
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/core/binarycodec/main.py", line 155, in _serialize_json
+    buffer += bytes(STObject.from_value(json, signing_only))
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/core/binarycodec/types/st_object.py", line 203, in from_value
+    associated_value = field.associated_type.from_value(*args)
+  File "/Users/user/Desktop/diagnostic/back-end/venv/lib/python3.9/site-packages/xrpl/core/binarycodec/types/account_id.py", line 77, in from_value
+    raise XRPLBinaryCodecException(
+xrpl.core.binarycodec.exceptions.XRPLBinaryCodecException: Error processing Destination: Invalid value to construct an AccountID: expected valid classic address or X-Address, received str.
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients/pt_mock_ae6ff077/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients/pt_mock_ae6ff077/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients/pt_mock_ae6ff077/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients/pt_mock_ae6ff077/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients/pt_mock_ae6ff077/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients/pt_mock_ae6ff077/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients/pt_mock_ae6ff077/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients/pt_mock_ae6ff077/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients/pt_mock_ae6ff077/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients/pt_mock_ae6ff077/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients/pt_mock_ae6ff077/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients/pt_mock_ae6ff077/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/a36a32e0-e7e6-4161-8eaf-e60ad1eb1a8d/dashboard HTTP/1.1" 404 Not Found
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.25:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "OPTIONS /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
+INFO:     129.100.255.82:0 - "GET /api/v1/patients/b58afde0-c053-4272-8c8f-f0764f9171dc/dashboard HTTP/1.1" 200 OK
