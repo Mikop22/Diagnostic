@@ -109,9 +109,14 @@ async def get_dashboard_data(patient_id: str, request: Request):
             detail="Appointment found but analysis results are missing.",
         )
 
-    result = analysis
+    result = dict(analysis)
     patient_payload = appointment.get("patient_payload")
     if patient_payload:
         result["patient_payload"] = patient_payload
+
+    # Inject patient name so the frontend doesn't need a hardcoded lookup map
+    patient = db.patients.find_one({"id": patient_id}, {"_id": 0, "name": 1})
+    if patient:
+        result["patient_name"] = patient["name"]
 
     return result

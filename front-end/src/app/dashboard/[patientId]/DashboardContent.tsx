@@ -93,11 +93,6 @@ const DEMO_ACUTE_METRICS = {
   ],
 };
 
-// Patient name lookup — in production this would come from the patient management API
-const DEMO_PATIENT_NAMES: Record<string, string> = {
-  "pt_883920_x": "Amara Osei",
-};
-
 // Demo patient narrative — production value arrives via patient_payload.patient_narrative
 const DEMO_NARRATIVE =
   "Over the past two weeks, the pain has become unbearable. It started slowly, " +
@@ -135,7 +130,7 @@ function XRPLBadge() {
 
 
 interface DashboardContentProps {
-  data: AnalysisResponse & { patient_payload?: PatientPayload };
+  data: AnalysisResponse & { patient_payload?: PatientPayload; patient_name?: string };
   patientId: string;
 }
 
@@ -143,7 +138,7 @@ export function DashboardContent({ data, patientId }: DashboardContentProps) {
   const { clinical_brief, biometric_deltas, condition_matches, patient_payload } = data;
   const acuteMetrics = patient_payload?.data?.acute_7_day?.metrics || DEMO_ACUTE_METRICS;
   const narrative = patient_payload?.patient_narrative ?? DEMO_NARRATIVE;
-  const patientName = DEMO_PATIENT_NAMES[data.patient_id] ?? `Patient ${data.patient_id}`;
+  const patientName = data.patient_name ?? data.patient_id;
 
   const riskFactors = data.risk_profile?.factors || [];
 
