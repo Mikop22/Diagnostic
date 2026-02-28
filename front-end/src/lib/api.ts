@@ -1,6 +1,6 @@
 import type { PatientPayload, AnalysisResponse, PatientRecord, AppointmentRecord } from "./types";
 
-const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/+$/, "");
+const API_BASE = ("https://vaunting-nonfactually-marin.ngrok-free.dev" || "http://localhost:8000").replace(/\/+$/, "");
 
 const COMMON_HEADERS: Record<string, string> = {
   "ngrok-skip-browser-warning": "true",
