@@ -1,7 +1,20 @@
 # Diagnostic
 
-
 Diagnostic combats systemic disparities for people of colour in healthcare. It merges natural language processing (NLP) with multi-modal physiological data from Apple Watch (Heart Rate Variability, Resting Heart Rate, Mobility metrics) to produce a clinical dashboard for physicians and researchers.
+
+<img width="2056" height="1234" alt="Screenshot 2026-03-02 at 4 08 06 PM" src="https://github.com/user-attachments/assets/cc176ad6-ca53-4e3a-a760-abab8d8b5523" />
+
+<img width="2056" height="1234" alt="Screenshot 2026-03-02 at 4 08 24 PM" src="https://github.com/user-attachments/assets/556db304-f42d-4c28-87e2-c23bea112cd3" />
+
+<img width="2056" height="1234" alt="Screenshot 2026-03-02 at 4 08 47 PM" src="https://github.com/user-attachments/assets/9fbec4e2-0a69-48f4-b38a-bb0170983888" />
+
+
+
+
+
+
+
+
 
 
 
