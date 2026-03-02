@@ -2,7 +2,7 @@
 
 **A full-stack healthcare advocacy platform that translates subjective patient narratives into objective clinical evidence.**
 
-Diagnostic combats systemic disparities for people of colour in healthcare. It merges natural language processing (NLP) with multi-modal physiological data from Apple Watch (Heart Rate Variability, Resting Heart Rate, Mobility metrics) to produce an undeniable clinical dashboard for physicians.
+Diagnostic combats systemic disparities for people of colour in healthcare. It merges natural language processing (NLP) with multi-modal physiological data from Apple Watch (Heart Rate Variability, Resting Heart Rate, Mobility metrics) to produce a clinical dashboard for physicians and researchers.
 
 
 
