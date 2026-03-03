@@ -16,7 +16,7 @@ interface AppleHealthSyncProps {
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-const API_BASE = "https://vaunting-nonfactually-marin.ngrok-free.dev" || "http://localhost:8000";
+const API_BASE = "https://vaunting-nonfactually-marin.ngrok-free.app" ;
 
 /**
  * The `shortcuts://` deep link URL scheme triggers Apple's Shortcuts app.
